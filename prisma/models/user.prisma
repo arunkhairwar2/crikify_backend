@@ -1,0 +1,17 @@
+// User model
+
+model User {
+    id         String   @id @default(uuid())
+    firstName  String
+    middleName String?
+    lastName   String
+    gender     Gender?
+    dob        DateTime
+    createdAt  DateTime @default(now())
+    updatedAt  DateTime @updatedAt
+
+    sessions UserSession[]
+    contact  Contact[]
+
+    @@map("users")
+}

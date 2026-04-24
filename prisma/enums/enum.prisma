@@ -12,3 +12,9 @@
 //   SUSPENDED
 //   DEACTIVATED
 // }
+
+enum Gender {
+    MALE
+    FEMALE
+    OTHER
+}
