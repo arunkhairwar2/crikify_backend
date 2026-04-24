@@ -1,0 +1,17 @@
+// User model
+
+// Example:
+// model User {
+//   id        String   @id @default(uuid())
+//   name      String
+//   email     String   @unique
+//   password  String
+//   role      Role     @default(USER)
+//   createdAt DateTime @default(now())
+//   updatedAt DateTime @updatedAt
+//
+//   // Relations
+//   posts     Post[]
+//
+//   @@map("users")
+// }

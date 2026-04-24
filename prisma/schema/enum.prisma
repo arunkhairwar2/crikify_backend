@@ -1,0 +1,14 @@
+// All enums live here
+
+// Example:
+// enum Role {
+//   USER
+//   ADMIN
+//   MODERATOR
+// }
+
+// enum AccountStatus {
+//   ACTIVE
+//   SUSPENDED
+//   DEACTIVATED
+// }

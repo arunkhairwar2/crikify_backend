@@ -1,0 +1,11 @@
+// Prisma base configuration
+// Generator and datasource definitions
+
+generator client {
+  provider = "prisma-client"
+  output   = "../../src/generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+}
