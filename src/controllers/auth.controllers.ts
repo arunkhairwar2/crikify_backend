@@ -1,25 +1,20 @@
 import type { Request, Response } from "express";
 import type { RegisterSchemaType } from "../schemas/auth.schema.ts";
-import { RegisterSchema } from "../schemas/auth.schema.ts";
 
 class AuthControllers {
   register = async (req: Request, res: Response) => {
-    try {
-      const registerData = req.body as RegisterSchemaType;
+    const registerData = req.body as RegisterSchemaType;
 
-      const validatedUser = RegisterSchema.parse(registerData);
+    // Data is already validated by the validate middleware
+    // You can safely use registerData here
 
-      if (!validatedUser) {
-        return res.status(400).json({ message: "Invalid user data" });
-      }
-
-      // const user = await authServices.registerUser({ name, email, password });
-      return res.status(201).json({ message: "User registered successfully" });
-    } catch (error) {
-      console.log(error);
-      return res.status(500).json({ message: "Internal server error" });
-    }
+    // const user = await authServices.registerUser(registerData);
+    return res.status(201).json({
+      success: true,
+      message: "User registered successfully",
+    });
   };
 }
 
 export default new AuthControllers();
+

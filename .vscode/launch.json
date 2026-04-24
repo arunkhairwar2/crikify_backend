@@ -1,0 +1,22 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    
+    {
+      "name": "Debug Server",
+      "type": "node",
+      "request": "launch",
+      "runtimeExecutable": "${workspaceFolder}/node_modules/.bin/ts-node",
+      "runtimeArgs": ["--esm"],
+      "args": ["${workspaceFolder}/src/server.ts"],
+      "cwd": "${workspaceFolder}",
+      "console": "integratedTerminal",
+      "restart": false,
+      "skipFiles": ["<node_internals>/**", "node_modules/**"],
+      "env": {
+        "NODE_ENV": "development"
+      },
+      "sourceMaps": true
+    }
+  ]
+}
