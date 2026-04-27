@@ -51,9 +51,11 @@ export const AnyNull = runtime.AnyNull
 
 
 export const ModelName = {
-  Contact: 'Contact',
-  User: 'User',
-  UserSession: 'UserSession'
+  ProfessionalDetails: 'ProfessionalDetails',
+  Address: 'Address',
+  PersonalDetails: 'PersonalDetails',
+  SportsPreferences: 'SportsPreferences',
+  User: 'User'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -72,17 +74,66 @@ export const TransactionIsolationLevel = runtime.makeStrictEnum({
 export type TransactionIsolationLevel = (typeof TransactionIsolationLevel)[keyof typeof TransactionIsolationLevel]
 
 
-export const ContactScalarFieldEnum = {
+export const ProfessionalDetailsScalarFieldEnum = {
   id: 'id',
   userId: 'userId',
-  primaryPhoneNumber: 'primaryPhoneNumber',
-  emergencyPhoneNumber: 'emergencyPhoneNumber',
-  email: 'email',
+  currentDesignation: 'currentDesignation',
+  organizationName: 'organizationName',
+  orgType: 'orgType',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
 } as const
 
-export type ContactScalarFieldEnum = (typeof ContactScalarFieldEnum)[keyof typeof ContactScalarFieldEnum]
+export type ProfessionalDetailsScalarFieldEnum = (typeof ProfessionalDetailsScalarFieldEnum)[keyof typeof ProfessionalDetailsScalarFieldEnum]
+
+
+export const AddressScalarFieldEnum = {
+  id: 'id',
+  userId: 'userId',
+  addressLine1: 'addressLine1',
+  addressLine2: 'addressLine2',
+  city: 'city',
+  state: 'state',
+  country: 'country',
+  pinCode: 'pinCode',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type AddressScalarFieldEnum = (typeof AddressScalarFieldEnum)[keyof typeof AddressScalarFieldEnum]
+
+
+export const PersonalDetailsScalarFieldEnum = {
+  id: 'id',
+  userId: 'userId',
+  gender: 'gender',
+  dob: 'dob',
+  nickname: 'nickname',
+  ageGroup: 'ageGroup',
+  foodPreference: 'foodPreference',
+  profilePicture: 'profilePicture',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type PersonalDetailsScalarFieldEnum = (typeof PersonalDetailsScalarFieldEnum)[keyof typeof PersonalDetailsScalarFieldEnum]
+
+
+export const SportsPreferencesScalarFieldEnum = {
+  id: 'id',
+  userId: 'userId',
+  jerseySize: 'jerseySize',
+  jerseyName: 'jerseyName',
+  jerseyNumber: 'jerseyNumber',
+  trackPantSize: 'trackPantSize',
+  battingStyle: 'battingStyle',
+  bowlingStyle: 'bowlingStyle',
+  shoeSize: 'shoeSize',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type SportsPreferencesScalarFieldEnum = (typeof SportsPreferencesScalarFieldEnum)[keyof typeof SportsPreferencesScalarFieldEnum]
 
 
 export const UserScalarFieldEnum = {
@@ -90,30 +141,13 @@ export const UserScalarFieldEnum = {
   firstName: 'firstName',
   middleName: 'middleName',
   lastName: 'lastName',
-  gender: 'gender',
-  dob: 'dob',
+  mobile: 'mobile',
+  email: 'email',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
 } as const
 
 export type UserScalarFieldEnum = (typeof UserScalarFieldEnum)[keyof typeof UserScalarFieldEnum]
-
-
-export const UserSessionScalarFieldEnum = {
-  id: 'id',
-  userId: 'userId',
-  password: 'password',
-  loginAt: 'loginAt',
-  logoutAt: 'logoutAt',
-  otp: 'otp',
-  phoneVerified: 'phoneVerified',
-  otpExpiry: 'otpExpiry',
-  token: 'token',
-  createdAt: 'createdAt',
-  updatedAt: 'updatedAt'
-} as const
-
-export type UserSessionScalarFieldEnum = (typeof UserSessionScalarFieldEnum)[keyof typeof UserSessionScalarFieldEnum]
 
 
 export const SortOrder = {

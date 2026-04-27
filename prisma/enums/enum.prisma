@@ -13,8 +13,73 @@
 //   DEACTIVATED
 // }
 
-enum Gender {
+enum JerseySize {
+    XS
+    S
+    M
+    L
+    XL
+    XXL
+    XXXL
+}
+
+enum GenderEnum {
     MALE
     FEMALE
     OTHER
+}
+
+enum AgeGroupEnum {
+    AGE_15_25
+    AGE_25_30
+    AGE_30_40
+    AGE_40_50
+    AGE_50_PLUS
+}
+
+enum OrganizationType {
+    GOVT
+    GOVT_PSU
+    PRIVATE
+    PUBLIC
+    STARTUP
+    NGO
+    MNC
+    OTHER
+}
+
+enum JerseySizeEnum {
+    XS
+    S
+    M
+    L
+    XL
+    XXL
+    XXXL
+}
+
+enum FoodPreferenceEnum {
+    VEG
+    NON_VEG
+    JAIN
+}
+
+enum BattingStyleEnum {
+    RIGHT_HAND_BAT
+    LEFT_HAND_BAT
+    RIGHT_HAND_TOP_ORDER
+    LEFT_HAND_TOP_ORDER
+    RIGHT_HAND_MIDDLE_ORDER
+    LEFT_HAND_MIDDLE_ORDER
+}
+
+enum BowlingStyleEnum {
+    RIGHT_HAND_FAST_MEDIUM
+    LEFT_HAND_FAST_MEDIUM
+    RIGHT_ARM_OFF_SPIN
+    LEFT_ARM_OFF_SPIN
+    RIGHT_ARM_LEG_SPIN
+    LEFT_ARM_LEG_SPIN
+    RIGHT_HAND_FAST
+    LEFT_HAND_FAST
 }

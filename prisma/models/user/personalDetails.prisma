@@ -1,0 +1,15 @@
+model PersonalDetails {
+    id             String              @id @default(uuid())
+    user           User                @relation(fields: [userId], references: [id], onDelete: Cascade)
+    userId         String              @unique
+    gender         GenderEnum?
+    dob            DateTime?
+    nickname       String?
+    ageGroup       AgeGroupEnum?
+    foodPreference FoodPreferenceEnum?
+    profilePicture String?
+    createdAt      DateTime            @default(now())
+    updatedAt      DateTime            @updatedAt
+
+    @@map("personal_details")
+}

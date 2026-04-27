@@ -1,0 +1,21 @@
+// User model
+
+model User {
+    id         String  @id @default(uuid())
+    firstName  String
+    middleName String?
+    lastName   String
+    mobile     String  @unique
+    email      String  @unique
+
+    personalDetails     PersonalDetails?
+    professionalDetails ProfessionalDetails?
+    sportsPreferences   SportsPreferences?
+    address             Address?
+
+    createdAt    DateTime      @default(now())
+    updatedAt    DateTime      @updatedAt
+
+
+    @@map("users")
+}

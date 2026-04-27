@@ -1,0 +1,16 @@
+model SportsPreferences {
+    id            String            @id @default(uuid())
+    user          User              @relation(fields: [userId], references: [id], onDelete: Cascade)
+    userId        String            @unique
+    jerseySize    JerseySize?
+    jerseyName    String?
+    jerseyNumber  Int?
+    trackPantSize JerseySize?
+    battingStyle  BattingStyleEnum?
+    bowlingStyle  BowlingStyleEnum?
+    shoeSize      Int?
+    createdAt     DateTime          @default(now())
+    updatedAt     DateTime          @updatedAt
+
+    @@map("sport_preferences")
+}

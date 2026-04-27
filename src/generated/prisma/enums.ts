@@ -9,10 +9,96 @@
 * 🟢 You can import this file directly.
 */
 
-export const Gender = {
+export const JerseySize = {
+  XS: 'XS',
+  S: 'S',
+  M: 'M',
+  L: 'L',
+  XL: 'XL',
+  XXL: 'XXL',
+  XXXL: 'XXXL'
+} as const
+
+export type JerseySize = (typeof JerseySize)[keyof typeof JerseySize]
+
+
+export const GenderEnum = {
   MALE: 'MALE',
   FEMALE: 'FEMALE',
   OTHER: 'OTHER'
 } as const
 
-export type Gender = (typeof Gender)[keyof typeof Gender]
+export type GenderEnum = (typeof GenderEnum)[keyof typeof GenderEnum]
+
+
+export const AgeGroupEnum = {
+  AGE_15_25: 'AGE_15_25',
+  AGE_25_30: 'AGE_25_30',
+  AGE_30_40: 'AGE_30_40',
+  AGE_40_50: 'AGE_40_50',
+  AGE_50_PLUS: 'AGE_50_PLUS'
+} as const
+
+export type AgeGroupEnum = (typeof AgeGroupEnum)[keyof typeof AgeGroupEnum]
+
+
+export const OrganizationType = {
+  GOVT: 'GOVT',
+  GOVT_PSU: 'GOVT_PSU',
+  PRIVATE: 'PRIVATE',
+  PUBLIC: 'PUBLIC',
+  STARTUP: 'STARTUP',
+  NGO: 'NGO',
+  MNC: 'MNC',
+  OTHER: 'OTHER'
+} as const
+
+export type OrganizationType = (typeof OrganizationType)[keyof typeof OrganizationType]
+
+
+export const JerseySizeEnum = {
+  XS: 'XS',
+  S: 'S',
+  M: 'M',
+  L: 'L',
+  XL: 'XL',
+  XXL: 'XXL',
+  XXXL: 'XXXL'
+} as const
+
+export type JerseySizeEnum = (typeof JerseySizeEnum)[keyof typeof JerseySizeEnum]
+
+
+export const FoodPreferenceEnum = {
+  VEG: 'VEG',
+  NON_VEG: 'NON_VEG',
+  JAIN: 'JAIN'
+} as const
+
+export type FoodPreferenceEnum = (typeof FoodPreferenceEnum)[keyof typeof FoodPreferenceEnum]
+
+
+export const BattingStyleEnum = {
+  RIGHT_HAND_BAT: 'RIGHT_HAND_BAT',
+  LEFT_HAND_BAT: 'LEFT_HAND_BAT',
+  RIGHT_HAND_TOP_ORDER: 'RIGHT_HAND_TOP_ORDER',
+  LEFT_HAND_TOP_ORDER: 'LEFT_HAND_TOP_ORDER',
+  RIGHT_HAND_MIDDLE_ORDER: 'RIGHT_HAND_MIDDLE_ORDER',
+  LEFT_HAND_MIDDLE_ORDER: 'LEFT_HAND_MIDDLE_ORDER'
+} as const
+
+export type BattingStyleEnum = (typeof BattingStyleEnum)[keyof typeof BattingStyleEnum]
+
+
+export const BowlingStyleEnum = {
+  RIGHT_HAND_FAST_MEDIUM: 'RIGHT_HAND_FAST_MEDIUM',
+  LEFT_HAND_FAST_MEDIUM: 'LEFT_HAND_FAST_MEDIUM',
+  RIGHT_ARM_OFF_SPIN: 'RIGHT_ARM_OFF_SPIN',
+  LEFT_ARM_OFF_SPIN: 'LEFT_ARM_OFF_SPIN',
+  RIGHT_ARM_LEG_SPIN: 'RIGHT_ARM_LEG_SPIN',
+  LEFT_ARM_LEG_SPIN: 'LEFT_ARM_LEG_SPIN',
+  RIGHT_HAND_FAST: 'RIGHT_HAND_FAST',
+  LEFT_HAND_FAST: 'LEFT_HAND_FAST'
+} as const
+
+export type BowlingStyleEnum = (typeof BowlingStyleEnum)[keyof typeof BowlingStyleEnum]

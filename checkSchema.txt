@@ -1,0 +1,815 @@
+// ============================================================
+// Cricket Tournament Management — DBML Schema v2
+// Generated for https://dbdiagram.io/
+// ============================================================
+// Changes from v1:
+//   Phase 1 — Access control
+//     [new]  user_permission_overrides
+//     [mod]  user_roles        — added stage_id scope
+//     [mod]  users             — soft delete + suspension
+//     [mod]  teams             — soft delete + suspension
+//     [mod]  players           — soft delete + suspension
+//     [new]  audit_logs
+//   Phase 2 — User & player data
+//     [new]  user_documents
+//     [mod]  tournaments       — squad size limits
+//     [new]  player_substitutions
+//   Phase 3 — Tournament structure
+//     [new]  stage_advancement_rules
+//     [new]  knockout_bracket_slots
+//     [new]  points_config
+//     [mod]  tournament_stages — next_stage_id, teams_to_advance
+//   Phase 4 — Match completeness
+//     [mod]  matches           — toss, DLS, super over, venue_id
+//     [mod]  innings           — is_super_over, phase tracking
+//     [mod]  balls             — phase tag
+//     [new]  venues
+//     [new]  match_officials
+//     [new]  match_awards
+// ============================================================
+
+Project CricketTournament {
+  database_type: 'MySQL'
+  Note: 'Cricket tournament management — ball-by-ball scoring, multi-stage brackets, role-based access control, per-user permission overrides'
+}
+
+// ============================================================
+// ENUMS
+// ============================================================
+
+enum StageType {
+  ROUND_ROBIN
+  GROUP_STAGE
+  SUPER_STAGE
+  KNOCKOUT
+  SEMI_FINAL
+  FINAL
+}
+
+enum RoleEnum {
+  SUPERADMIN
+  TOURNAMENT_ADMIN
+  TEAM_ADMIN
+  SCORER
+  VIEWER
+}
+
+enum Permission {
+  CREATE_TOURNAMENT
+  DELETE_TOURNAMENT
+  MANAGE_STAGES
+  CREATE_MATCH
+  UPDATE_MATCH
+  SCORE_BALL
+  UNDO_BALL
+  MANAGE_PLAYERS
+  MANAGE_TEAMS
+  ASSIGN_ROLES
+  MANAGE_USERS
+  VIEW_ALL
+}
+
+enum PermissionEffect {
+  GRANT
+  DENY
+}
+
+enum TournamentStatus {
+  DRAFT
+  REGISTRATION
+  ACTIVE
+  COMPLETED
+  CANCELLED
+}
+
+enum MatchStatus {
+  SCHEDULED
+  IN_PROGRESS
+  COMPLETED
+  ABANDONED
+  NO_RESULT
+}
+
+enum TossDecision {
+  BAT
+  FIELD
+}
+
+enum SubstitutionType {
+  CONCUSSION
+  X_FACTOR
+  IMPACT_PLAYER
+  TACTICAL
+}
+
+enum AdvancementMethod {
+  TOP_N_PER_GROUP
+  TOP_N_OVERALL
+  WINNER
+  RUNNER_UP
+}
+
+enum DocumentType {
+  ID_PROOF
+  PHOTO
+  CONSENT_FORM
+  MEDICAL_CERT
+  OTHER
+}
+
+enum VerificationStatus {
+  PENDING
+  APPROVED
+  REJECTED
+}
+
+enum OfficialRole {
+  ON_FIELD_UMPIRE
+  TV_UMPIRE
+  RESERVE_UMPIRE
+  MATCH_REFEREE
+  SCORER
+}
+
+enum AwardType {
+  MOTM
+  BEST_BOWLER
+  BEST_BATTER
+  BEST_FIELDER
+  CUSTOM
+}
+
+enum PitchType {
+  FLAT
+  SPIN
+  PACE
+  SWING
+}
+
+enum AuditAction {
+  ROLE_ASSIGNED
+  ROLE_REVOKED
+  PERMISSION_OVERRIDDEN
+  BALL_RECORDED
+  BALL_UNDONE
+  MATCH_CREATED
+  MATCH_UPDATED
+  MATCH_COMPLETED
+  USER_SUSPENDED
+  USER_RESTORED
+  PLAYER_SUBBED
+  TEAM_DISQUALIFIED
+  DOCUMENT_UPLOADED
+  DOCUMENT_VERIFIED
+}
+
+enum OverPhase {
+  POWERPLAY
+  MIDDLE
+  DEATH
+}
+
+enum GenderEnum {
+  MALE
+  FEMALE
+  OTHER
+}
+
+enum AgeGroupEnum {
+  AGE_15_25
+  AGE_25_30
+  AGE_30_40
+  AGE_40_50
+  AGE_50_PLUS
+}
+
+enum OrganizationType {
+  GOVT
+  GOVT_PSU
+  PRIVATE
+  PUBLIC
+  STARTUP
+  NGO
+  MNC
+  OTHER
+}
+
+enum JerseySizeEnum {
+  XS
+  S
+  M
+  L
+  XL
+  XXL
+  XXXL
+}
+
+// ============================================================
+// PARTIALS
+// ============================================================
+
+TablePartial timestamps {
+  created_at timestamp [not null, default: `now()`]
+  updated_at timestamp [not null, default: `now()`]
+}
+
+// ============================================================
+// USERS & AUTH
+// ============================================================
+
+Table users {
+  id                int          [pk, increment]
+  name              varchar(255) [null]
+  email             varchar(255) [unique, null]
+  password          varchar(255) [null]
+  phone             varchar(20)  [unique, null]
+  otp_code          varchar(10)  [null]
+  otp_expires       timestamp    [null]
+  profile_image     varchar(500) [null]
+  is_suspended      boolean      [not null, default: false]
+  suspension_reason varchar(500) [null]
+  is_deleted        boolean      [not null, default: false]
+  deleted_at        timestamp    [null]
+  ~timestamps
+
+  note: 'All queries must filter WHERE is_deleted = false. Use active_users view in app layer.'
+}
+
+Table user_profiles {
+  id                    int              [pk, increment]
+  user_id               int              [not null, unique, ref: - users.id]
+  player_name           varchar(255)     [not null]
+  gender                GenderEnum       [not null]
+  age_group             AgeGroupEnum     [not null]
+  mobile_number         varchar(20)      [not null]
+  email                 varchar(255)     [null]
+  designation           varchar(255)     [null]
+  organization          varchar(255)     [null]
+  org_type              OrganizationType [null]
+  jersey_size           JerseySizeEnum   [not null]
+  preferred_jersey_name varchar(100)     [null]
+  preferred_jersey_no   int              [null]
+  track_pant_size       JerseySizeEnum   [null]
+  shoe_size             int              [null]
+  address_line1         varchar(500)     [not null]
+  address_line2         varchar(500)     [null]
+  city                  varchar(100)     [not null]
+  pin_code              varchar(20)      [not null]
+  state                 varchar(100)     [not null]
+  country               varchar(100)     [not null]
+  ~timestamps
+}
+
+Table user_documents {
+  id              int                [pk, increment]
+  user_id         int                [not null, ref: > users.id]
+  document_type   DocumentType       [not null]
+  s3_url          varchar(1000)      [not null]
+  file_name       varchar(255)       [null]
+  mime_type       varchar(100)       [null]
+  file_size_kb    int                [null]
+  verified_status VerificationStatus [not null, default: 'PENDING']
+  verified_by     int                [null, ref: > users.id]
+  verified_at     timestamp          [null]
+  expires_at      timestamp          [null]
+  created_at      timestamp          [not null, default: `now()`]
+
+  indexes {
+    user_id
+    (user_id, document_type) [name: 'idx_user_doc_type']
+  }
+
+  note: 'S3 links for ID proof, consent forms, medical certs, photos etc.'
+}
+
+// ============================================================
+// ROLES & PERMISSIONS
+// ============================================================
+
+Table user_roles {
+  id            int      [pk, increment]
+  user_id       int      [not null, ref: > users.id]
+  tournament_id int      [null, ref: > tournaments.id]
+  team_id       int      [null, ref: > teams.id]
+  stage_id      int      [null, ref: > tournament_stages.id]
+  role          RoleEnum [not null]
+
+  indexes {
+    user_id
+    tournament_id
+    team_id
+    stage_id
+    (user_id, role, tournament_id, team_id, stage_id) [unique, name: 'uq_user_role_scope']
+  }
+
+  note: 'SUPERADMIN: all nulls. TOURNAMENT_ADMIN: tournament_id. SCORER: tournament_id + stage_id.'
+}
+
+Table role_permissions {
+  id         int        [pk, increment]
+  role       RoleEnum   [not null]
+  permission Permission [not null]
+
+  indexes {
+    (role, permission) [unique, name: 'uq_role_permission']
+  }
+
+  note: 'Seeded at startup. Resolution: user DENY > user GRANT > role default.'
+}
+
+Table user_permission_overrides {
+  id            int              [pk, increment]
+  user_id       int              [not null, ref: > users.id]
+  tournament_id int              [null, ref: > tournaments.id]
+  permission    Permission       [not null]
+  effect        PermissionEffect [not null]
+  granted_by    int              [not null, ref: > users.id]
+  reason        varchar(500)     [null]
+  expires_at    timestamp        [null]
+  created_at    timestamp        [not null, default: `now()`]
+
+  indexes {
+    user_id
+    (user_id, permission, tournament_id) [unique, name: 'uq_user_perm_override']
+  }
+
+  note: 'DENY wins over GRANT. Check before role_permissions in middleware.'
+}
+
+Table audit_logs {
+  id           int         [pk, increment]
+  actor_id     int         [null, ref: > users.id]
+  action       AuditAction [not null]
+  entity_type  varchar(50) [not null]
+  entity_id    int         [not null]
+  before_state text        [null]
+  after_state  text        [null]
+  ip_address   varchar(45) [null]
+  created_at   timestamp   [not null, default: `now()`]
+
+  indexes {
+    actor_id
+    (entity_type, entity_id) [name: 'idx_audit_entity']
+    created_at
+  }
+
+  note: 'Append-only. Never update or delete rows.'
+}
+
+// ============================================================
+// PLAYERS
+// ============================================================
+
+Table players {
+  id                int          [pk, increment]
+  full_name         varchar(255) [not null]
+  dob               date         [null]
+  batting_style     varchar(100) [null]
+  bowling_style     varchar(100) [null]
+  image_url         varchar(500) [null]
+  phone             varchar(20)  [unique, null]
+  user_id           int          [unique, null, ref: - users.id]
+  is_suspended      boolean      [not null, default: false]
+  suspension_reason varchar(500) [null]
+  is_deleted        boolean      [not null, default: false]
+  deleted_at        timestamp    [null]
+  created_at        timestamp    [not null, default: `now()`]
+
+  note: 'Global player registry. Linked to User via user_id when player signs up.'
+}
+
+// ============================================================
+// VENUES
+// ============================================================
+
+Table venues {
+  id         int          [pk, increment]
+  name       varchar(255) [not null]
+  short_name varchar(50)  [null]
+  city       varchar(100) [not null]
+  state      varchar(100) [null]
+  country    varchar(100) [not null]
+  capacity   int          [null]
+  pitch_type PitchType    [null]
+  latitude   decimal(9,6) [null]
+  longitude  decimal(9,6) [null]
+  image_url  varchar(500) [null]
+  created_at timestamp    [not null, default: `now()`]
+
+  indexes {
+    (name, city) [name: 'idx_venue_name_city']
+  }
+}
+
+// ============================================================
+// TOURNAMENTS
+// ============================================================
+
+Table tournaments {
+  id                  int              [pk, increment]
+  name                varchar(255)     [not null]
+  year                int              [not null]
+  location            varchar(255)     [null]
+  status              TournamentStatus [not null, default: 'DRAFT']
+  default_overs_limit int              [null]
+  default_max_wickets int              [null]
+  start_at            timestamp        [not null]
+  end_at              timestamp        [null]
+  image_url           varchar(500)     [null]
+  created_by          int              [null, ref: > users.id]
+  max_squad_size      int              [null]
+  min_squad_size      int              [null]
+  ~timestamps
+}
+
+Table tournament_stages {
+  id               int          [pk, increment]
+  tournament_id    int          [not null, ref: > tournaments.id]
+  name             varchar(255) [not null]
+  order            int          [not null]
+  type             StageType    [not null]
+  next_stage_id    int          [null, ref: > tournament_stages.id]
+  teams_to_advance int          [null]
+  is_final_stage   boolean      [not null, default: false]
+
+  indexes {
+    tournament_id
+    (tournament_id, order) [unique, name: 'uq_stage_order']
+  }
+}
+
+Table stage_groups {
+  id       int         [pk, increment]
+  stage_id int         [not null, ref: > tournament_stages.id]
+  name     varchar(50) [not null]
+  order    int         [null]
+
+  indexes {
+    stage_id
+  }
+}
+
+Table stage_teams {
+  id       int [pk, increment]
+  stage_id int [not null, ref: > tournament_stages.id]
+  team_id  int [not null, ref: > teams.id]
+  group_id int [null, ref: > stage_groups.id]
+  seed     int [null]
+
+  indexes {
+    (stage_id, team_id) [unique, name: 'uq_stage_team']
+  }
+}
+
+Table stage_advancement_rules {
+  id               int               [pk, increment]
+  from_stage_id    int               [not null, ref: > tournament_stages.id]
+  to_stage_id      int               [not null, ref: > tournament_stages.id]
+  teams_per_group  int               [null]
+  total_teams      int               [null]
+  selection_method AdvancementMethod [not null]
+  tiebreaker_order varchar(200)      [null]
+
+  indexes {
+    (from_stage_id, to_stage_id) [name: 'idx_advancement_stages']
+  }
+}
+
+Table knockout_bracket_slots {
+  id                      int         [pk, increment]
+  stage_id                int         [not null, ref: > tournament_stages.id]
+  slot_number             int         [not null]
+  round_name              varchar(50) [null]
+  match_id                int         [null, ref: > matches.id]
+  team_a_source_slot      int         [null]
+  team_b_source_slot      int         [null]
+  winner_advances_to_slot int         [null]
+
+  indexes {
+    stage_id
+    (stage_id, slot_number) [unique, name: 'uq_bracket_slot']
+  }
+}
+
+Table points_config {
+  id               int          [pk, increment]
+  tournament_id    int          [not null, ref: > tournaments.id]
+  win_points       int          [not null, default: 2]
+  loss_points      int          [not null, default: 0]
+  tie_points       int          [not null, default: 1]
+  no_result_points int          [not null, default: 1]
+  bonus_point_rule varchar(200) [null]
+  nrr_tiebreaker   boolean      [not null, default: true]
+
+  indexes {
+    tournament_id [unique, name: 'uq_points_config_tournament']
+  }
+}
+
+// ============================================================
+// TEAMS
+// ============================================================
+
+Table teams {
+  id                int          [pk, increment]
+  name              varchar(255) [not null]
+  short_name        varchar(10)  [not null]
+  tournament_id     int          [null, ref: > tournaments.id]
+  created_by        int          [not null, ref: > users.id]
+  image_url         varchar(500) [null]
+  is_disqualified   boolean      [not null, default: false]
+  is_suspended      boolean      [not null, default: false]
+  suspension_reason varchar(500) [null]
+  is_deleted        boolean      [not null, default: false]
+  deleted_at        timestamp    [null]
+  ~timestamps
+}
+
+Table team_players {
+  id         int         [pk, increment]
+  team_id    int         [not null, ref: > teams.id]
+  player_id  int         [not null, ref: > players.id]
+  jersey_no  int         [null]
+  role       varchar(50) [null]
+  is_captain boolean     [not null, default: false]
+  is_active  boolean     [not null, default: true]
+
+  indexes {
+    (team_id, player_id) [unique, name: 'uq_team_player']
+  }
+}
+
+// ============================================================
+// MATCHES
+// ============================================================
+
+Table matches {
+  id                  int          [pk, increment]
+  tournament_id       int          [not null, ref: > tournaments.id]
+  stage_id            int          [null, ref: > tournament_stages.id]
+  group_id            int          [null, ref: > stage_groups.id]
+  team_a_id           int          [null, ref: > teams.id]
+  team_b_id           int          [null, ref: > teams.id]
+  overs_limit         int          [not null]
+  max_wickets         int          [not null, default: 10]
+  venue_id            int          [null, ref: > venues.id]
+  ground              varchar(255) [null, note: 'Deprecated — use venue_id']
+  start_time          timestamp    [null]
+  status              MatchStatus  [not null, default: 'SCHEDULED']
+  winner_team_id      int          [null, ref: > teams.id]
+  result_text         varchar(500) [null]
+  match_completed     boolean      [not null, default: false]
+  toss_winner_team_id int          [null, ref: > teams.id]
+  toss_decision       TossDecision [null]
+  dls_applied         boolean      [not null, default: false]
+  revised_target      int          [null]
+  overs_lost          decimal(4,1) [null]
+  has_super_over      boolean      [not null, default: false]
+  ~timestamps
+
+  indexes {
+    tournament_id
+    stage_id
+    group_id
+    team_a_id
+    team_b_id
+    venue_id
+  }
+}
+
+// ============================================================
+// INNINGS
+// ============================================================
+
+Table innings {
+  id                  int          [pk, increment]
+  match_id            int          [not null, ref: > matches.id]
+  batting_team_id     int          [not null, ref: > teams.id]
+  bowling_team_id     int          [not null, ref: > teams.id]
+  innings_no          int          [not null]
+  total_runs          int          [not null, default: 0]
+  total_wkts          int          [not null, default: 0]
+  total_overs         decimal(4,1) [not null, default: 0.0]
+  is_super_over       boolean      [not null, default: false]
+  powerplay_overs     int          [null]
+  death_overs_start   int          [null]
+
+  indexes {
+    match_id
+    (match_id, innings_no) [unique, name: 'uq_match_innings']
+  }
+}
+
+// ============================================================
+// BALLS
+// ============================================================
+
+Table balls {
+  id                  int         [pk, increment]
+  match_id            int         [not null, ref: > matches.id]
+  inning_id           int         [not null, ref: > innings.id]
+  over_number         int         [not null]
+  ball_number         int         [not null]
+  striker_id          int         [not null, ref: > players.id]
+  non_striker_id      int         [not null, ref: > players.id]
+  bowler_id           int         [not null, ref: > players.id]
+  runs                int         [not null, default: 0]
+  extra_type          varchar(20) [null]
+  extra_runs          int         [not null, default: 0]
+  wicket              boolean     [not null, default: false]
+  wicket_type         varchar(50) [null]
+  dismissed_player_id int         [null, ref: > players.id]
+  phase               OverPhase   [null]
+  created_at          timestamp   [not null, default: `now()`]
+
+  indexes {
+    match_id
+    inning_id
+    (inning_id, over_number, ball_number) [unique, name: 'uq_ball_position']
+  }
+
+  note: 'Single source of truth for scoring.'
+}
+
+// ============================================================
+// PLAYER SUBSTITUTIONS
+// ============================================================
+
+Table player_substitutions {
+  id                   int              [pk, increment]
+  match_id             int              [not null, ref: > matches.id]
+  team_id              int              [not null, ref: > teams.id]
+  original_player_id   int              [not null, ref: > players.id]
+  substitute_player_id int              [not null, ref: > players.id]
+  sub_type             SubstitutionType [not null]
+  innings_no           int              [not null]
+  over_number          int              [null]
+  approved_by_official boolean          [not null, default: false]
+  notes                varchar(500)     [null]
+  created_at           timestamp        [not null, default: `now()`]
+
+  indexes {
+    match_id
+    team_id
+    (match_id, original_player_id) [name: 'idx_sub_match_player']
+  }
+}
+
+// ============================================================
+// MATCH OFFICIALS
+// ============================================================
+
+Table match_officials {
+  id       int          [pk, increment]
+  match_id int          [not null, ref: > matches.id]
+  name     varchar(255) [not null]
+  role     OfficialRole [not null]
+  user_id  int          [null, ref: > users.id]
+
+  indexes {
+    match_id
+    (match_id, role) [name: 'idx_official_match_role']
+  }
+}
+
+// ============================================================
+// MATCH AWARDS
+// ============================================================
+
+Table match_awards {
+  id            int          [pk, increment]
+  tournament_id int          [not null, ref: > tournaments.id]
+  match_id      int          [null, ref: > matches.id]
+  stage_id      int          [null, ref: > tournament_stages.id]
+  player_id     int          [not null, ref: > players.id]
+  team_id       int          [not null, ref: > teams.id]
+  award_type    AwardType    [not null]
+  award_name    varchar(100) [null]
+  awarded_by    int          [null, ref: > users.id]
+  created_at    timestamp    [not null, default: `now()`]
+
+  indexes {
+    match_id
+    player_id
+    tournament_id
+  }
+}
+
+// ============================================================
+// SCORECARDS
+// ============================================================
+
+Table batting_scorecards {
+  id              int          [pk, increment]
+  match_id        int          [not null, ref: > matches.id]
+  innings_no      int          [not null]
+  team_id         int          [not null, ref: > teams.id]
+  player_id       int          [not null, ref: > players.id]
+  tournament_id   int          [not null, ref: > tournaments.id]
+  stage_id        int          [null, ref: > tournament_stages.id]
+  group_id        int          [null, ref: > stage_groups.id]
+  runs            int          [not null, default: 0]
+  balls           int          [not null, default: 0]
+  fours           int          [not null, default: 0]
+  sixes           int          [not null, default: 0]
+  strike_rate     float        [null]
+  dismissal_type  varchar(50)  [null]
+  dismissed_by_id int          [null, ref: > players.id]
+  fielder_ids     varchar(500) [null]
+
+  indexes {
+    (match_id, innings_no) [name: 'idx_batting_match_innings']
+    player_id
+  }
+}
+
+Table bowling_scorecards {
+  id            int   [pk, increment]
+  match_id      int   [not null, ref: > matches.id]
+  innings_no    int   [not null]
+  team_id       int   [not null, ref: > teams.id]
+  player_id     int   [not null, ref: > players.id]
+  tournament_id int   [not null, ref: > tournaments.id]
+  stage_id      int   [null, ref: > tournament_stages.id]
+  group_id      int   [null, ref: > stage_groups.id]
+  overs         float [not null, default: 0]
+  balls         int   [not null, default: 0]
+  runs_given    int   [not null, default: 0]
+  wickets       int   [not null, default: 0]
+  maidens       int   [null, default: 0]
+  wides         int   [null, default: 0]
+  no_balls      int   [null, default: 0]
+  economy       float [null]
+
+  indexes {
+    (match_id, innings_no) [name: 'idx_bowling_match_innings']
+    player_id
+  }
+}
+
+// ============================================================
+// SUMMARIES
+// ============================================================
+
+Table match_summaries {
+  id              int          [pk, increment]
+  match_id        int          [not null, ref: > matches.id]
+  tournament_id   int          [not null, ref: > tournaments.id]
+  stage_id        int          [null, ref: > tournament_stages.id]
+  group_id        int          [null, ref: > stage_groups.id]
+  winner_team_id  int          [null, ref: > teams.id]
+  result_text     varchar(500) [not null]
+  target          int          [null]
+  overs_limit     int          [not null]
+  decided_by      varchar(50)  [null]
+  match_completed boolean      [not null, default: false]
+  created_at      timestamp    [not null, default: `now()`]
+
+  indexes {
+    match_id [unique, name: 'uq_match_summary']
+  }
+}
+
+Table innings_summaries {
+  id              int       [pk, increment]
+  match_id        int       [not null, ref: > matches.id]
+  tournament_id   int       [not null, ref: > tournaments.id]
+  stage_id        int       [null, ref: > tournament_stages.id]
+  group_id        int       [null, ref: > stage_groups.id]
+  innings_no      int       [not null]
+  batting_team_id int       [not null, ref: > teams.id]
+  bowling_team_id int       [not null, ref: > teams.id]
+  total_runs      int       [not null]
+  wickets         int       [not null]
+  overs           float     [not null]
+  created_at      timestamp [not null, default: `now()`]
+
+  indexes {
+    (match_id, innings_no) [unique, name: 'uq_innings_summary']
+  }
+}
+
+// ============================================================
+// STANDINGS
+// ============================================================
+
+Table tournament_standings {
+  id            int   [pk, increment]
+  tournament_id int   [not null, ref: > tournaments.id]
+  stage_id      int   [null, ref: > tournament_stages.id]
+  group_id      int   [null, ref: > stage_groups.id]
+  team_id       int   [not null, ref: > teams.id]
+  matches       int   [not null, default: 0]
+  wins          int   [not null, default: 0]
+  losses        int   [not null, default: 0]
+  ties          int   [not null, default: 0]
+  no_result     int   [not null, default: 0]
+  points        int   [not null, default: 0]
+  net_run_rate  float [not null, default: 0]
+
+  indexes {
+    (tournament_id, stage_id, group_id, team_id) [unique, name: 'uq_standing']
+  }
+
+  note: 'Recomputable from match results + points_config.'
+}
