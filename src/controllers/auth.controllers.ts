@@ -1,5 +1,6 @@
 import type { Request, Response } from "express";
 import type { RegisterSchemaType } from "../schemas/auth.schema.ts";
+import { HttpStatus } from "../types/statusCode.ts";
 
 class AuthControllers {
   register = async (req: Request, res: Response) => {
@@ -9,7 +10,7 @@ class AuthControllers {
     // You can safely use registerData here
 
     // const user = await authServices.registerUser(registerData);
-    return res.status(201).json({
+    return res.status(HttpStatus.CREATED).json({
       success: true,
       message: "User registered successfully",
     });

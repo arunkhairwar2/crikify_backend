@@ -1,6 +1,7 @@
-import type { Request, Response, NextFunction } from "express";
+import type { NextFunction, Request, Response } from "express";
 import type { ZodSchema } from "zod";
 import { ZodError } from "zod";
+import { HttpStatus } from "../types/statusCode.ts";
 import { ApiError } from "../utils/ApiError.ts";
 
 /**
@@ -25,7 +26,11 @@ export const validate =
           message: issue.message,
         }));
 
-        throw new ApiError(422, "Validation failed", fieldErrors);
+        throw new ApiError(
+          HttpStatus.UNPROCESSABLE_ENTITY,
+          "Validation failed",
+          fieldErrors,
+        );
       }
       throw error;
     }

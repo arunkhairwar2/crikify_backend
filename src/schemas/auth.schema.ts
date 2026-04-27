@@ -33,7 +33,7 @@ export const RegisterSchema = z.object({
   firstName: z
     .string()
     .min(3, "First name must be at least 3 characters")
-    .max(100, "First name must be less than 50 characters")
+    .max(100, "First name must be less than 100 characters")
     .trim()
     .regex(/^[A-Za-z]+$/, "First name must contain only letters"),
   middleName: z.string().optional(),
@@ -44,7 +44,7 @@ export const RegisterSchema = z.object({
     .trim()
     .regex(/^[A-Za-z]+$/, "Last name must contain only letters"),
   primaryPhoneNumber: phoneValidation,
-  dob: z.date(),
+  dob: z.coerce.date().max(new Date(), "DOB cannot be future date"),
   gender: z.enum(["MALE", "FEMALE", "OTHER"]),
   email: emailValidation,
   password: passwordValidation,

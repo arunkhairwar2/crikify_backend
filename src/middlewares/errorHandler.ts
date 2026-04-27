@@ -1,6 +1,7 @@
 import type { Request, Response, NextFunction } from "express";
 import { ZodError } from "zod";
 import { ApiError } from "../utils/ApiError.ts";
+import { HttpStatus } from "../types/statusCode.ts";
 
 /**
  * Global error handling middleware.
@@ -34,7 +35,7 @@ export const errorHandler = (
       message: issue.message,
     }));
 
-    res.status(422).json({
+    res.status(HttpStatus.UNPROCESSABLE_ENTITY).json({
       success: false,
       message: "Validation failed",
       errors: fieldErrors,
@@ -44,7 +45,7 @@ export const errorHandler = (
 
   // Unknown / unexpected errors
   console.error("Unhandled error:", err);
-  res.status(500).json({
+  res.status(HttpStatus.INTERNAL_SERVER_ERROR).json({
     success: false,
     message: "Internal server error",
   });
