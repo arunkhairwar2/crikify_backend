@@ -1,5 +1,5 @@
 import userRepositories from "../repositories/user.repository.ts";
-import { RegisterSchemaType } from "../schemas/auth.schema.ts";
+import type { RegisterSchemaType } from "../schemas/auth.schema.ts";
 
 class AuthServices {
   async registerUser(userData: RegisterSchemaType) {

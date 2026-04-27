@@ -1,5 +1,5 @@
 import prisma from "../config/database.ts";
-import { RegisterSchemaType } from "../schemas/auth.schema.ts";
+import type { RegisterSchemaType } from "../schemas/auth.schema.ts";
 
 class UserRepositories {
   async create(userData: RegisterSchemaType) {
