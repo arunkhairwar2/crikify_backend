@@ -8,10 +8,11 @@ import router from "./routes/index.ts";
 
 const app = express();
 
-app.use(helmet());
+app.use(helmet()); // it sets various http headers to secure the application
 app.use(cors());
 app.use(express.json());
-app.use(morgan("dev"));
+app.use(express.urlencoded({ extended: true }));
+app.use(morgan("dev")); // it's a http logger actually
 
 app.get("/health", (_req, res) => res.json({ status: "ok" }));
 app.use("/api/v1", router);
