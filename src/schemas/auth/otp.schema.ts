@@ -11,3 +11,10 @@ export const VerifyOtpSchema = z.object({
 });
 
 export type VerifyOtpSchemaType = z.infer<typeof VerifyOtpSchema>;
+
+export const ResendOtpSchema = z.object({
+  countryCode: z.string().min(2, "Country code must be at least 2 characters"),
+  mobile: phoneValidation,
+});
+
+export type ResendOtpSchemaType = z.infer<typeof ResendOtpSchema>;

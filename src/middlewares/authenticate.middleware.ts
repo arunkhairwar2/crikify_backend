@@ -1,7 +1,7 @@
-import type { Request, Response, NextFunction } from "express";
+import type { NextFunction, Request, Response } from "express";
 import jwt from "jsonwebtoken";
-import { ApiError } from "../utils/ApiError.ts";
 import { HttpStatus } from "../types/statusCode.ts";
+import { ApiError } from "../utils/ApiError.ts";
 
 /**
  * Routes that do NOT require authentication.
@@ -12,6 +12,8 @@ const PUBLIC_ROUTES: { method?: string; path: string }[] = [
   { path: "/health" },
   { method: "POST", path: "/api/v1/auth/register" },
   { method: "POST", path: "/api/v1/auth/login" },
+  { method: "POST", path: "/api/v1/auth/verify-otp" },
+  { method: "POST", path: "/api/v1/auth/resent-otp" },
 ];
 
 /**

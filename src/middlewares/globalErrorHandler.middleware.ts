@@ -12,7 +12,7 @@ import { HttpStatus } from "../types/statusCode.ts";
  *  - ZodError → formats field errors into a 422 response
  *  - Unknown errors → returns a generic 500 response
  */
-export const errorHandler = (
+export const globalErrorHandler = (
   err: Error,
   _req: Request,
   res: Response,
@@ -41,6 +41,15 @@ export const errorHandler = (
       errors: fieldErrors,
     });
     return;
+  }
+
+  // Handle SyntaxError (in case one slips through without the validate middleware)
+  if (err instanceof SyntaxError) {
+    return res.status(HttpStatus.BAD_REQUEST).json({
+      success: false,
+      message: "Invalid JSON payload",
+      // errors: [{ message: err.message }],
+    });
   }
 
   // Unknown / unexpected errors

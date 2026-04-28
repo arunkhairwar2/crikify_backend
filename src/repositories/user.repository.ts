@@ -47,6 +47,7 @@ class UserRepositories {
           select: {
             otp: true,
             otpExpiry: true,
+            mobileVerified: true,
           },
         },
       },

@@ -1,12 +1,10 @@
 import userRepositories from "../repositories/user.repository.ts";
+import type { VerifyOtpSchemaType } from "../schemas/auth/otp.schema.ts";
 import type { RegisterSchemaType } from "../schemas/auth/register.schema.ts";
-import { VerifyOtpSchemaType } from "../schemas/auth/verifyotp.schema.ts";
+import { generateAccessToken } from "../security/generateAccessToken.ts";
 import { HttpStatus } from "../types/statusCode.ts";
 import { ApiError } from "../utils/ApiError.ts";
-import {
-  generateOtp,
-  getOtpExpiryTime
-} from "../utils/otp.utils.ts";
+import { generateOtp, getOtpExpiryTime } from "../utils/otp.utils.ts";
 import { hashPassword } from "../utils/password.utils.ts";
 
 class AuthServices {
@@ -50,6 +48,13 @@ class AuthServices {
       throw new ApiError(HttpStatus.NOT_FOUND, "User not found");
     }
 
+    if (user.security?.mobileVerified) {
+      throw new ApiError(
+        HttpStatus.CONFLICT,
+        "Mobile number already verified , please login",
+      );
+    }
+
     if (user.security?.otp !== otp) {
       throw new ApiError(HttpStatus.UNAUTHORIZED, "Invalid OTP");
     }
@@ -58,9 +63,23 @@ class AuthServices {
       throw new ApiError(HttpStatus.UNAUTHORIZED, "OTP expired");
     }
 
-    userRepositories.updateMobileVerification(user.id, true);
+    await userRepositories.updateMobileVerification(user.id, true);
+    const token = generateAccessToken(user.id);
+    return token;
+  }
 
-    return user;
+  async resendOtp(countryCode: string, mobile: string) {
+    const user = await userRepositories.findByMobile(countryCode, mobile);
+
+    if (!user) {
+      throw new ApiError(HttpStatus.NOT_FOUND, "User not found");
+    }
+
+    const otp = generateOtp();
+    const otpExpiry = getOtpExpiryTime();
+    await userRepositories.updateOtpAndExpiry(user.id, otp, otpExpiry);
+
+    return;
   }
 
   async login() {}
