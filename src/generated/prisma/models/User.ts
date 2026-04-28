@@ -32,7 +32,6 @@ export type UserMinAggregateOutputType = {
   countryCode: string | null
   mobile: string | null
   email: string | null
-  passwordHash: string | null
   createdAt: Date | null
   updatedAt: Date | null
 }
@@ -45,7 +44,6 @@ export type UserMaxAggregateOutputType = {
   countryCode: string | null
   mobile: string | null
   email: string | null
-  passwordHash: string | null
   createdAt: Date | null
   updatedAt: Date | null
 }
@@ -58,7 +56,6 @@ export type UserCountAggregateOutputType = {
   countryCode: number
   mobile: number
   email: number
-  passwordHash: number
   createdAt: number
   updatedAt: number
   _all: number
@@ -73,7 +70,6 @@ export type UserMinAggregateInputType = {
   countryCode?: true
   mobile?: true
   email?: true
-  passwordHash?: true
   createdAt?: true
   updatedAt?: true
 }
@@ -86,7 +82,6 @@ export type UserMaxAggregateInputType = {
   countryCode?: true
   mobile?: true
   email?: true
-  passwordHash?: true
   createdAt?: true
   updatedAt?: true
 }
@@ -99,7 +94,6 @@ export type UserCountAggregateInputType = {
   countryCode?: true
   mobile?: true
   email?: true
-  passwordHash?: true
   createdAt?: true
   updatedAt?: true
   _all?: true
@@ -185,7 +179,6 @@ export type UserGroupByOutputType = {
   countryCode: string
   mobile: string
   email: string
-  passwordHash: string
   createdAt: Date
   updatedAt: Date
   _count: UserCountAggregateOutputType | null
@@ -219,13 +212,13 @@ export type UserWhereInput = {
   countryCode?: Prisma.StringFilter<"User"> | string
   mobile?: Prisma.StringFilter<"User"> | string
   email?: Prisma.StringFilter<"User"> | string
-  passwordHash?: Prisma.StringFilter<"User"> | string
   createdAt?: Prisma.DateTimeFilter<"User"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"User"> | Date | string
   personal?: Prisma.XOR<Prisma.PersonalDetailsNullableScalarRelationFilter, Prisma.PersonalDetailsWhereInput> | null
   professional?: Prisma.XOR<Prisma.ProfessionalDetailsNullableScalarRelationFilter, Prisma.ProfessionalDetailsWhereInput> | null
   sports?: Prisma.XOR<Prisma.SportsPreferencesNullableScalarRelationFilter, Prisma.SportsPreferencesWhereInput> | null
   address?: Prisma.XOR<Prisma.AddressNullableScalarRelationFilter, Prisma.AddressWhereInput> | null
+  security?: Prisma.XOR<Prisma.UserSecurityNullableScalarRelationFilter, Prisma.UserSecurityWhereInput> | null
 }
 
 export type UserOrderByWithRelationInput = {
@@ -236,13 +229,13 @@ export type UserOrderByWithRelationInput = {
   countryCode?: Prisma.SortOrder
   mobile?: Prisma.SortOrder
   email?: Prisma.SortOrder
-  passwordHash?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   personal?: Prisma.PersonalDetailsOrderByWithRelationInput
   professional?: Prisma.ProfessionalDetailsOrderByWithRelationInput
   sports?: Prisma.SportsPreferencesOrderByWithRelationInput
   address?: Prisma.AddressOrderByWithRelationInput
+  security?: Prisma.UserSecurityOrderByWithRelationInput
 }
 
 export type UserWhereUniqueInput = Prisma.AtLeast<{
@@ -257,13 +250,13 @@ export type UserWhereUniqueInput = Prisma.AtLeast<{
   lastName?: Prisma.StringFilter<"User"> | string
   countryCode?: Prisma.StringFilter<"User"> | string
   mobile?: Prisma.StringFilter<"User"> | string
-  passwordHash?: Prisma.StringFilter<"User"> | string
   createdAt?: Prisma.DateTimeFilter<"User"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"User"> | Date | string
   personal?: Prisma.XOR<Prisma.PersonalDetailsNullableScalarRelationFilter, Prisma.PersonalDetailsWhereInput> | null
   professional?: Prisma.XOR<Prisma.ProfessionalDetailsNullableScalarRelationFilter, Prisma.ProfessionalDetailsWhereInput> | null
   sports?: Prisma.XOR<Prisma.SportsPreferencesNullableScalarRelationFilter, Prisma.SportsPreferencesWhereInput> | null
   address?: Prisma.XOR<Prisma.AddressNullableScalarRelationFilter, Prisma.AddressWhereInput> | null
+  security?: Prisma.XOR<Prisma.UserSecurityNullableScalarRelationFilter, Prisma.UserSecurityWhereInput> | null
 }, "id" | "email" | "mobile_unique">
 
 export type UserOrderByWithAggregationInput = {
@@ -274,7 +267,6 @@ export type UserOrderByWithAggregationInput = {
   countryCode?: Prisma.SortOrder
   mobile?: Prisma.SortOrder
   email?: Prisma.SortOrder
-  passwordHash?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   _count?: Prisma.UserCountOrderByAggregateInput
@@ -293,7 +285,6 @@ export type UserScalarWhereWithAggregatesInput = {
   countryCode?: Prisma.StringWithAggregatesFilter<"User"> | string
   mobile?: Prisma.StringWithAggregatesFilter<"User"> | string
   email?: Prisma.StringWithAggregatesFilter<"User"> | string
-  passwordHash?: Prisma.StringWithAggregatesFilter<"User"> | string
   createdAt?: Prisma.DateTimeWithAggregatesFilter<"User"> | Date | string
   updatedAt?: Prisma.DateTimeWithAggregatesFilter<"User"> | Date | string
 }
@@ -306,13 +297,13 @@ export type UserCreateInput = {
   countryCode: string
   mobile: string
   email: string
-  passwordHash: string
   createdAt?: Date | string
   updatedAt?: Date | string
   personal?: Prisma.PersonalDetailsCreateNestedOneWithoutUserInput
   professional?: Prisma.ProfessionalDetailsCreateNestedOneWithoutUserInput
   sports?: Prisma.SportsPreferencesCreateNestedOneWithoutUserInput
   address?: Prisma.AddressCreateNestedOneWithoutUserInput
+  security?: Prisma.UserSecurityCreateNestedOneWithoutUserInput
 }
 
 export type UserUncheckedCreateInput = {
@@ -323,13 +314,13 @@ export type UserUncheckedCreateInput = {
   countryCode: string
   mobile: string
   email: string
-  passwordHash: string
   createdAt?: Date | string
   updatedAt?: Date | string
   personal?: Prisma.PersonalDetailsUncheckedCreateNestedOneWithoutUserInput
   professional?: Prisma.ProfessionalDetailsUncheckedCreateNestedOneWithoutUserInput
   sports?: Prisma.SportsPreferencesUncheckedCreateNestedOneWithoutUserInput
   address?: Prisma.AddressUncheckedCreateNestedOneWithoutUserInput
+  security?: Prisma.UserSecurityUncheckedCreateNestedOneWithoutUserInput
 }
 
 export type UserUpdateInput = {
@@ -340,13 +331,13 @@ export type UserUpdateInput = {
   countryCode?: Prisma.StringFieldUpdateOperationsInput | string
   mobile?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.StringFieldUpdateOperationsInput | string
-  passwordHash?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   personal?: Prisma.PersonalDetailsUpdateOneWithoutUserNestedInput
   professional?: Prisma.ProfessionalDetailsUpdateOneWithoutUserNestedInput
   sports?: Prisma.SportsPreferencesUpdateOneWithoutUserNestedInput
   address?: Prisma.AddressUpdateOneWithoutUserNestedInput
+  security?: Prisma.UserSecurityUpdateOneWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateInput = {
@@ -357,13 +348,13 @@ export type UserUncheckedUpdateInput = {
   countryCode?: Prisma.StringFieldUpdateOperationsInput | string
   mobile?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.StringFieldUpdateOperationsInput | string
-  passwordHash?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   personal?: Prisma.PersonalDetailsUncheckedUpdateOneWithoutUserNestedInput
   professional?: Prisma.ProfessionalDetailsUncheckedUpdateOneWithoutUserNestedInput
   sports?: Prisma.SportsPreferencesUncheckedUpdateOneWithoutUserNestedInput
   address?: Prisma.AddressUncheckedUpdateOneWithoutUserNestedInput
+  security?: Prisma.UserSecurityUncheckedUpdateOneWithoutUserNestedInput
 }
 
 export type UserCreateManyInput = {
@@ -374,7 +365,6 @@ export type UserCreateManyInput = {
   countryCode: string
   mobile: string
   email: string
-  passwordHash: string
   createdAt?: Date | string
   updatedAt?: Date | string
 }
@@ -387,7 +377,6 @@ export type UserUpdateManyMutationInput = {
   countryCode?: Prisma.StringFieldUpdateOperationsInput | string
   mobile?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.StringFieldUpdateOperationsInput | string
-  passwordHash?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -400,7 +389,6 @@ export type UserUncheckedUpdateManyInput = {
   countryCode?: Prisma.StringFieldUpdateOperationsInput | string
   mobile?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.StringFieldUpdateOperationsInput | string
-  passwordHash?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -423,7 +411,6 @@ export type UserCountOrderByAggregateInput = {
   countryCode?: Prisma.SortOrder
   mobile?: Prisma.SortOrder
   email?: Prisma.SortOrder
-  passwordHash?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
 }
@@ -436,7 +423,6 @@ export type UserMaxOrderByAggregateInput = {
   countryCode?: Prisma.SortOrder
   mobile?: Prisma.SortOrder
   email?: Prisma.SortOrder
-  passwordHash?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
 }
@@ -449,7 +435,6 @@ export type UserMinOrderByAggregateInput = {
   countryCode?: Prisma.SortOrder
   mobile?: Prisma.SortOrder
   email?: Prisma.SortOrder
-  passwordHash?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
 }
@@ -496,6 +481,20 @@ export type UserUpdateOneRequiredWithoutPersonalNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutPersonalInput, Prisma.UserUpdateWithoutPersonalInput>, Prisma.UserUncheckedUpdateWithoutPersonalInput>
 }
 
+export type UserCreateNestedOneWithoutSecurityInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutSecurityInput, Prisma.UserUncheckedCreateWithoutSecurityInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutSecurityInput
+  connect?: Prisma.UserWhereUniqueInput
+}
+
+export type UserUpdateOneRequiredWithoutSecurityNestedInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutSecurityInput, Prisma.UserUncheckedCreateWithoutSecurityInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutSecurityInput
+  upsert?: Prisma.UserUpsertWithoutSecurityInput
+  connect?: Prisma.UserWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutSecurityInput, Prisma.UserUpdateWithoutSecurityInput>, Prisma.UserUncheckedUpdateWithoutSecurityInput>
+}
+
 export type UserCreateNestedOneWithoutSportsInput = {
   create?: Prisma.XOR<Prisma.UserCreateWithoutSportsInput, Prisma.UserUncheckedCreateWithoutSportsInput>
   connectOrCreate?: Prisma.UserCreateOrConnectWithoutSportsInput
@@ -518,12 +517,12 @@ export type UserCreateWithoutProfessionalInput = {
   countryCode: string
   mobile: string
   email: string
-  passwordHash: string
   createdAt?: Date | string
   updatedAt?: Date | string
   personal?: Prisma.PersonalDetailsCreateNestedOneWithoutUserInput
   sports?: Prisma.SportsPreferencesCreateNestedOneWithoutUserInput
   address?: Prisma.AddressCreateNestedOneWithoutUserInput
+  security?: Prisma.UserSecurityCreateNestedOneWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutProfessionalInput = {
@@ -534,12 +533,12 @@ export type UserUncheckedCreateWithoutProfessionalInput = {
   countryCode: string
   mobile: string
   email: string
-  passwordHash: string
   createdAt?: Date | string
   updatedAt?: Date | string
   personal?: Prisma.PersonalDetailsUncheckedCreateNestedOneWithoutUserInput
   sports?: Prisma.SportsPreferencesUncheckedCreateNestedOneWithoutUserInput
   address?: Prisma.AddressUncheckedCreateNestedOneWithoutUserInput
+  security?: Prisma.UserSecurityUncheckedCreateNestedOneWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutProfessionalInput = {
@@ -566,12 +565,12 @@ export type UserUpdateWithoutProfessionalInput = {
   countryCode?: Prisma.StringFieldUpdateOperationsInput | string
   mobile?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.StringFieldUpdateOperationsInput | string
-  passwordHash?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   personal?: Prisma.PersonalDetailsUpdateOneWithoutUserNestedInput
   sports?: Prisma.SportsPreferencesUpdateOneWithoutUserNestedInput
   address?: Prisma.AddressUpdateOneWithoutUserNestedInput
+  security?: Prisma.UserSecurityUpdateOneWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutProfessionalInput = {
@@ -582,12 +581,12 @@ export type UserUncheckedUpdateWithoutProfessionalInput = {
   countryCode?: Prisma.StringFieldUpdateOperationsInput | string
   mobile?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.StringFieldUpdateOperationsInput | string
-  passwordHash?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   personal?: Prisma.PersonalDetailsUncheckedUpdateOneWithoutUserNestedInput
   sports?: Prisma.SportsPreferencesUncheckedUpdateOneWithoutUserNestedInput
   address?: Prisma.AddressUncheckedUpdateOneWithoutUserNestedInput
+  security?: Prisma.UserSecurityUncheckedUpdateOneWithoutUserNestedInput
 }
 
 export type UserCreateWithoutAddressInput = {
@@ -598,12 +597,12 @@ export type UserCreateWithoutAddressInput = {
   countryCode: string
   mobile: string
   email: string
-  passwordHash: string
   createdAt?: Date | string
   updatedAt?: Date | string
   personal?: Prisma.PersonalDetailsCreateNestedOneWithoutUserInput
   professional?: Prisma.ProfessionalDetailsCreateNestedOneWithoutUserInput
   sports?: Prisma.SportsPreferencesCreateNestedOneWithoutUserInput
+  security?: Prisma.UserSecurityCreateNestedOneWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutAddressInput = {
@@ -614,12 +613,12 @@ export type UserUncheckedCreateWithoutAddressInput = {
   countryCode: string
   mobile: string
   email: string
-  passwordHash: string
   createdAt?: Date | string
   updatedAt?: Date | string
   personal?: Prisma.PersonalDetailsUncheckedCreateNestedOneWithoutUserInput
   professional?: Prisma.ProfessionalDetailsUncheckedCreateNestedOneWithoutUserInput
   sports?: Prisma.SportsPreferencesUncheckedCreateNestedOneWithoutUserInput
+  security?: Prisma.UserSecurityUncheckedCreateNestedOneWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutAddressInput = {
@@ -646,12 +645,12 @@ export type UserUpdateWithoutAddressInput = {
   countryCode?: Prisma.StringFieldUpdateOperationsInput | string
   mobile?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.StringFieldUpdateOperationsInput | string
-  passwordHash?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   personal?: Prisma.PersonalDetailsUpdateOneWithoutUserNestedInput
   professional?: Prisma.ProfessionalDetailsUpdateOneWithoutUserNestedInput
   sports?: Prisma.SportsPreferencesUpdateOneWithoutUserNestedInput
+  security?: Prisma.UserSecurityUpdateOneWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutAddressInput = {
@@ -662,12 +661,12 @@ export type UserUncheckedUpdateWithoutAddressInput = {
   countryCode?: Prisma.StringFieldUpdateOperationsInput | string
   mobile?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.StringFieldUpdateOperationsInput | string
-  passwordHash?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   personal?: Prisma.PersonalDetailsUncheckedUpdateOneWithoutUserNestedInput
   professional?: Prisma.ProfessionalDetailsUncheckedUpdateOneWithoutUserNestedInput
   sports?: Prisma.SportsPreferencesUncheckedUpdateOneWithoutUserNestedInput
+  security?: Prisma.UserSecurityUncheckedUpdateOneWithoutUserNestedInput
 }
 
 export type UserCreateWithoutPersonalInput = {
@@ -678,12 +677,12 @@ export type UserCreateWithoutPersonalInput = {
   countryCode: string
   mobile: string
   email: string
-  passwordHash: string
   createdAt?: Date | string
   updatedAt?: Date | string
   professional?: Prisma.ProfessionalDetailsCreateNestedOneWithoutUserInput
   sports?: Prisma.SportsPreferencesCreateNestedOneWithoutUserInput
   address?: Prisma.AddressCreateNestedOneWithoutUserInput
+  security?: Prisma.UserSecurityCreateNestedOneWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutPersonalInput = {
@@ -694,12 +693,12 @@ export type UserUncheckedCreateWithoutPersonalInput = {
   countryCode: string
   mobile: string
   email: string
-  passwordHash: string
   createdAt?: Date | string
   updatedAt?: Date | string
   professional?: Prisma.ProfessionalDetailsUncheckedCreateNestedOneWithoutUserInput
   sports?: Prisma.SportsPreferencesUncheckedCreateNestedOneWithoutUserInput
   address?: Prisma.AddressUncheckedCreateNestedOneWithoutUserInput
+  security?: Prisma.UserSecurityUncheckedCreateNestedOneWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutPersonalInput = {
@@ -726,12 +725,12 @@ export type UserUpdateWithoutPersonalInput = {
   countryCode?: Prisma.StringFieldUpdateOperationsInput | string
   mobile?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.StringFieldUpdateOperationsInput | string
-  passwordHash?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   professional?: Prisma.ProfessionalDetailsUpdateOneWithoutUserNestedInput
   sports?: Prisma.SportsPreferencesUpdateOneWithoutUserNestedInput
   address?: Prisma.AddressUpdateOneWithoutUserNestedInput
+  security?: Prisma.UserSecurityUpdateOneWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutPersonalInput = {
@@ -742,9 +741,89 @@ export type UserUncheckedUpdateWithoutPersonalInput = {
   countryCode?: Prisma.StringFieldUpdateOperationsInput | string
   mobile?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.StringFieldUpdateOperationsInput | string
-  passwordHash?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  professional?: Prisma.ProfessionalDetailsUncheckedUpdateOneWithoutUserNestedInput
+  sports?: Prisma.SportsPreferencesUncheckedUpdateOneWithoutUserNestedInput
+  address?: Prisma.AddressUncheckedUpdateOneWithoutUserNestedInput
+  security?: Prisma.UserSecurityUncheckedUpdateOneWithoutUserNestedInput
+}
+
+export type UserCreateWithoutSecurityInput = {
+  id?: string
+  firstName: string
+  middleName?: string | null
+  lastName: string
+  countryCode: string
+  mobile: string
+  email: string
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  personal?: Prisma.PersonalDetailsCreateNestedOneWithoutUserInput
+  professional?: Prisma.ProfessionalDetailsCreateNestedOneWithoutUserInput
+  sports?: Prisma.SportsPreferencesCreateNestedOneWithoutUserInput
+  address?: Prisma.AddressCreateNestedOneWithoutUserInput
+}
+
+export type UserUncheckedCreateWithoutSecurityInput = {
+  id?: string
+  firstName: string
+  middleName?: string | null
+  lastName: string
+  countryCode: string
+  mobile: string
+  email: string
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  personal?: Prisma.PersonalDetailsUncheckedCreateNestedOneWithoutUserInput
+  professional?: Prisma.ProfessionalDetailsUncheckedCreateNestedOneWithoutUserInput
+  sports?: Prisma.SportsPreferencesUncheckedCreateNestedOneWithoutUserInput
+  address?: Prisma.AddressUncheckedCreateNestedOneWithoutUserInput
+}
+
+export type UserCreateOrConnectWithoutSecurityInput = {
+  where: Prisma.UserWhereUniqueInput
+  create: Prisma.XOR<Prisma.UserCreateWithoutSecurityInput, Prisma.UserUncheckedCreateWithoutSecurityInput>
+}
+
+export type UserUpsertWithoutSecurityInput = {
+  update: Prisma.XOR<Prisma.UserUpdateWithoutSecurityInput, Prisma.UserUncheckedUpdateWithoutSecurityInput>
+  create: Prisma.XOR<Prisma.UserCreateWithoutSecurityInput, Prisma.UserUncheckedCreateWithoutSecurityInput>
+  where?: Prisma.UserWhereInput
+}
+
+export type UserUpdateToOneWithWhereWithoutSecurityInput = {
+  where?: Prisma.UserWhereInput
+  data: Prisma.XOR<Prisma.UserUpdateWithoutSecurityInput, Prisma.UserUncheckedUpdateWithoutSecurityInput>
+}
+
+export type UserUpdateWithoutSecurityInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  firstName?: Prisma.StringFieldUpdateOperationsInput | string
+  middleName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lastName?: Prisma.StringFieldUpdateOperationsInput | string
+  countryCode?: Prisma.StringFieldUpdateOperationsInput | string
+  mobile?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  personal?: Prisma.PersonalDetailsUpdateOneWithoutUserNestedInput
+  professional?: Prisma.ProfessionalDetailsUpdateOneWithoutUserNestedInput
+  sports?: Prisma.SportsPreferencesUpdateOneWithoutUserNestedInput
+  address?: Prisma.AddressUpdateOneWithoutUserNestedInput
+}
+
+export type UserUncheckedUpdateWithoutSecurityInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  firstName?: Prisma.StringFieldUpdateOperationsInput | string
+  middleName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lastName?: Prisma.StringFieldUpdateOperationsInput | string
+  countryCode?: Prisma.StringFieldUpdateOperationsInput | string
+  mobile?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  personal?: Prisma.PersonalDetailsUncheckedUpdateOneWithoutUserNestedInput
   professional?: Prisma.ProfessionalDetailsUncheckedUpdateOneWithoutUserNestedInput
   sports?: Prisma.SportsPreferencesUncheckedUpdateOneWithoutUserNestedInput
   address?: Prisma.AddressUncheckedUpdateOneWithoutUserNestedInput
@@ -758,12 +837,12 @@ export type UserCreateWithoutSportsInput = {
   countryCode: string
   mobile: string
   email: string
-  passwordHash: string
   createdAt?: Date | string
   updatedAt?: Date | string
   personal?: Prisma.PersonalDetailsCreateNestedOneWithoutUserInput
   professional?: Prisma.ProfessionalDetailsCreateNestedOneWithoutUserInput
   address?: Prisma.AddressCreateNestedOneWithoutUserInput
+  security?: Prisma.UserSecurityCreateNestedOneWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutSportsInput = {
@@ -774,12 +853,12 @@ export type UserUncheckedCreateWithoutSportsInput = {
   countryCode: string
   mobile: string
   email: string
-  passwordHash: string
   createdAt?: Date | string
   updatedAt?: Date | string
   personal?: Prisma.PersonalDetailsUncheckedCreateNestedOneWithoutUserInput
   professional?: Prisma.ProfessionalDetailsUncheckedCreateNestedOneWithoutUserInput
   address?: Prisma.AddressUncheckedCreateNestedOneWithoutUserInput
+  security?: Prisma.UserSecurityUncheckedCreateNestedOneWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutSportsInput = {
@@ -806,12 +885,12 @@ export type UserUpdateWithoutSportsInput = {
   countryCode?: Prisma.StringFieldUpdateOperationsInput | string
   mobile?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.StringFieldUpdateOperationsInput | string
-  passwordHash?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   personal?: Prisma.PersonalDetailsUpdateOneWithoutUserNestedInput
   professional?: Prisma.ProfessionalDetailsUpdateOneWithoutUserNestedInput
   address?: Prisma.AddressUpdateOneWithoutUserNestedInput
+  security?: Prisma.UserSecurityUpdateOneWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutSportsInput = {
@@ -822,12 +901,12 @@ export type UserUncheckedUpdateWithoutSportsInput = {
   countryCode?: Prisma.StringFieldUpdateOperationsInput | string
   mobile?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.StringFieldUpdateOperationsInput | string
-  passwordHash?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   personal?: Prisma.PersonalDetailsUncheckedUpdateOneWithoutUserNestedInput
   professional?: Prisma.ProfessionalDetailsUncheckedUpdateOneWithoutUserNestedInput
   address?: Prisma.AddressUncheckedUpdateOneWithoutUserNestedInput
+  security?: Prisma.UserSecurityUncheckedUpdateOneWithoutUserNestedInput
 }
 
 
@@ -840,13 +919,13 @@ export type UserSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = r
   countryCode?: boolean
   mobile?: boolean
   email?: boolean
-  passwordHash?: boolean
   createdAt?: boolean
   updatedAt?: boolean
   personal?: boolean | Prisma.User$personalArgs<ExtArgs>
   professional?: boolean | Prisma.User$professionalArgs<ExtArgs>
   sports?: boolean | Prisma.User$sportsArgs<ExtArgs>
   address?: boolean | Prisma.User$addressArgs<ExtArgs>
+  security?: boolean | Prisma.User$securityArgs<ExtArgs>
 }, ExtArgs["result"]["user"]>
 
 export type UserSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -857,7 +936,6 @@ export type UserSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensio
   countryCode?: boolean
   mobile?: boolean
   email?: boolean
-  passwordHash?: boolean
   createdAt?: boolean
   updatedAt?: boolean
 }, ExtArgs["result"]["user"]>
@@ -870,7 +948,6 @@ export type UserSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensio
   countryCode?: boolean
   mobile?: boolean
   email?: boolean
-  passwordHash?: boolean
   createdAt?: boolean
   updatedAt?: boolean
 }, ExtArgs["result"]["user"]>
@@ -883,17 +960,17 @@ export type UserSelectScalar = {
   countryCode?: boolean
   mobile?: boolean
   email?: boolean
-  passwordHash?: boolean
   createdAt?: boolean
   updatedAt?: boolean
 }
 
-export type UserOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "firstName" | "middleName" | "lastName" | "countryCode" | "mobile" | "email" | "passwordHash" | "createdAt" | "updatedAt", ExtArgs["result"]["user"]>
+export type UserOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "firstName" | "middleName" | "lastName" | "countryCode" | "mobile" | "email" | "createdAt" | "updatedAt", ExtArgs["result"]["user"]>
 export type UserInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   personal?: boolean | Prisma.User$personalArgs<ExtArgs>
   professional?: boolean | Prisma.User$professionalArgs<ExtArgs>
   sports?: boolean | Prisma.User$sportsArgs<ExtArgs>
   address?: boolean | Prisma.User$addressArgs<ExtArgs>
+  security?: boolean | Prisma.User$securityArgs<ExtArgs>
 }
 export type UserIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {}
 export type UserIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {}
@@ -905,6 +982,7 @@ export type $UserPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs =
     professional: Prisma.$ProfessionalDetailsPayload<ExtArgs> | null
     sports: Prisma.$SportsPreferencesPayload<ExtArgs> | null
     address: Prisma.$AddressPayload<ExtArgs> | null
+    security: Prisma.$UserSecurityPayload<ExtArgs> | null
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
@@ -914,7 +992,6 @@ export type $UserPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs =
     countryCode: string
     mobile: string
     email: string
-    passwordHash: string
     createdAt: Date
     updatedAt: Date
   }, ExtArgs["result"]["user"]>
@@ -1315,6 +1392,7 @@ export interface Prisma__UserClient<T, Null = never, ExtArgs extends runtime.Typ
   professional<T extends Prisma.User$professionalArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$professionalArgs<ExtArgs>>): Prisma.Prisma__ProfessionalDetailsClient<runtime.Types.Result.GetResult<Prisma.$ProfessionalDetailsPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   sports<T extends Prisma.User$sportsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$sportsArgs<ExtArgs>>): Prisma.Prisma__SportsPreferencesClient<runtime.Types.Result.GetResult<Prisma.$SportsPreferencesPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   address<T extends Prisma.User$addressArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$addressArgs<ExtArgs>>): Prisma.Prisma__AddressClient<runtime.Types.Result.GetResult<Prisma.$AddressPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+  security<T extends Prisma.User$securityArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$securityArgs<ExtArgs>>): Prisma.Prisma__UserSecurityClient<runtime.Types.Result.GetResult<Prisma.$UserSecurityPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -1351,7 +1429,6 @@ export interface UserFieldRefs {
   readonly countryCode: Prisma.FieldRef<"User", 'String'>
   readonly mobile: Prisma.FieldRef<"User", 'String'>
   readonly email: Prisma.FieldRef<"User", 'String'>
-  readonly passwordHash: Prisma.FieldRef<"User", 'String'>
   readonly createdAt: Prisma.FieldRef<"User", 'DateTime'>
   readonly updatedAt: Prisma.FieldRef<"User", 'DateTime'>
 }
@@ -1820,6 +1897,25 @@ export type User$addressArgs<ExtArgs extends runtime.Types.Extensions.InternalAr
    */
   include?: Prisma.AddressInclude<ExtArgs> | null
   where?: Prisma.AddressWhereInput
+}
+
+/**
+ * User.security
+ */
+export type User$securityArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the UserSecurity
+   */
+  select?: Prisma.UserSecuritySelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the UserSecurity
+   */
+  omit?: Prisma.UserSecurityOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.UserSecurityInclude<ExtArgs> | null
+  where?: Prisma.UserSecurityWhereInput
 }
 
 /**

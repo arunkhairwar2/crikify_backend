@@ -2,7 +2,6 @@ model PersonalDetails {
     id               String              @id @default(uuid())
     user             User                @relation(fields: [userId], references: [id], onDelete: Cascade)
     userId           String              @unique
-    isAdultConfirmed Boolean             @default(false)
     gender           GenderEnum?
     dob              String?
     nickname         String?

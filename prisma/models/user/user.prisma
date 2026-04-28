@@ -1,20 +1,19 @@
 // User model
 
 model User {
-    id           String  @id @default(uuid())
-    firstName    String
-    middleName   String?
-    lastName     String
-    countryCode  String
-    mobile       String
-    email        String  @unique
-    passwordHash String
+    id          String  @id @default(uuid())
+    firstName   String
+    middleName  String?
+    lastName    String
+    countryCode String
+    mobile      String
+    email       String  @unique
 
     personal     PersonalDetails?
     professional ProfessionalDetails?
     sports       SportsPreferences?
     address      Address?
-
+    security     UserSecurity?
     createdAt DateTime @default(now())
     updatedAt DateTime @updatedAt
 

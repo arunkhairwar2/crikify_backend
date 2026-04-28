@@ -1,8 +1,9 @@
 import prisma from "../config/database.ts";
-import type { RegisterSchemaType } from "../schemas/auth.schema.ts";
+import type { RegisterSchemaType } from "../schemas/auth/register.schema.ts";
+import type { UserRegisterType } from "../types/auth.types.ts";
 
 class UserRepositories {
-  async create(userData: RegisterSchemaType) {
+  async create(userData: UserRegisterType) {
     const user = await prisma.user.create({
       data: {
         firstName: userData.firstName,
@@ -11,23 +12,19 @@ class UserRepositories {
         countryCode: userData.countryCode,
         mobile: userData.mobile,
         email: userData.email,
-        passwordHash: userData.password,
+
+        security: {
+          create: {
+            passwordHash: userData.password,
+            isAdultConfirmed: userData.isAdultConfirmed,
+            otp: userData.otp,
+            otpExpiry: userData.otpExpiry,
+          },
+        },
       },
     });
 
-    const personalDetails = await prisma.personalDetails.create({
-      data: {
-        user: {
-          connect: {
-            id: user.id,
-          },
-        },
-        isAdultConfirmed: userData.isAdultConfirmed,
-        // gender: userData.gender,
-        // dob: userData.dob.toISOString(),
-      },
-    });
-    return { user, personalDetails };
+    return user;
   }
 
   async findByEmail(email: string) {
@@ -43,6 +40,14 @@ class UserRepositories {
         mobile_unique: {
           mobile: mobile,
           countryCode: countryCode,
+        },
+      },
+      include: {
+        security: {
+          select: {
+            otp: true,
+            otpExpiry: true,
+          },
         },
       },
     });
@@ -67,6 +72,45 @@ class UserRepositories {
   async delete(id: string) {
     const user = await prisma.user.delete({
       where: { id },
+    });
+    return user;
+  }
+
+  async updateMobileVerification(id: string, isMobileVerified: boolean) {
+    const user = await prisma.user.update({
+      where: { id },
+      data: {
+        security: {
+          update: {
+            mobileVerified: isMobileVerified,
+          },
+        },
+      },
+    });
+    return user;
+  }
+
+  async updateOtpAndExpiry(userId: string, otp: string, otpExpiry: Date) {
+    const user = await prisma.user.update({
+      where: {
+        id: userId,
+      },
+      data: {
+        security: {
+          update: {
+            otp: otp,
+            otpExpiry: otpExpiry,
+          },
+        },
+      },
+      // select: {
+      //   security: {
+      //     select: {
+      //       otp: true,
+      //       otpExpiry: true,
+      //     },
+      //   },
+      // },
     });
     return user;
   }

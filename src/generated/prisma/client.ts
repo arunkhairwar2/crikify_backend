@@ -57,6 +57,11 @@ export type Address = Prisma.AddressModel
  */
 export type PersonalDetails = Prisma.PersonalDetailsModel
 /**
+ * Model UserSecurity
+ * 
+ */
+export type UserSecurity = Prisma.UserSecurityModel
+/**
  * Model SportsPreferences
  * 
  */

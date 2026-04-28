@@ -11,6 +11,7 @@
 export type * from './models/ProfessionalDetails.ts'
 export type * from './models/Address.ts'
 export type * from './models/PersonalDetails.ts'
+export type * from './models/UserSecurity.ts'
 export type * from './models/SportsPreferences.ts'
 export type * from './models/User.ts'
 export type * from './commonInputTypes.ts'

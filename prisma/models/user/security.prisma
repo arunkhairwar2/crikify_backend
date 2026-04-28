@@ -1,0 +1,16 @@
+model UserSecurity {
+    id               String   @id @default(uuid())
+    user             User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+    userId           String   @unique
+    passwordHash     String
+    otp              String
+    otpExpiry        DateTime @default(now())
+    mobileVerified   Boolean  @default(false)
+    isAdultConfirmed Boolean  @default(false)
+    //   emailVerified Boolean  @default(false)
+    //   token         String?
+    createdAt        DateTime @default(now())
+    updatedAt        DateTime @updatedAt
+
+    @@map("user_securities")
+}

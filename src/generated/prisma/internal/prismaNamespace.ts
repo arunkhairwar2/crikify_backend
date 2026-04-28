@@ -387,6 +387,7 @@ export const ModelName = {
   ProfessionalDetails: 'ProfessionalDetails',
   Address: 'Address',
   PersonalDetails: 'PersonalDetails',
+  UserSecurity: 'UserSecurity',
   SportsPreferences: 'SportsPreferences',
   User: 'User'
 } as const
@@ -404,7 +405,7 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
     omit: GlobalOmitOptions
   }
   meta: {
-    modelProps: "professionalDetails" | "address" | "personalDetails" | "sportsPreferences" | "user"
+    modelProps: "professionalDetails" | "address" | "personalDetails" | "userSecurity" | "sportsPreferences" | "user"
     txIsolationLevel: TransactionIsolationLevel
   }
   model: {
@@ -630,6 +631,80 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
         }
       }
     }
+    UserSecurity: {
+      payload: Prisma.$UserSecurityPayload<ExtArgs>
+      fields: Prisma.UserSecurityFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.UserSecurityFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$UserSecurityPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.UserSecurityFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$UserSecurityPayload>
+        }
+        findFirst: {
+          args: Prisma.UserSecurityFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$UserSecurityPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.UserSecurityFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$UserSecurityPayload>
+        }
+        findMany: {
+          args: Prisma.UserSecurityFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$UserSecurityPayload>[]
+        }
+        create: {
+          args: Prisma.UserSecurityCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$UserSecurityPayload>
+        }
+        createMany: {
+          args: Prisma.UserSecurityCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.UserSecurityCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$UserSecurityPayload>[]
+        }
+        delete: {
+          args: Prisma.UserSecurityDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$UserSecurityPayload>
+        }
+        update: {
+          args: Prisma.UserSecurityUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$UserSecurityPayload>
+        }
+        deleteMany: {
+          args: Prisma.UserSecurityDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.UserSecurityUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.UserSecurityUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$UserSecurityPayload>[]
+        }
+        upsert: {
+          args: Prisma.UserSecurityUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$UserSecurityPayload>
+        }
+        aggregate: {
+          args: Prisma.UserSecurityAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateUserSecurity>
+        }
+        groupBy: {
+          args: Prisma.UserSecurityGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.UserSecurityGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.UserSecurityCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.UserSecurityCountAggregateOutputType> | number
+        }
+      }
+    }
     SportsPreferences: {
       payload: Prisma.$SportsPreferencesPayload<ExtArgs>
       fields: Prisma.SportsPreferencesFieldRefs
@@ -849,7 +924,6 @@ export type AddressScalarFieldEnum = (typeof AddressScalarFieldEnum)[keyof typeo
 export const PersonalDetailsScalarFieldEnum = {
   id: 'id',
   userId: 'userId',
-  isAdultConfirmed: 'isAdultConfirmed',
   gender: 'gender',
   dob: 'dob',
   nickname: 'nickname',
@@ -861,6 +935,21 @@ export const PersonalDetailsScalarFieldEnum = {
 } as const
 
 export type PersonalDetailsScalarFieldEnum = (typeof PersonalDetailsScalarFieldEnum)[keyof typeof PersonalDetailsScalarFieldEnum]
+
+
+export const UserSecurityScalarFieldEnum = {
+  id: 'id',
+  userId: 'userId',
+  passwordHash: 'passwordHash',
+  otp: 'otp',
+  otpExpiry: 'otpExpiry',
+  mobileVerified: 'mobileVerified',
+  isAdultConfirmed: 'isAdultConfirmed',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type UserSecurityScalarFieldEnum = (typeof UserSecurityScalarFieldEnum)[keyof typeof UserSecurityScalarFieldEnum]
 
 
 export const SportsPreferencesScalarFieldEnum = {
@@ -886,7 +975,6 @@ export const UserScalarFieldEnum = {
   countryCode: 'countryCode',
   mobile: 'mobile',
   email: 'email',
-  passwordHash: 'passwordHash',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
 } as const
@@ -967,13 +1055,6 @@ export type ListDateTimeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaM
 
 
 /**
- * Reference to a field of type 'Boolean'
- */
-export type BooleanFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Boolean'>
-    
-
-
-/**
  * Reference to a field of type 'GenderEnum'
  */
 export type EnumGenderEnumFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'GenderEnum'>
@@ -1012,6 +1093,13 @@ export type EnumFoodPreferenceEnumFieldRefInput<$PrismaModel> = FieldRefInputTyp
  * Reference to a field of type 'FoodPreferenceEnum[]'
  */
 export type ListEnumFoodPreferenceEnumFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'FoodPreferenceEnum[]'>
+    
+
+
+/**
+ * Reference to a field of type 'Boolean'
+ */
+export type BooleanFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Boolean'>
     
 
 
@@ -1183,6 +1271,7 @@ export type GlobalOmitConfig = {
   professionalDetails?: Prisma.ProfessionalDetailsOmit
   address?: Prisma.AddressOmit
   personalDetails?: Prisma.PersonalDetailsOmit
+  userSecurity?: Prisma.UserSecurityOmit
   sportsPreferences?: Prisma.SportsPreferencesOmit
   user?: Prisma.UserOmit
 }

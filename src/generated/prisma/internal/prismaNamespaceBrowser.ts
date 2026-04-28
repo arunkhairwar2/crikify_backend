@@ -54,6 +54,7 @@ export const ModelName = {
   ProfessionalDetails: 'ProfessionalDetails',
   Address: 'Address',
   PersonalDetails: 'PersonalDetails',
+  UserSecurity: 'UserSecurity',
   SportsPreferences: 'SportsPreferences',
   User: 'User'
 } as const
@@ -106,7 +107,6 @@ export type AddressScalarFieldEnum = (typeof AddressScalarFieldEnum)[keyof typeo
 export const PersonalDetailsScalarFieldEnum = {
   id: 'id',
   userId: 'userId',
-  isAdultConfirmed: 'isAdultConfirmed',
   gender: 'gender',
   dob: 'dob',
   nickname: 'nickname',
@@ -118,6 +118,21 @@ export const PersonalDetailsScalarFieldEnum = {
 } as const
 
 export type PersonalDetailsScalarFieldEnum = (typeof PersonalDetailsScalarFieldEnum)[keyof typeof PersonalDetailsScalarFieldEnum]
+
+
+export const UserSecurityScalarFieldEnum = {
+  id: 'id',
+  userId: 'userId',
+  passwordHash: 'passwordHash',
+  otp: 'otp',
+  otpExpiry: 'otpExpiry',
+  mobileVerified: 'mobileVerified',
+  isAdultConfirmed: 'isAdultConfirmed',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type UserSecurityScalarFieldEnum = (typeof UserSecurityScalarFieldEnum)[keyof typeof UserSecurityScalarFieldEnum]
 
 
 export const SportsPreferencesScalarFieldEnum = {
@@ -143,7 +158,6 @@ export const UserScalarFieldEnum = {
   countryCode: 'countryCode',
   mobile: 'mobile',
   email: 'email',
-  passwordHash: 'passwordHash',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
 } as const
