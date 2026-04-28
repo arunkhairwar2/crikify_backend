@@ -1,11 +1,12 @@
 import userRepositories from "../repositories/user.repository.ts";
+import type { LoginSchemaType } from "../schemas/auth/login.schema.ts";
 import type { VerifyOtpSchemaType } from "../schemas/auth/otp.schema.ts";
 import type { RegisterSchemaType } from "../schemas/auth/register.schema.ts";
 import { generateAccessToken } from "../security/generateAccessToken.ts";
 import { HttpStatus } from "../types/statusCode.ts";
 import { ApiError } from "../utils/ApiError.ts";
 import { generateOtp, getOtpExpiryTime } from "../utils/otp.utils.ts";
-import { hashPassword } from "../utils/password.utils.ts";
+import { checkPassword, hashPassword } from "../utils/password.utils.ts";
 
 class AuthServices {
   async registerUser(userData: RegisterSchemaType) {
@@ -82,7 +83,29 @@ class AuthServices {
     return;
   }
 
-  async login() {}
+  async login(loginData: LoginSchemaType) {
+    const { countryCode, mobile, password } = loginData;
+    const user = await userRepositories.findByMobile(countryCode, mobile);
+    if (!user) {
+      throw new ApiError(HttpStatus.NOT_FOUND, "User not found");
+    }
+    if (!user.security?.mobileVerified) {
+      throw new ApiError(
+        HttpStatus.UNAUTHORIZED,
+        "Mobile number not verified , please verify mobile number first",
+      );
+    }
+    const isPasswordValid = await checkPassword(
+      password,
+      user.security?.passwordHash as string,
+    );
+    if (!isPasswordValid) {
+      throw new ApiError(HttpStatus.UNAUTHORIZED, "Invalid password");
+    }
+
+    const token = generateAccessToken(user.id);
+    return token;
+  }
 }
 
 export default new AuthServices();

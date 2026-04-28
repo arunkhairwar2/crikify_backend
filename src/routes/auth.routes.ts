@@ -6,10 +6,12 @@ import {
   VerifyOtpSchema,
 } from "../schemas/auth/otp.schema.ts";
 import { RegisterSchema } from "../schemas/auth/register.schema.ts";
+import { LoginSchema } from "../schemas/auth/login.schema.ts";
 
 const authRoutes = Router();
 
 authRoutes.post("/register", validate(RegisterSchema), authController.register);
+authRoutes.post("/login", validate(LoginSchema), authController.login);
 authRoutes.post(
   "/verify-otp",
   validate(VerifyOtpSchema),
@@ -20,16 +22,6 @@ authRoutes.post(
   validate(ResendOtpSchema),
   authController.resendOtp,
 );
-
-
-
-
-
-
-
-
-
-
 
 //  // take mobile number as query param.
 // router.post("/login", login);

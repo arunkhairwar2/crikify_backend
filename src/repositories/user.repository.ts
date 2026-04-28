@@ -48,6 +48,7 @@ class UserRepositories {
             otp: true,
             otpExpiry: true,
             mobileVerified: true,
+            passwordHash: true,
           },
         },
       },
