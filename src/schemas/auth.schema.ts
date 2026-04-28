@@ -43,11 +43,18 @@ export const RegisterSchema = z.object({
     .max(100, "Last name must be less than 100 characters")
     .trim()
     .regex(/^[A-Za-z]+$/, "Last name must contain only letters"),
-  primaryPhoneNumber: phoneValidation,
-  dob: z.coerce.date().max(new Date(), "DOB cannot be future date"),
-  gender: z.enum(["MALE", "FEMALE", "OTHER"]),
+  countryCode: z
+    .string()
+    .min(2, "Country code must be at least 2 characters")
+    .trim(),
+  mobile: phoneValidation,
+  // dob: z.coerce.date().max(new Date(), "DOB cannot be future date"),
+  // gender: z.enum(["MALE", "FEMALE", "OTHER"]),
   email: emailValidation,
   password: passwordValidation,
+  isAdultConfirmed: z.boolean().refine((val) => val === true, {
+    message: "You must be at least 18 years old to register",
+  }),
 });
 
 export type RegisterSchemaType = z.infer<typeof RegisterSchema>;

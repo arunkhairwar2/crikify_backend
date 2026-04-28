@@ -127,22 +127,16 @@ export type DateTimeWithAggregatesFilter<$PrismaModel = never> = {
   _max?: Prisma.NestedDateTimeFilter<$PrismaModel>
 }
 
+export type BoolFilter<$PrismaModel = never> = {
+  equals?: boolean | Prisma.BooleanFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedBoolFilter<$PrismaModel> | boolean
+}
+
 export type EnumGenderEnumNullableFilter<$PrismaModel = never> = {
   equals?: $Enums.GenderEnum | Prisma.EnumGenderEnumFieldRefInput<$PrismaModel> | null
   in?: $Enums.GenderEnum[] | Prisma.ListEnumGenderEnumFieldRefInput<$PrismaModel> | null
   notIn?: $Enums.GenderEnum[] | Prisma.ListEnumGenderEnumFieldRefInput<$PrismaModel> | null
   not?: Prisma.NestedEnumGenderEnumNullableFilter<$PrismaModel> | $Enums.GenderEnum | null
-}
-
-export type DateTimeNullableFilter<$PrismaModel = never> = {
-  equals?: Date | string | Prisma.DateTimeFieldRefInput<$PrismaModel> | null
-  in?: Date[] | string[] | Prisma.ListDateTimeFieldRefInput<$PrismaModel> | null
-  notIn?: Date[] | string[] | Prisma.ListDateTimeFieldRefInput<$PrismaModel> | null
-  lt?: Date | string | Prisma.DateTimeFieldRefInput<$PrismaModel>
-  lte?: Date | string | Prisma.DateTimeFieldRefInput<$PrismaModel>
-  gt?: Date | string | Prisma.DateTimeFieldRefInput<$PrismaModel>
-  gte?: Date | string | Prisma.DateTimeFieldRefInput<$PrismaModel>
-  not?: Prisma.NestedDateTimeNullableFilter<$PrismaModel> | Date | string | null
 }
 
 export type EnumAgeGroupEnumNullableFilter<$PrismaModel = never> = {
@@ -159,6 +153,14 @@ export type EnumFoodPreferenceEnumNullableFilter<$PrismaModel = never> = {
   not?: Prisma.NestedEnumFoodPreferenceEnumNullableFilter<$PrismaModel> | $Enums.FoodPreferenceEnum | null
 }
 
+export type BoolWithAggregatesFilter<$PrismaModel = never> = {
+  equals?: boolean | Prisma.BooleanFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedBoolWithAggregatesFilter<$PrismaModel> | boolean
+  _count?: Prisma.NestedIntFilter<$PrismaModel>
+  _min?: Prisma.NestedBoolFilter<$PrismaModel>
+  _max?: Prisma.NestedBoolFilter<$PrismaModel>
+}
+
 export type EnumGenderEnumNullableWithAggregatesFilter<$PrismaModel = never> = {
   equals?: $Enums.GenderEnum | Prisma.EnumGenderEnumFieldRefInput<$PrismaModel> | null
   in?: $Enums.GenderEnum[] | Prisma.ListEnumGenderEnumFieldRefInput<$PrismaModel> | null
@@ -167,20 +169,6 @@ export type EnumGenderEnumNullableWithAggregatesFilter<$PrismaModel = never> = {
   _count?: Prisma.NestedIntNullableFilter<$PrismaModel>
   _min?: Prisma.NestedEnumGenderEnumNullableFilter<$PrismaModel>
   _max?: Prisma.NestedEnumGenderEnumNullableFilter<$PrismaModel>
-}
-
-export type DateTimeNullableWithAggregatesFilter<$PrismaModel = never> = {
-  equals?: Date | string | Prisma.DateTimeFieldRefInput<$PrismaModel> | null
-  in?: Date[] | string[] | Prisma.ListDateTimeFieldRefInput<$PrismaModel> | null
-  notIn?: Date[] | string[] | Prisma.ListDateTimeFieldRefInput<$PrismaModel> | null
-  lt?: Date | string | Prisma.DateTimeFieldRefInput<$PrismaModel>
-  lte?: Date | string | Prisma.DateTimeFieldRefInput<$PrismaModel>
-  gt?: Date | string | Prisma.DateTimeFieldRefInput<$PrismaModel>
-  gte?: Date | string | Prisma.DateTimeFieldRefInput<$PrismaModel>
-  not?: Prisma.NestedDateTimeNullableWithAggregatesFilter<$PrismaModel> | Date | string | null
-  _count?: Prisma.NestedIntNullableFilter<$PrismaModel>
-  _min?: Prisma.NestedDateTimeNullableFilter<$PrismaModel>
-  _max?: Prisma.NestedDateTimeNullableFilter<$PrismaModel>
 }
 
 export type EnumAgeGroupEnumNullableWithAggregatesFilter<$PrismaModel = never> = {
@@ -203,11 +191,11 @@ export type EnumFoodPreferenceEnumNullableWithAggregatesFilter<$PrismaModel = ne
   _max?: Prisma.NestedEnumFoodPreferenceEnumNullableFilter<$PrismaModel>
 }
 
-export type EnumJerseySizeNullableFilter<$PrismaModel = never> = {
-  equals?: $Enums.JerseySize | Prisma.EnumJerseySizeFieldRefInput<$PrismaModel> | null
-  in?: $Enums.JerseySize[] | Prisma.ListEnumJerseySizeFieldRefInput<$PrismaModel> | null
-  notIn?: $Enums.JerseySize[] | Prisma.ListEnumJerseySizeFieldRefInput<$PrismaModel> | null
-  not?: Prisma.NestedEnumJerseySizeNullableFilter<$PrismaModel> | $Enums.JerseySize | null
+export type EnumJerseySizeEnumNullableFilter<$PrismaModel = never> = {
+  equals?: $Enums.JerseySizeEnum | Prisma.EnumJerseySizeEnumFieldRefInput<$PrismaModel> | null
+  in?: $Enums.JerseySizeEnum[] | Prisma.ListEnumJerseySizeEnumFieldRefInput<$PrismaModel> | null
+  notIn?: $Enums.JerseySizeEnum[] | Prisma.ListEnumJerseySizeEnumFieldRefInput<$PrismaModel> | null
+  not?: Prisma.NestedEnumJerseySizeEnumNullableFilter<$PrismaModel> | $Enums.JerseySizeEnum | null
 }
 
 export type IntNullableFilter<$PrismaModel = never> = {
@@ -221,28 +209,21 @@ export type IntNullableFilter<$PrismaModel = never> = {
   not?: Prisma.NestedIntNullableFilter<$PrismaModel> | number | null
 }
 
-export type EnumBattingStyleEnumNullableFilter<$PrismaModel = never> = {
-  equals?: $Enums.BattingStyleEnum | Prisma.EnumBattingStyleEnumFieldRefInput<$PrismaModel> | null
-  in?: $Enums.BattingStyleEnum[] | Prisma.ListEnumBattingStyleEnumFieldRefInput<$PrismaModel> | null
-  notIn?: $Enums.BattingStyleEnum[] | Prisma.ListEnumBattingStyleEnumFieldRefInput<$PrismaModel> | null
-  not?: Prisma.NestedEnumBattingStyleEnumNullableFilter<$PrismaModel> | $Enums.BattingStyleEnum | null
+export type EnumTrackPantSizeEnumNullableFilter<$PrismaModel = never> = {
+  equals?: $Enums.TrackPantSizeEnum | Prisma.EnumTrackPantSizeEnumFieldRefInput<$PrismaModel> | null
+  in?: $Enums.TrackPantSizeEnum[] | Prisma.ListEnumTrackPantSizeEnumFieldRefInput<$PrismaModel> | null
+  notIn?: $Enums.TrackPantSizeEnum[] | Prisma.ListEnumTrackPantSizeEnumFieldRefInput<$PrismaModel> | null
+  not?: Prisma.NestedEnumTrackPantSizeEnumNullableFilter<$PrismaModel> | $Enums.TrackPantSizeEnum | null
 }
 
-export type EnumBowlingStyleEnumNullableFilter<$PrismaModel = never> = {
-  equals?: $Enums.BowlingStyleEnum | Prisma.EnumBowlingStyleEnumFieldRefInput<$PrismaModel> | null
-  in?: $Enums.BowlingStyleEnum[] | Prisma.ListEnumBowlingStyleEnumFieldRefInput<$PrismaModel> | null
-  notIn?: $Enums.BowlingStyleEnum[] | Prisma.ListEnumBowlingStyleEnumFieldRefInput<$PrismaModel> | null
-  not?: Prisma.NestedEnumBowlingStyleEnumNullableFilter<$PrismaModel> | $Enums.BowlingStyleEnum | null
-}
-
-export type EnumJerseySizeNullableWithAggregatesFilter<$PrismaModel = never> = {
-  equals?: $Enums.JerseySize | Prisma.EnumJerseySizeFieldRefInput<$PrismaModel> | null
-  in?: $Enums.JerseySize[] | Prisma.ListEnumJerseySizeFieldRefInput<$PrismaModel> | null
-  notIn?: $Enums.JerseySize[] | Prisma.ListEnumJerseySizeFieldRefInput<$PrismaModel> | null
-  not?: Prisma.NestedEnumJerseySizeNullableWithAggregatesFilter<$PrismaModel> | $Enums.JerseySize | null
+export type EnumJerseySizeEnumNullableWithAggregatesFilter<$PrismaModel = never> = {
+  equals?: $Enums.JerseySizeEnum | Prisma.EnumJerseySizeEnumFieldRefInput<$PrismaModel> | null
+  in?: $Enums.JerseySizeEnum[] | Prisma.ListEnumJerseySizeEnumFieldRefInput<$PrismaModel> | null
+  notIn?: $Enums.JerseySizeEnum[] | Prisma.ListEnumJerseySizeEnumFieldRefInput<$PrismaModel> | null
+  not?: Prisma.NestedEnumJerseySizeEnumNullableWithAggregatesFilter<$PrismaModel> | $Enums.JerseySizeEnum | null
   _count?: Prisma.NestedIntNullableFilter<$PrismaModel>
-  _min?: Prisma.NestedEnumJerseySizeNullableFilter<$PrismaModel>
-  _max?: Prisma.NestedEnumJerseySizeNullableFilter<$PrismaModel>
+  _min?: Prisma.NestedEnumJerseySizeEnumNullableFilter<$PrismaModel>
+  _max?: Prisma.NestedEnumJerseySizeEnumNullableFilter<$PrismaModel>
 }
 
 export type IntNullableWithAggregatesFilter<$PrismaModel = never> = {
@@ -261,24 +242,14 @@ export type IntNullableWithAggregatesFilter<$PrismaModel = never> = {
   _max?: Prisma.NestedIntNullableFilter<$PrismaModel>
 }
 
-export type EnumBattingStyleEnumNullableWithAggregatesFilter<$PrismaModel = never> = {
-  equals?: $Enums.BattingStyleEnum | Prisma.EnumBattingStyleEnumFieldRefInput<$PrismaModel> | null
-  in?: $Enums.BattingStyleEnum[] | Prisma.ListEnumBattingStyleEnumFieldRefInput<$PrismaModel> | null
-  notIn?: $Enums.BattingStyleEnum[] | Prisma.ListEnumBattingStyleEnumFieldRefInput<$PrismaModel> | null
-  not?: Prisma.NestedEnumBattingStyleEnumNullableWithAggregatesFilter<$PrismaModel> | $Enums.BattingStyleEnum | null
+export type EnumTrackPantSizeEnumNullableWithAggregatesFilter<$PrismaModel = never> = {
+  equals?: $Enums.TrackPantSizeEnum | Prisma.EnumTrackPantSizeEnumFieldRefInput<$PrismaModel> | null
+  in?: $Enums.TrackPantSizeEnum[] | Prisma.ListEnumTrackPantSizeEnumFieldRefInput<$PrismaModel> | null
+  notIn?: $Enums.TrackPantSizeEnum[] | Prisma.ListEnumTrackPantSizeEnumFieldRefInput<$PrismaModel> | null
+  not?: Prisma.NestedEnumTrackPantSizeEnumNullableWithAggregatesFilter<$PrismaModel> | $Enums.TrackPantSizeEnum | null
   _count?: Prisma.NestedIntNullableFilter<$PrismaModel>
-  _min?: Prisma.NestedEnumBattingStyleEnumNullableFilter<$PrismaModel>
-  _max?: Prisma.NestedEnumBattingStyleEnumNullableFilter<$PrismaModel>
-}
-
-export type EnumBowlingStyleEnumNullableWithAggregatesFilter<$PrismaModel = never> = {
-  equals?: $Enums.BowlingStyleEnum | Prisma.EnumBowlingStyleEnumFieldRefInput<$PrismaModel> | null
-  in?: $Enums.BowlingStyleEnum[] | Prisma.ListEnumBowlingStyleEnumFieldRefInput<$PrismaModel> | null
-  notIn?: $Enums.BowlingStyleEnum[] | Prisma.ListEnumBowlingStyleEnumFieldRefInput<$PrismaModel> | null
-  not?: Prisma.NestedEnumBowlingStyleEnumNullableWithAggregatesFilter<$PrismaModel> | $Enums.BowlingStyleEnum | null
-  _count?: Prisma.NestedIntNullableFilter<$PrismaModel>
-  _min?: Prisma.NestedEnumBowlingStyleEnumNullableFilter<$PrismaModel>
-  _max?: Prisma.NestedEnumBowlingStyleEnumNullableFilter<$PrismaModel>
+  _min?: Prisma.NestedEnumTrackPantSizeEnumNullableFilter<$PrismaModel>
+  _max?: Prisma.NestedEnumTrackPantSizeEnumNullableFilter<$PrismaModel>
 }
 
 export type NestedStringFilter<$PrismaModel = never> = {
@@ -407,22 +378,16 @@ export type NestedDateTimeWithAggregatesFilter<$PrismaModel = never> = {
   _max?: Prisma.NestedDateTimeFilter<$PrismaModel>
 }
 
+export type NestedBoolFilter<$PrismaModel = never> = {
+  equals?: boolean | Prisma.BooleanFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedBoolFilter<$PrismaModel> | boolean
+}
+
 export type NestedEnumGenderEnumNullableFilter<$PrismaModel = never> = {
   equals?: $Enums.GenderEnum | Prisma.EnumGenderEnumFieldRefInput<$PrismaModel> | null
   in?: $Enums.GenderEnum[] | Prisma.ListEnumGenderEnumFieldRefInput<$PrismaModel> | null
   notIn?: $Enums.GenderEnum[] | Prisma.ListEnumGenderEnumFieldRefInput<$PrismaModel> | null
   not?: Prisma.NestedEnumGenderEnumNullableFilter<$PrismaModel> | $Enums.GenderEnum | null
-}
-
-export type NestedDateTimeNullableFilter<$PrismaModel = never> = {
-  equals?: Date | string | Prisma.DateTimeFieldRefInput<$PrismaModel> | null
-  in?: Date[] | string[] | Prisma.ListDateTimeFieldRefInput<$PrismaModel> | null
-  notIn?: Date[] | string[] | Prisma.ListDateTimeFieldRefInput<$PrismaModel> | null
-  lt?: Date | string | Prisma.DateTimeFieldRefInput<$PrismaModel>
-  lte?: Date | string | Prisma.DateTimeFieldRefInput<$PrismaModel>
-  gt?: Date | string | Prisma.DateTimeFieldRefInput<$PrismaModel>
-  gte?: Date | string | Prisma.DateTimeFieldRefInput<$PrismaModel>
-  not?: Prisma.NestedDateTimeNullableFilter<$PrismaModel> | Date | string | null
 }
 
 export type NestedEnumAgeGroupEnumNullableFilter<$PrismaModel = never> = {
@@ -439,6 +404,14 @@ export type NestedEnumFoodPreferenceEnumNullableFilter<$PrismaModel = never> = {
   not?: Prisma.NestedEnumFoodPreferenceEnumNullableFilter<$PrismaModel> | $Enums.FoodPreferenceEnum | null
 }
 
+export type NestedBoolWithAggregatesFilter<$PrismaModel = never> = {
+  equals?: boolean | Prisma.BooleanFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedBoolWithAggregatesFilter<$PrismaModel> | boolean
+  _count?: Prisma.NestedIntFilter<$PrismaModel>
+  _min?: Prisma.NestedBoolFilter<$PrismaModel>
+  _max?: Prisma.NestedBoolFilter<$PrismaModel>
+}
+
 export type NestedEnumGenderEnumNullableWithAggregatesFilter<$PrismaModel = never> = {
   equals?: $Enums.GenderEnum | Prisma.EnumGenderEnumFieldRefInput<$PrismaModel> | null
   in?: $Enums.GenderEnum[] | Prisma.ListEnumGenderEnumFieldRefInput<$PrismaModel> | null
@@ -447,20 +420,6 @@ export type NestedEnumGenderEnumNullableWithAggregatesFilter<$PrismaModel = neve
   _count?: Prisma.NestedIntNullableFilter<$PrismaModel>
   _min?: Prisma.NestedEnumGenderEnumNullableFilter<$PrismaModel>
   _max?: Prisma.NestedEnumGenderEnumNullableFilter<$PrismaModel>
-}
-
-export type NestedDateTimeNullableWithAggregatesFilter<$PrismaModel = never> = {
-  equals?: Date | string | Prisma.DateTimeFieldRefInput<$PrismaModel> | null
-  in?: Date[] | string[] | Prisma.ListDateTimeFieldRefInput<$PrismaModel> | null
-  notIn?: Date[] | string[] | Prisma.ListDateTimeFieldRefInput<$PrismaModel> | null
-  lt?: Date | string | Prisma.DateTimeFieldRefInput<$PrismaModel>
-  lte?: Date | string | Prisma.DateTimeFieldRefInput<$PrismaModel>
-  gt?: Date | string | Prisma.DateTimeFieldRefInput<$PrismaModel>
-  gte?: Date | string | Prisma.DateTimeFieldRefInput<$PrismaModel>
-  not?: Prisma.NestedDateTimeNullableWithAggregatesFilter<$PrismaModel> | Date | string | null
-  _count?: Prisma.NestedIntNullableFilter<$PrismaModel>
-  _min?: Prisma.NestedDateTimeNullableFilter<$PrismaModel>
-  _max?: Prisma.NestedDateTimeNullableFilter<$PrismaModel>
 }
 
 export type NestedEnumAgeGroupEnumNullableWithAggregatesFilter<$PrismaModel = never> = {
@@ -483,35 +442,28 @@ export type NestedEnumFoodPreferenceEnumNullableWithAggregatesFilter<$PrismaMode
   _max?: Prisma.NestedEnumFoodPreferenceEnumNullableFilter<$PrismaModel>
 }
 
-export type NestedEnumJerseySizeNullableFilter<$PrismaModel = never> = {
-  equals?: $Enums.JerseySize | Prisma.EnumJerseySizeFieldRefInput<$PrismaModel> | null
-  in?: $Enums.JerseySize[] | Prisma.ListEnumJerseySizeFieldRefInput<$PrismaModel> | null
-  notIn?: $Enums.JerseySize[] | Prisma.ListEnumJerseySizeFieldRefInput<$PrismaModel> | null
-  not?: Prisma.NestedEnumJerseySizeNullableFilter<$PrismaModel> | $Enums.JerseySize | null
+export type NestedEnumJerseySizeEnumNullableFilter<$PrismaModel = never> = {
+  equals?: $Enums.JerseySizeEnum | Prisma.EnumJerseySizeEnumFieldRefInput<$PrismaModel> | null
+  in?: $Enums.JerseySizeEnum[] | Prisma.ListEnumJerseySizeEnumFieldRefInput<$PrismaModel> | null
+  notIn?: $Enums.JerseySizeEnum[] | Prisma.ListEnumJerseySizeEnumFieldRefInput<$PrismaModel> | null
+  not?: Prisma.NestedEnumJerseySizeEnumNullableFilter<$PrismaModel> | $Enums.JerseySizeEnum | null
 }
 
-export type NestedEnumBattingStyleEnumNullableFilter<$PrismaModel = never> = {
-  equals?: $Enums.BattingStyleEnum | Prisma.EnumBattingStyleEnumFieldRefInput<$PrismaModel> | null
-  in?: $Enums.BattingStyleEnum[] | Prisma.ListEnumBattingStyleEnumFieldRefInput<$PrismaModel> | null
-  notIn?: $Enums.BattingStyleEnum[] | Prisma.ListEnumBattingStyleEnumFieldRefInput<$PrismaModel> | null
-  not?: Prisma.NestedEnumBattingStyleEnumNullableFilter<$PrismaModel> | $Enums.BattingStyleEnum | null
+export type NestedEnumTrackPantSizeEnumNullableFilter<$PrismaModel = never> = {
+  equals?: $Enums.TrackPantSizeEnum | Prisma.EnumTrackPantSizeEnumFieldRefInput<$PrismaModel> | null
+  in?: $Enums.TrackPantSizeEnum[] | Prisma.ListEnumTrackPantSizeEnumFieldRefInput<$PrismaModel> | null
+  notIn?: $Enums.TrackPantSizeEnum[] | Prisma.ListEnumTrackPantSizeEnumFieldRefInput<$PrismaModel> | null
+  not?: Prisma.NestedEnumTrackPantSizeEnumNullableFilter<$PrismaModel> | $Enums.TrackPantSizeEnum | null
 }
 
-export type NestedEnumBowlingStyleEnumNullableFilter<$PrismaModel = never> = {
-  equals?: $Enums.BowlingStyleEnum | Prisma.EnumBowlingStyleEnumFieldRefInput<$PrismaModel> | null
-  in?: $Enums.BowlingStyleEnum[] | Prisma.ListEnumBowlingStyleEnumFieldRefInput<$PrismaModel> | null
-  notIn?: $Enums.BowlingStyleEnum[] | Prisma.ListEnumBowlingStyleEnumFieldRefInput<$PrismaModel> | null
-  not?: Prisma.NestedEnumBowlingStyleEnumNullableFilter<$PrismaModel> | $Enums.BowlingStyleEnum | null
-}
-
-export type NestedEnumJerseySizeNullableWithAggregatesFilter<$PrismaModel = never> = {
-  equals?: $Enums.JerseySize | Prisma.EnumJerseySizeFieldRefInput<$PrismaModel> | null
-  in?: $Enums.JerseySize[] | Prisma.ListEnumJerseySizeFieldRefInput<$PrismaModel> | null
-  notIn?: $Enums.JerseySize[] | Prisma.ListEnumJerseySizeFieldRefInput<$PrismaModel> | null
-  not?: Prisma.NestedEnumJerseySizeNullableWithAggregatesFilter<$PrismaModel> | $Enums.JerseySize | null
+export type NestedEnumJerseySizeEnumNullableWithAggregatesFilter<$PrismaModel = never> = {
+  equals?: $Enums.JerseySizeEnum | Prisma.EnumJerseySizeEnumFieldRefInput<$PrismaModel> | null
+  in?: $Enums.JerseySizeEnum[] | Prisma.ListEnumJerseySizeEnumFieldRefInput<$PrismaModel> | null
+  notIn?: $Enums.JerseySizeEnum[] | Prisma.ListEnumJerseySizeEnumFieldRefInput<$PrismaModel> | null
+  not?: Prisma.NestedEnumJerseySizeEnumNullableWithAggregatesFilter<$PrismaModel> | $Enums.JerseySizeEnum | null
   _count?: Prisma.NestedIntNullableFilter<$PrismaModel>
-  _min?: Prisma.NestedEnumJerseySizeNullableFilter<$PrismaModel>
-  _max?: Prisma.NestedEnumJerseySizeNullableFilter<$PrismaModel>
+  _min?: Prisma.NestedEnumJerseySizeEnumNullableFilter<$PrismaModel>
+  _max?: Prisma.NestedEnumJerseySizeEnumNullableFilter<$PrismaModel>
 }
 
 export type NestedIntNullableWithAggregatesFilter<$PrismaModel = never> = {
@@ -541,24 +493,14 @@ export type NestedFloatNullableFilter<$PrismaModel = never> = {
   not?: Prisma.NestedFloatNullableFilter<$PrismaModel> | number | null
 }
 
-export type NestedEnumBattingStyleEnumNullableWithAggregatesFilter<$PrismaModel = never> = {
-  equals?: $Enums.BattingStyleEnum | Prisma.EnumBattingStyleEnumFieldRefInput<$PrismaModel> | null
-  in?: $Enums.BattingStyleEnum[] | Prisma.ListEnumBattingStyleEnumFieldRefInput<$PrismaModel> | null
-  notIn?: $Enums.BattingStyleEnum[] | Prisma.ListEnumBattingStyleEnumFieldRefInput<$PrismaModel> | null
-  not?: Prisma.NestedEnumBattingStyleEnumNullableWithAggregatesFilter<$PrismaModel> | $Enums.BattingStyleEnum | null
+export type NestedEnumTrackPantSizeEnumNullableWithAggregatesFilter<$PrismaModel = never> = {
+  equals?: $Enums.TrackPantSizeEnum | Prisma.EnumTrackPantSizeEnumFieldRefInput<$PrismaModel> | null
+  in?: $Enums.TrackPantSizeEnum[] | Prisma.ListEnumTrackPantSizeEnumFieldRefInput<$PrismaModel> | null
+  notIn?: $Enums.TrackPantSizeEnum[] | Prisma.ListEnumTrackPantSizeEnumFieldRefInput<$PrismaModel> | null
+  not?: Prisma.NestedEnumTrackPantSizeEnumNullableWithAggregatesFilter<$PrismaModel> | $Enums.TrackPantSizeEnum | null
   _count?: Prisma.NestedIntNullableFilter<$PrismaModel>
-  _min?: Prisma.NestedEnumBattingStyleEnumNullableFilter<$PrismaModel>
-  _max?: Prisma.NestedEnumBattingStyleEnumNullableFilter<$PrismaModel>
-}
-
-export type NestedEnumBowlingStyleEnumNullableWithAggregatesFilter<$PrismaModel = never> = {
-  equals?: $Enums.BowlingStyleEnum | Prisma.EnumBowlingStyleEnumFieldRefInput<$PrismaModel> | null
-  in?: $Enums.BowlingStyleEnum[] | Prisma.ListEnumBowlingStyleEnumFieldRefInput<$PrismaModel> | null
-  notIn?: $Enums.BowlingStyleEnum[] | Prisma.ListEnumBowlingStyleEnumFieldRefInput<$PrismaModel> | null
-  not?: Prisma.NestedEnumBowlingStyleEnumNullableWithAggregatesFilter<$PrismaModel> | $Enums.BowlingStyleEnum | null
-  _count?: Prisma.NestedIntNullableFilter<$PrismaModel>
-  _min?: Prisma.NestedEnumBowlingStyleEnumNullableFilter<$PrismaModel>
-  _max?: Prisma.NestedEnumBowlingStyleEnumNullableFilter<$PrismaModel>
+  _min?: Prisma.NestedEnumTrackPantSizeEnumNullableFilter<$PrismaModel>
+  _max?: Prisma.NestedEnumTrackPantSizeEnumNullableFilter<$PrismaModel>
 }
 
 

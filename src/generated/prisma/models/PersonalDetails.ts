@@ -27,8 +27,9 @@ export type AggregatePersonalDetails = {
 export type PersonalDetailsMinAggregateOutputType = {
   id: string | null
   userId: string | null
+  isAdultConfirmed: boolean | null
   gender: $Enums.GenderEnum | null
-  dob: Date | null
+  dob: string | null
   nickname: string | null
   ageGroup: $Enums.AgeGroupEnum | null
   foodPreference: $Enums.FoodPreferenceEnum | null
@@ -40,8 +41,9 @@ export type PersonalDetailsMinAggregateOutputType = {
 export type PersonalDetailsMaxAggregateOutputType = {
   id: string | null
   userId: string | null
+  isAdultConfirmed: boolean | null
   gender: $Enums.GenderEnum | null
-  dob: Date | null
+  dob: string | null
   nickname: string | null
   ageGroup: $Enums.AgeGroupEnum | null
   foodPreference: $Enums.FoodPreferenceEnum | null
@@ -53,6 +55,7 @@ export type PersonalDetailsMaxAggregateOutputType = {
 export type PersonalDetailsCountAggregateOutputType = {
   id: number
   userId: number
+  isAdultConfirmed: number
   gender: number
   dob: number
   nickname: number
@@ -68,6 +71,7 @@ export type PersonalDetailsCountAggregateOutputType = {
 export type PersonalDetailsMinAggregateInputType = {
   id?: true
   userId?: true
+  isAdultConfirmed?: true
   gender?: true
   dob?: true
   nickname?: true
@@ -81,6 +85,7 @@ export type PersonalDetailsMinAggregateInputType = {
 export type PersonalDetailsMaxAggregateInputType = {
   id?: true
   userId?: true
+  isAdultConfirmed?: true
   gender?: true
   dob?: true
   nickname?: true
@@ -94,6 +99,7 @@ export type PersonalDetailsMaxAggregateInputType = {
 export type PersonalDetailsCountAggregateInputType = {
   id?: true
   userId?: true
+  isAdultConfirmed?: true
   gender?: true
   dob?: true
   nickname?: true
@@ -180,8 +186,9 @@ export type PersonalDetailsGroupByArgs<ExtArgs extends runtime.Types.Extensions.
 export type PersonalDetailsGroupByOutputType = {
   id: string
   userId: string
+  isAdultConfirmed: boolean
   gender: $Enums.GenderEnum | null
-  dob: Date | null
+  dob: string | null
   nickname: string | null
   ageGroup: $Enums.AgeGroupEnum | null
   foodPreference: $Enums.FoodPreferenceEnum | null
@@ -214,8 +221,9 @@ export type PersonalDetailsWhereInput = {
   NOT?: Prisma.PersonalDetailsWhereInput | Prisma.PersonalDetailsWhereInput[]
   id?: Prisma.StringFilter<"PersonalDetails"> | string
   userId?: Prisma.StringFilter<"PersonalDetails"> | string
+  isAdultConfirmed?: Prisma.BoolFilter<"PersonalDetails"> | boolean
   gender?: Prisma.EnumGenderEnumNullableFilter<"PersonalDetails"> | $Enums.GenderEnum | null
-  dob?: Prisma.DateTimeNullableFilter<"PersonalDetails"> | Date | string | null
+  dob?: Prisma.StringNullableFilter<"PersonalDetails"> | string | null
   nickname?: Prisma.StringNullableFilter<"PersonalDetails"> | string | null
   ageGroup?: Prisma.EnumAgeGroupEnumNullableFilter<"PersonalDetails"> | $Enums.AgeGroupEnum | null
   foodPreference?: Prisma.EnumFoodPreferenceEnumNullableFilter<"PersonalDetails"> | $Enums.FoodPreferenceEnum | null
@@ -228,6 +236,7 @@ export type PersonalDetailsWhereInput = {
 export type PersonalDetailsOrderByWithRelationInput = {
   id?: Prisma.SortOrder
   userId?: Prisma.SortOrder
+  isAdultConfirmed?: Prisma.SortOrder
   gender?: Prisma.SortOrderInput | Prisma.SortOrder
   dob?: Prisma.SortOrderInput | Prisma.SortOrder
   nickname?: Prisma.SortOrderInput | Prisma.SortOrder
@@ -245,8 +254,9 @@ export type PersonalDetailsWhereUniqueInput = Prisma.AtLeast<{
   AND?: Prisma.PersonalDetailsWhereInput | Prisma.PersonalDetailsWhereInput[]
   OR?: Prisma.PersonalDetailsWhereInput[]
   NOT?: Prisma.PersonalDetailsWhereInput | Prisma.PersonalDetailsWhereInput[]
+  isAdultConfirmed?: Prisma.BoolFilter<"PersonalDetails"> | boolean
   gender?: Prisma.EnumGenderEnumNullableFilter<"PersonalDetails"> | $Enums.GenderEnum | null
-  dob?: Prisma.DateTimeNullableFilter<"PersonalDetails"> | Date | string | null
+  dob?: Prisma.StringNullableFilter<"PersonalDetails"> | string | null
   nickname?: Prisma.StringNullableFilter<"PersonalDetails"> | string | null
   ageGroup?: Prisma.EnumAgeGroupEnumNullableFilter<"PersonalDetails"> | $Enums.AgeGroupEnum | null
   foodPreference?: Prisma.EnumFoodPreferenceEnumNullableFilter<"PersonalDetails"> | $Enums.FoodPreferenceEnum | null
@@ -259,6 +269,7 @@ export type PersonalDetailsWhereUniqueInput = Prisma.AtLeast<{
 export type PersonalDetailsOrderByWithAggregationInput = {
   id?: Prisma.SortOrder
   userId?: Prisma.SortOrder
+  isAdultConfirmed?: Prisma.SortOrder
   gender?: Prisma.SortOrderInput | Prisma.SortOrder
   dob?: Prisma.SortOrderInput | Prisma.SortOrder
   nickname?: Prisma.SortOrderInput | Prisma.SortOrder
@@ -278,8 +289,9 @@ export type PersonalDetailsScalarWhereWithAggregatesInput = {
   NOT?: Prisma.PersonalDetailsScalarWhereWithAggregatesInput | Prisma.PersonalDetailsScalarWhereWithAggregatesInput[]
   id?: Prisma.StringWithAggregatesFilter<"PersonalDetails"> | string
   userId?: Prisma.StringWithAggregatesFilter<"PersonalDetails"> | string
+  isAdultConfirmed?: Prisma.BoolWithAggregatesFilter<"PersonalDetails"> | boolean
   gender?: Prisma.EnumGenderEnumNullableWithAggregatesFilter<"PersonalDetails"> | $Enums.GenderEnum | null
-  dob?: Prisma.DateTimeNullableWithAggregatesFilter<"PersonalDetails"> | Date | string | null
+  dob?: Prisma.StringNullableWithAggregatesFilter<"PersonalDetails"> | string | null
   nickname?: Prisma.StringNullableWithAggregatesFilter<"PersonalDetails"> | string | null
   ageGroup?: Prisma.EnumAgeGroupEnumNullableWithAggregatesFilter<"PersonalDetails"> | $Enums.AgeGroupEnum | null
   foodPreference?: Prisma.EnumFoodPreferenceEnumNullableWithAggregatesFilter<"PersonalDetails"> | $Enums.FoodPreferenceEnum | null
@@ -290,22 +302,24 @@ export type PersonalDetailsScalarWhereWithAggregatesInput = {
 
 export type PersonalDetailsCreateInput = {
   id?: string
+  isAdultConfirmed?: boolean
   gender?: $Enums.GenderEnum | null
-  dob?: Date | string | null
+  dob?: string | null
   nickname?: string | null
   ageGroup?: $Enums.AgeGroupEnum | null
   foodPreference?: $Enums.FoodPreferenceEnum | null
   profilePicture?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
-  user: Prisma.UserCreateNestedOneWithoutPersonalDetailsInput
+  user: Prisma.UserCreateNestedOneWithoutPersonalInput
 }
 
 export type PersonalDetailsUncheckedCreateInput = {
   id?: string
   userId: string
+  isAdultConfirmed?: boolean
   gender?: $Enums.GenderEnum | null
-  dob?: Date | string | null
+  dob?: string | null
   nickname?: string | null
   ageGroup?: $Enums.AgeGroupEnum | null
   foodPreference?: $Enums.FoodPreferenceEnum | null
@@ -316,22 +330,24 @@ export type PersonalDetailsUncheckedCreateInput = {
 
 export type PersonalDetailsUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
+  isAdultConfirmed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   gender?: Prisma.NullableEnumGenderEnumFieldUpdateOperationsInput | $Enums.GenderEnum | null
-  dob?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  dob?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   nickname?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   ageGroup?: Prisma.NullableEnumAgeGroupEnumFieldUpdateOperationsInput | $Enums.AgeGroupEnum | null
   foodPreference?: Prisma.NullableEnumFoodPreferenceEnumFieldUpdateOperationsInput | $Enums.FoodPreferenceEnum | null
   profilePicture?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  user?: Prisma.UserUpdateOneRequiredWithoutPersonalDetailsNestedInput
+  user?: Prisma.UserUpdateOneRequiredWithoutPersonalNestedInput
 }
 
 export type PersonalDetailsUncheckedUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   userId?: Prisma.StringFieldUpdateOperationsInput | string
+  isAdultConfirmed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   gender?: Prisma.NullableEnumGenderEnumFieldUpdateOperationsInput | $Enums.GenderEnum | null
-  dob?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  dob?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   nickname?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   ageGroup?: Prisma.NullableEnumAgeGroupEnumFieldUpdateOperationsInput | $Enums.AgeGroupEnum | null
   foodPreference?: Prisma.NullableEnumFoodPreferenceEnumFieldUpdateOperationsInput | $Enums.FoodPreferenceEnum | null
@@ -343,8 +359,9 @@ export type PersonalDetailsUncheckedUpdateInput = {
 export type PersonalDetailsCreateManyInput = {
   id?: string
   userId: string
+  isAdultConfirmed?: boolean
   gender?: $Enums.GenderEnum | null
-  dob?: Date | string | null
+  dob?: string | null
   nickname?: string | null
   ageGroup?: $Enums.AgeGroupEnum | null
   foodPreference?: $Enums.FoodPreferenceEnum | null
@@ -355,8 +372,9 @@ export type PersonalDetailsCreateManyInput = {
 
 export type PersonalDetailsUpdateManyMutationInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
+  isAdultConfirmed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   gender?: Prisma.NullableEnumGenderEnumFieldUpdateOperationsInput | $Enums.GenderEnum | null
-  dob?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  dob?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   nickname?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   ageGroup?: Prisma.NullableEnumAgeGroupEnumFieldUpdateOperationsInput | $Enums.AgeGroupEnum | null
   foodPreference?: Prisma.NullableEnumFoodPreferenceEnumFieldUpdateOperationsInput | $Enums.FoodPreferenceEnum | null
@@ -368,8 +386,9 @@ export type PersonalDetailsUpdateManyMutationInput = {
 export type PersonalDetailsUncheckedUpdateManyInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   userId?: Prisma.StringFieldUpdateOperationsInput | string
+  isAdultConfirmed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   gender?: Prisma.NullableEnumGenderEnumFieldUpdateOperationsInput | $Enums.GenderEnum | null
-  dob?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  dob?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   nickname?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   ageGroup?: Prisma.NullableEnumAgeGroupEnumFieldUpdateOperationsInput | $Enums.AgeGroupEnum | null
   foodPreference?: Prisma.NullableEnumFoodPreferenceEnumFieldUpdateOperationsInput | $Enums.FoodPreferenceEnum | null
@@ -381,6 +400,7 @@ export type PersonalDetailsUncheckedUpdateManyInput = {
 export type PersonalDetailsCountOrderByAggregateInput = {
   id?: Prisma.SortOrder
   userId?: Prisma.SortOrder
+  isAdultConfirmed?: Prisma.SortOrder
   gender?: Prisma.SortOrder
   dob?: Prisma.SortOrder
   nickname?: Prisma.SortOrder
@@ -394,6 +414,7 @@ export type PersonalDetailsCountOrderByAggregateInput = {
 export type PersonalDetailsMaxOrderByAggregateInput = {
   id?: Prisma.SortOrder
   userId?: Prisma.SortOrder
+  isAdultConfirmed?: Prisma.SortOrder
   gender?: Prisma.SortOrder
   dob?: Prisma.SortOrder
   nickname?: Prisma.SortOrder
@@ -407,6 +428,7 @@ export type PersonalDetailsMaxOrderByAggregateInput = {
 export type PersonalDetailsMinOrderByAggregateInput = {
   id?: Prisma.SortOrder
   userId?: Prisma.SortOrder
+  isAdultConfirmed?: Prisma.SortOrder
   gender?: Prisma.SortOrder
   dob?: Prisma.SortOrder
   nickname?: Prisma.SortOrder
@@ -422,12 +444,12 @@ export type PersonalDetailsNullableScalarRelationFilter = {
   isNot?: Prisma.PersonalDetailsWhereInput | null
 }
 
-export type NullableEnumGenderEnumFieldUpdateOperationsInput = {
-  set?: $Enums.GenderEnum | null
+export type BoolFieldUpdateOperationsInput = {
+  set?: boolean
 }
 
-export type NullableDateTimeFieldUpdateOperationsInput = {
-  set?: Date | string | null
+export type NullableEnumGenderEnumFieldUpdateOperationsInput = {
+  set?: $Enums.GenderEnum | null
 }
 
 export type NullableEnumAgeGroupEnumFieldUpdateOperationsInput = {
@@ -472,8 +494,9 @@ export type PersonalDetailsUncheckedUpdateOneWithoutUserNestedInput = {
 
 export type PersonalDetailsCreateWithoutUserInput = {
   id?: string
+  isAdultConfirmed?: boolean
   gender?: $Enums.GenderEnum | null
-  dob?: Date | string | null
+  dob?: string | null
   nickname?: string | null
   ageGroup?: $Enums.AgeGroupEnum | null
   foodPreference?: $Enums.FoodPreferenceEnum | null
@@ -484,8 +507,9 @@ export type PersonalDetailsCreateWithoutUserInput = {
 
 export type PersonalDetailsUncheckedCreateWithoutUserInput = {
   id?: string
+  isAdultConfirmed?: boolean
   gender?: $Enums.GenderEnum | null
-  dob?: Date | string | null
+  dob?: string | null
   nickname?: string | null
   ageGroup?: $Enums.AgeGroupEnum | null
   foodPreference?: $Enums.FoodPreferenceEnum | null
@@ -512,8 +536,9 @@ export type PersonalDetailsUpdateToOneWithWhereWithoutUserInput = {
 
 export type PersonalDetailsUpdateWithoutUserInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
+  isAdultConfirmed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   gender?: Prisma.NullableEnumGenderEnumFieldUpdateOperationsInput | $Enums.GenderEnum | null
-  dob?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  dob?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   nickname?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   ageGroup?: Prisma.NullableEnumAgeGroupEnumFieldUpdateOperationsInput | $Enums.AgeGroupEnum | null
   foodPreference?: Prisma.NullableEnumFoodPreferenceEnumFieldUpdateOperationsInput | $Enums.FoodPreferenceEnum | null
@@ -524,8 +549,9 @@ export type PersonalDetailsUpdateWithoutUserInput = {
 
 export type PersonalDetailsUncheckedUpdateWithoutUserInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
+  isAdultConfirmed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   gender?: Prisma.NullableEnumGenderEnumFieldUpdateOperationsInput | $Enums.GenderEnum | null
-  dob?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  dob?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   nickname?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   ageGroup?: Prisma.NullableEnumAgeGroupEnumFieldUpdateOperationsInput | $Enums.AgeGroupEnum | null
   foodPreference?: Prisma.NullableEnumFoodPreferenceEnumFieldUpdateOperationsInput | $Enums.FoodPreferenceEnum | null
@@ -539,6 +565,7 @@ export type PersonalDetailsUncheckedUpdateWithoutUserInput = {
 export type PersonalDetailsSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
   userId?: boolean
+  isAdultConfirmed?: boolean
   gender?: boolean
   dob?: boolean
   nickname?: boolean
@@ -553,6 +580,7 @@ export type PersonalDetailsSelect<ExtArgs extends runtime.Types.Extensions.Inter
 export type PersonalDetailsSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
   userId?: boolean
+  isAdultConfirmed?: boolean
   gender?: boolean
   dob?: boolean
   nickname?: boolean
@@ -567,6 +595,7 @@ export type PersonalDetailsSelectCreateManyAndReturn<ExtArgs extends runtime.Typ
 export type PersonalDetailsSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
   userId?: boolean
+  isAdultConfirmed?: boolean
   gender?: boolean
   dob?: boolean
   nickname?: boolean
@@ -581,6 +610,7 @@ export type PersonalDetailsSelectUpdateManyAndReturn<ExtArgs extends runtime.Typ
 export type PersonalDetailsSelectScalar = {
   id?: boolean
   userId?: boolean
+  isAdultConfirmed?: boolean
   gender?: boolean
   dob?: boolean
   nickname?: boolean
@@ -591,7 +621,7 @@ export type PersonalDetailsSelectScalar = {
   updatedAt?: boolean
 }
 
-export type PersonalDetailsOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "userId" | "gender" | "dob" | "nickname" | "ageGroup" | "foodPreference" | "profilePicture" | "createdAt" | "updatedAt", ExtArgs["result"]["personalDetails"]>
+export type PersonalDetailsOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "userId" | "isAdultConfirmed" | "gender" | "dob" | "nickname" | "ageGroup" | "foodPreference" | "profilePicture" | "createdAt" | "updatedAt", ExtArgs["result"]["personalDetails"]>
 export type PersonalDetailsInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
 }
@@ -610,8 +640,9 @@ export type $PersonalDetailsPayload<ExtArgs extends runtime.Types.Extensions.Int
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
     userId: string
+    isAdultConfirmed: boolean
     gender: $Enums.GenderEnum | null
-    dob: Date | null
+    dob: string | null
     nickname: string | null
     ageGroup: $Enums.AgeGroupEnum | null
     foodPreference: $Enums.FoodPreferenceEnum | null
@@ -1044,8 +1075,9 @@ export interface Prisma__PersonalDetailsClient<T, Null = never, ExtArgs extends 
 export interface PersonalDetailsFieldRefs {
   readonly id: Prisma.FieldRef<"PersonalDetails", 'String'>
   readonly userId: Prisma.FieldRef<"PersonalDetails", 'String'>
+  readonly isAdultConfirmed: Prisma.FieldRef<"PersonalDetails", 'Boolean'>
   readonly gender: Prisma.FieldRef<"PersonalDetails", 'GenderEnum'>
-  readonly dob: Prisma.FieldRef<"PersonalDetails", 'DateTime'>
+  readonly dob: Prisma.FieldRef<"PersonalDetails", 'String'>
   readonly nickname: Prisma.FieldRef<"PersonalDetails", 'String'>
   readonly ageGroup: Prisma.FieldRef<"PersonalDetails", 'AgeGroupEnum'>
   readonly foodPreference: Prisma.FieldRef<"PersonalDetails", 'FoodPreferenceEnum'>

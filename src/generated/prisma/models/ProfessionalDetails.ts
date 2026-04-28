@@ -259,7 +259,7 @@ export type ProfessionalDetailsCreateInput = {
   orgType?: $Enums.OrganizationType | null
   createdAt?: Date | string
   updatedAt?: Date | string
-  user: Prisma.UserCreateNestedOneWithoutProfessionalDetailsInput
+  user: Prisma.UserCreateNestedOneWithoutProfessionalInput
 }
 
 export type ProfessionalDetailsUncheckedCreateInput = {
@@ -279,7 +279,7 @@ export type ProfessionalDetailsUpdateInput = {
   orgType?: Prisma.NullableEnumOrganizationTypeFieldUpdateOperationsInput | $Enums.OrganizationType | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  user?: Prisma.UserUpdateOneRequiredWithoutProfessionalDetailsNestedInput
+  user?: Prisma.UserUpdateOneRequiredWithoutProfessionalNestedInput
 }
 
 export type ProfessionalDetailsUncheckedUpdateInput = {

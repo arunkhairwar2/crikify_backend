@@ -8,26 +8,46 @@ class UserRepositories {
         firstName: userData.firstName,
         middleName: userData.middleName,
         lastName: userData.lastName,
-        dob: userData.dob,
-        gender: userData.gender,
+        countryCode: userData.countryCode,
+        mobile: userData.mobile,
+        email: userData.email,
+        passwordHash: userData.password,
       },
+    });
+
+    const personalDetails = await prisma.personalDetails.create({
+      data: {
+        user: {
+          connect: {
+            id: user.id,
+          },
+        },
+        isAdultConfirmed: userData.isAdultConfirmed,
+        // gender: userData.gender,
+        // dob: userData.dob.toISOString(),
+      },
+    });
+    return { user, personalDetails };
+  }
+
+  async findByEmail(email: string) {
+    const user = await prisma.user.findUnique({
+      where: { email },
     });
     return user;
   }
 
-  //   async findByEmail(email: string) {
-  //     const user = await prisma.user.findUnique({
-  //       where: { email },
-  //     });
-  //     return user;
-  //   }
-
-  //   async findByPhone(phoneNumber: string) {
-  //     const user = await prisma.user.findUnique({
-  //       where: { primaryPhoneNumber: phoneNumber },
-  //     });
-  //     return user;
-  //   }
+  async findByMobile(countryCode: string, mobile: string) {
+    const user = await prisma.user.findUnique({
+      where: {
+        mobile_unique: {
+          mobile: mobile,
+          countryCode: countryCode,
+        },
+      },
+    });
+    return user;
+  }
 
   async findById(id: string) {
     const user = await prisma.user.findUnique({

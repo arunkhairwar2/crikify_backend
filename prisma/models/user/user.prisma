@@ -1,21 +1,23 @@
 // User model
 
 model User {
-    id         String  @id @default(uuid())
-    firstName  String
-    middleName String?
-    lastName   String
-    mobile     String  @unique
-    email      String  @unique
+    id           String  @id @default(uuid())
+    firstName    String
+    middleName   String?
+    lastName     String
+    countryCode  String
+    mobile       String
+    email        String  @unique
+    passwordHash String
 
-    personalDetails     PersonalDetails?
-    professionalDetails ProfessionalDetails?
-    sportsPreferences   SportsPreferences?
-    address             Address?
+    personal     PersonalDetails?
+    professional ProfessionalDetails?
+    sports       SportsPreferences?
+    address      Address?
 
-    createdAt    DateTime      @default(now())
-    updatedAt    DateTime      @updatedAt
+    createdAt DateTime @default(now())
+    updatedAt DateTime @updatedAt
 
-
+    @@unique([countryCode, mobile], name: "mobile_unique")
     @@map("users")
 }

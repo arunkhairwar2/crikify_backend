@@ -29,8 +29,10 @@ export type UserMinAggregateOutputType = {
   firstName: string | null
   middleName: string | null
   lastName: string | null
+  countryCode: string | null
   mobile: string | null
   email: string | null
+  passwordHash: string | null
   createdAt: Date | null
   updatedAt: Date | null
 }
@@ -40,8 +42,10 @@ export type UserMaxAggregateOutputType = {
   firstName: string | null
   middleName: string | null
   lastName: string | null
+  countryCode: string | null
   mobile: string | null
   email: string | null
+  passwordHash: string | null
   createdAt: Date | null
   updatedAt: Date | null
 }
@@ -51,8 +55,10 @@ export type UserCountAggregateOutputType = {
   firstName: number
   middleName: number
   lastName: number
+  countryCode: number
   mobile: number
   email: number
+  passwordHash: number
   createdAt: number
   updatedAt: number
   _all: number
@@ -64,8 +70,10 @@ export type UserMinAggregateInputType = {
   firstName?: true
   middleName?: true
   lastName?: true
+  countryCode?: true
   mobile?: true
   email?: true
+  passwordHash?: true
   createdAt?: true
   updatedAt?: true
 }
@@ -75,8 +83,10 @@ export type UserMaxAggregateInputType = {
   firstName?: true
   middleName?: true
   lastName?: true
+  countryCode?: true
   mobile?: true
   email?: true
+  passwordHash?: true
   createdAt?: true
   updatedAt?: true
 }
@@ -86,8 +96,10 @@ export type UserCountAggregateInputType = {
   firstName?: true
   middleName?: true
   lastName?: true
+  countryCode?: true
   mobile?: true
   email?: true
+  passwordHash?: true
   createdAt?: true
   updatedAt?: true
   _all?: true
@@ -170,8 +182,10 @@ export type UserGroupByOutputType = {
   firstName: string
   middleName: string | null
   lastName: string
+  countryCode: string
   mobile: string
   email: string
+  passwordHash: string
   createdAt: Date
   updatedAt: Date
   _count: UserCountAggregateOutputType | null
@@ -202,13 +216,15 @@ export type UserWhereInput = {
   firstName?: Prisma.StringFilter<"User"> | string
   middleName?: Prisma.StringNullableFilter<"User"> | string | null
   lastName?: Prisma.StringFilter<"User"> | string
+  countryCode?: Prisma.StringFilter<"User"> | string
   mobile?: Prisma.StringFilter<"User"> | string
   email?: Prisma.StringFilter<"User"> | string
+  passwordHash?: Prisma.StringFilter<"User"> | string
   createdAt?: Prisma.DateTimeFilter<"User"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"User"> | Date | string
-  personalDetails?: Prisma.XOR<Prisma.PersonalDetailsNullableScalarRelationFilter, Prisma.PersonalDetailsWhereInput> | null
-  professionalDetails?: Prisma.XOR<Prisma.ProfessionalDetailsNullableScalarRelationFilter, Prisma.ProfessionalDetailsWhereInput> | null
-  sportsPreferences?: Prisma.XOR<Prisma.SportsPreferencesNullableScalarRelationFilter, Prisma.SportsPreferencesWhereInput> | null
+  personal?: Prisma.XOR<Prisma.PersonalDetailsNullableScalarRelationFilter, Prisma.PersonalDetailsWhereInput> | null
+  professional?: Prisma.XOR<Prisma.ProfessionalDetailsNullableScalarRelationFilter, Prisma.ProfessionalDetailsWhereInput> | null
+  sports?: Prisma.XOR<Prisma.SportsPreferencesNullableScalarRelationFilter, Prisma.SportsPreferencesWhereInput> | null
   address?: Prisma.XOR<Prisma.AddressNullableScalarRelationFilter, Prisma.AddressWhereInput> | null
 }
 
@@ -217,41 +233,48 @@ export type UserOrderByWithRelationInput = {
   firstName?: Prisma.SortOrder
   middleName?: Prisma.SortOrderInput | Prisma.SortOrder
   lastName?: Prisma.SortOrder
+  countryCode?: Prisma.SortOrder
   mobile?: Prisma.SortOrder
   email?: Prisma.SortOrder
+  passwordHash?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
-  personalDetails?: Prisma.PersonalDetailsOrderByWithRelationInput
-  professionalDetails?: Prisma.ProfessionalDetailsOrderByWithRelationInput
-  sportsPreferences?: Prisma.SportsPreferencesOrderByWithRelationInput
+  personal?: Prisma.PersonalDetailsOrderByWithRelationInput
+  professional?: Prisma.ProfessionalDetailsOrderByWithRelationInput
+  sports?: Prisma.SportsPreferencesOrderByWithRelationInput
   address?: Prisma.AddressOrderByWithRelationInput
 }
 
 export type UserWhereUniqueInput = Prisma.AtLeast<{
   id?: string
-  mobile?: string
   email?: string
+  mobile_unique?: Prisma.UserMobile_uniqueCompoundUniqueInput
   AND?: Prisma.UserWhereInput | Prisma.UserWhereInput[]
   OR?: Prisma.UserWhereInput[]
   NOT?: Prisma.UserWhereInput | Prisma.UserWhereInput[]
   firstName?: Prisma.StringFilter<"User"> | string
   middleName?: Prisma.StringNullableFilter<"User"> | string | null
   lastName?: Prisma.StringFilter<"User"> | string
+  countryCode?: Prisma.StringFilter<"User"> | string
+  mobile?: Prisma.StringFilter<"User"> | string
+  passwordHash?: Prisma.StringFilter<"User"> | string
   createdAt?: Prisma.DateTimeFilter<"User"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"User"> | Date | string
-  personalDetails?: Prisma.XOR<Prisma.PersonalDetailsNullableScalarRelationFilter, Prisma.PersonalDetailsWhereInput> | null
-  professionalDetails?: Prisma.XOR<Prisma.ProfessionalDetailsNullableScalarRelationFilter, Prisma.ProfessionalDetailsWhereInput> | null
-  sportsPreferences?: Prisma.XOR<Prisma.SportsPreferencesNullableScalarRelationFilter, Prisma.SportsPreferencesWhereInput> | null
+  personal?: Prisma.XOR<Prisma.PersonalDetailsNullableScalarRelationFilter, Prisma.PersonalDetailsWhereInput> | null
+  professional?: Prisma.XOR<Prisma.ProfessionalDetailsNullableScalarRelationFilter, Prisma.ProfessionalDetailsWhereInput> | null
+  sports?: Prisma.XOR<Prisma.SportsPreferencesNullableScalarRelationFilter, Prisma.SportsPreferencesWhereInput> | null
   address?: Prisma.XOR<Prisma.AddressNullableScalarRelationFilter, Prisma.AddressWhereInput> | null
-}, "id" | "mobile" | "email">
+}, "id" | "email" | "mobile_unique">
 
 export type UserOrderByWithAggregationInput = {
   id?: Prisma.SortOrder
   firstName?: Prisma.SortOrder
   middleName?: Prisma.SortOrderInput | Prisma.SortOrder
   lastName?: Prisma.SortOrder
+  countryCode?: Prisma.SortOrder
   mobile?: Prisma.SortOrder
   email?: Prisma.SortOrder
+  passwordHash?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   _count?: Prisma.UserCountOrderByAggregateInput
@@ -267,8 +290,10 @@ export type UserScalarWhereWithAggregatesInput = {
   firstName?: Prisma.StringWithAggregatesFilter<"User"> | string
   middleName?: Prisma.StringNullableWithAggregatesFilter<"User"> | string | null
   lastName?: Prisma.StringWithAggregatesFilter<"User"> | string
+  countryCode?: Prisma.StringWithAggregatesFilter<"User"> | string
   mobile?: Prisma.StringWithAggregatesFilter<"User"> | string
   email?: Prisma.StringWithAggregatesFilter<"User"> | string
+  passwordHash?: Prisma.StringWithAggregatesFilter<"User"> | string
   createdAt?: Prisma.DateTimeWithAggregatesFilter<"User"> | Date | string
   updatedAt?: Prisma.DateTimeWithAggregatesFilter<"User"> | Date | string
 }
@@ -278,13 +303,15 @@ export type UserCreateInput = {
   firstName: string
   middleName?: string | null
   lastName: string
+  countryCode: string
   mobile: string
   email: string
+  passwordHash: string
   createdAt?: Date | string
   updatedAt?: Date | string
-  personalDetails?: Prisma.PersonalDetailsCreateNestedOneWithoutUserInput
-  professionalDetails?: Prisma.ProfessionalDetailsCreateNestedOneWithoutUserInput
-  sportsPreferences?: Prisma.SportsPreferencesCreateNestedOneWithoutUserInput
+  personal?: Prisma.PersonalDetailsCreateNestedOneWithoutUserInput
+  professional?: Prisma.ProfessionalDetailsCreateNestedOneWithoutUserInput
+  sports?: Prisma.SportsPreferencesCreateNestedOneWithoutUserInput
   address?: Prisma.AddressCreateNestedOneWithoutUserInput
 }
 
@@ -293,13 +320,15 @@ export type UserUncheckedCreateInput = {
   firstName: string
   middleName?: string | null
   lastName: string
+  countryCode: string
   mobile: string
   email: string
+  passwordHash: string
   createdAt?: Date | string
   updatedAt?: Date | string
-  personalDetails?: Prisma.PersonalDetailsUncheckedCreateNestedOneWithoutUserInput
-  professionalDetails?: Prisma.ProfessionalDetailsUncheckedCreateNestedOneWithoutUserInput
-  sportsPreferences?: Prisma.SportsPreferencesUncheckedCreateNestedOneWithoutUserInput
+  personal?: Prisma.PersonalDetailsUncheckedCreateNestedOneWithoutUserInput
+  professional?: Prisma.ProfessionalDetailsUncheckedCreateNestedOneWithoutUserInput
+  sports?: Prisma.SportsPreferencesUncheckedCreateNestedOneWithoutUserInput
   address?: Prisma.AddressUncheckedCreateNestedOneWithoutUserInput
 }
 
@@ -308,13 +337,15 @@ export type UserUpdateInput = {
   firstName?: Prisma.StringFieldUpdateOperationsInput | string
   middleName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   lastName?: Prisma.StringFieldUpdateOperationsInput | string
+  countryCode?: Prisma.StringFieldUpdateOperationsInput | string
   mobile?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.StringFieldUpdateOperationsInput | string
+  passwordHash?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  personalDetails?: Prisma.PersonalDetailsUpdateOneWithoutUserNestedInput
-  professionalDetails?: Prisma.ProfessionalDetailsUpdateOneWithoutUserNestedInput
-  sportsPreferences?: Prisma.SportsPreferencesUpdateOneWithoutUserNestedInput
+  personal?: Prisma.PersonalDetailsUpdateOneWithoutUserNestedInput
+  professional?: Prisma.ProfessionalDetailsUpdateOneWithoutUserNestedInput
+  sports?: Prisma.SportsPreferencesUpdateOneWithoutUserNestedInput
   address?: Prisma.AddressUpdateOneWithoutUserNestedInput
 }
 
@@ -323,13 +354,15 @@ export type UserUncheckedUpdateInput = {
   firstName?: Prisma.StringFieldUpdateOperationsInput | string
   middleName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   lastName?: Prisma.StringFieldUpdateOperationsInput | string
+  countryCode?: Prisma.StringFieldUpdateOperationsInput | string
   mobile?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.StringFieldUpdateOperationsInput | string
+  passwordHash?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  personalDetails?: Prisma.PersonalDetailsUncheckedUpdateOneWithoutUserNestedInput
-  professionalDetails?: Prisma.ProfessionalDetailsUncheckedUpdateOneWithoutUserNestedInput
-  sportsPreferences?: Prisma.SportsPreferencesUncheckedUpdateOneWithoutUserNestedInput
+  personal?: Prisma.PersonalDetailsUncheckedUpdateOneWithoutUserNestedInput
+  professional?: Prisma.ProfessionalDetailsUncheckedUpdateOneWithoutUserNestedInput
+  sports?: Prisma.SportsPreferencesUncheckedUpdateOneWithoutUserNestedInput
   address?: Prisma.AddressUncheckedUpdateOneWithoutUserNestedInput
 }
 
@@ -338,8 +371,10 @@ export type UserCreateManyInput = {
   firstName: string
   middleName?: string | null
   lastName: string
+  countryCode: string
   mobile: string
   email: string
+  passwordHash: string
   createdAt?: Date | string
   updatedAt?: Date | string
 }
@@ -349,8 +384,10 @@ export type UserUpdateManyMutationInput = {
   firstName?: Prisma.StringFieldUpdateOperationsInput | string
   middleName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   lastName?: Prisma.StringFieldUpdateOperationsInput | string
+  countryCode?: Prisma.StringFieldUpdateOperationsInput | string
   mobile?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.StringFieldUpdateOperationsInput | string
+  passwordHash?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -360,8 +397,10 @@ export type UserUncheckedUpdateManyInput = {
   firstName?: Prisma.StringFieldUpdateOperationsInput | string
   middleName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   lastName?: Prisma.StringFieldUpdateOperationsInput | string
+  countryCode?: Prisma.StringFieldUpdateOperationsInput | string
   mobile?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.StringFieldUpdateOperationsInput | string
+  passwordHash?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -371,13 +410,20 @@ export type UserScalarRelationFilter = {
   isNot?: Prisma.UserWhereInput
 }
 
+export type UserMobile_uniqueCompoundUniqueInput = {
+  countryCode: string
+  mobile: string
+}
+
 export type UserCountOrderByAggregateInput = {
   id?: Prisma.SortOrder
   firstName?: Prisma.SortOrder
   middleName?: Prisma.SortOrder
   lastName?: Prisma.SortOrder
+  countryCode?: Prisma.SortOrder
   mobile?: Prisma.SortOrder
   email?: Prisma.SortOrder
+  passwordHash?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
 }
@@ -387,8 +433,10 @@ export type UserMaxOrderByAggregateInput = {
   firstName?: Prisma.SortOrder
   middleName?: Prisma.SortOrder
   lastName?: Prisma.SortOrder
+  countryCode?: Prisma.SortOrder
   mobile?: Prisma.SortOrder
   email?: Prisma.SortOrder
+  passwordHash?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
 }
@@ -398,24 +446,26 @@ export type UserMinOrderByAggregateInput = {
   firstName?: Prisma.SortOrder
   middleName?: Prisma.SortOrder
   lastName?: Prisma.SortOrder
+  countryCode?: Prisma.SortOrder
   mobile?: Prisma.SortOrder
   email?: Prisma.SortOrder
+  passwordHash?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
 }
 
-export type UserCreateNestedOneWithoutProfessionalDetailsInput = {
-  create?: Prisma.XOR<Prisma.UserCreateWithoutProfessionalDetailsInput, Prisma.UserUncheckedCreateWithoutProfessionalDetailsInput>
-  connectOrCreate?: Prisma.UserCreateOrConnectWithoutProfessionalDetailsInput
+export type UserCreateNestedOneWithoutProfessionalInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutProfessionalInput, Prisma.UserUncheckedCreateWithoutProfessionalInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutProfessionalInput
   connect?: Prisma.UserWhereUniqueInput
 }
 
-export type UserUpdateOneRequiredWithoutProfessionalDetailsNestedInput = {
-  create?: Prisma.XOR<Prisma.UserCreateWithoutProfessionalDetailsInput, Prisma.UserUncheckedCreateWithoutProfessionalDetailsInput>
-  connectOrCreate?: Prisma.UserCreateOrConnectWithoutProfessionalDetailsInput
-  upsert?: Prisma.UserUpsertWithoutProfessionalDetailsInput
+export type UserUpdateOneRequiredWithoutProfessionalNestedInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutProfessionalInput, Prisma.UserUncheckedCreateWithoutProfessionalInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutProfessionalInput
+  upsert?: Prisma.UserUpsertWithoutProfessionalInput
   connect?: Prisma.UserWhereUniqueInput
-  update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutProfessionalDetailsInput, Prisma.UserUpdateWithoutProfessionalDetailsInput>, Prisma.UserUncheckedUpdateWithoutProfessionalDetailsInput>
+  update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutProfessionalInput, Prisma.UserUpdateWithoutProfessionalInput>, Prisma.UserUncheckedUpdateWithoutProfessionalInput>
 }
 
 export type UserCreateNestedOneWithoutAddressInput = {
@@ -432,103 +482,111 @@ export type UserUpdateOneRequiredWithoutAddressNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutAddressInput, Prisma.UserUpdateWithoutAddressInput>, Prisma.UserUncheckedUpdateWithoutAddressInput>
 }
 
-export type UserCreateNestedOneWithoutPersonalDetailsInput = {
-  create?: Prisma.XOR<Prisma.UserCreateWithoutPersonalDetailsInput, Prisma.UserUncheckedCreateWithoutPersonalDetailsInput>
-  connectOrCreate?: Prisma.UserCreateOrConnectWithoutPersonalDetailsInput
+export type UserCreateNestedOneWithoutPersonalInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutPersonalInput, Prisma.UserUncheckedCreateWithoutPersonalInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutPersonalInput
   connect?: Prisma.UserWhereUniqueInput
 }
 
-export type UserUpdateOneRequiredWithoutPersonalDetailsNestedInput = {
-  create?: Prisma.XOR<Prisma.UserCreateWithoutPersonalDetailsInput, Prisma.UserUncheckedCreateWithoutPersonalDetailsInput>
-  connectOrCreate?: Prisma.UserCreateOrConnectWithoutPersonalDetailsInput
-  upsert?: Prisma.UserUpsertWithoutPersonalDetailsInput
+export type UserUpdateOneRequiredWithoutPersonalNestedInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutPersonalInput, Prisma.UserUncheckedCreateWithoutPersonalInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutPersonalInput
+  upsert?: Prisma.UserUpsertWithoutPersonalInput
   connect?: Prisma.UserWhereUniqueInput
-  update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutPersonalDetailsInput, Prisma.UserUpdateWithoutPersonalDetailsInput>, Prisma.UserUncheckedUpdateWithoutPersonalDetailsInput>
+  update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutPersonalInput, Prisma.UserUpdateWithoutPersonalInput>, Prisma.UserUncheckedUpdateWithoutPersonalInput>
 }
 
-export type UserCreateNestedOneWithoutSportsPreferencesInput = {
-  create?: Prisma.XOR<Prisma.UserCreateWithoutSportsPreferencesInput, Prisma.UserUncheckedCreateWithoutSportsPreferencesInput>
-  connectOrCreate?: Prisma.UserCreateOrConnectWithoutSportsPreferencesInput
+export type UserCreateNestedOneWithoutSportsInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutSportsInput, Prisma.UserUncheckedCreateWithoutSportsInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutSportsInput
   connect?: Prisma.UserWhereUniqueInput
 }
 
-export type UserUpdateOneRequiredWithoutSportsPreferencesNestedInput = {
-  create?: Prisma.XOR<Prisma.UserCreateWithoutSportsPreferencesInput, Prisma.UserUncheckedCreateWithoutSportsPreferencesInput>
-  connectOrCreate?: Prisma.UserCreateOrConnectWithoutSportsPreferencesInput
-  upsert?: Prisma.UserUpsertWithoutSportsPreferencesInput
+export type UserUpdateOneRequiredWithoutSportsNestedInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutSportsInput, Prisma.UserUncheckedCreateWithoutSportsInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutSportsInput
+  upsert?: Prisma.UserUpsertWithoutSportsInput
   connect?: Prisma.UserWhereUniqueInput
-  update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutSportsPreferencesInput, Prisma.UserUpdateWithoutSportsPreferencesInput>, Prisma.UserUncheckedUpdateWithoutSportsPreferencesInput>
+  update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutSportsInput, Prisma.UserUpdateWithoutSportsInput>, Prisma.UserUncheckedUpdateWithoutSportsInput>
 }
 
-export type UserCreateWithoutProfessionalDetailsInput = {
+export type UserCreateWithoutProfessionalInput = {
   id?: string
   firstName: string
   middleName?: string | null
   lastName: string
+  countryCode: string
   mobile: string
   email: string
+  passwordHash: string
   createdAt?: Date | string
   updatedAt?: Date | string
-  personalDetails?: Prisma.PersonalDetailsCreateNestedOneWithoutUserInput
-  sportsPreferences?: Prisma.SportsPreferencesCreateNestedOneWithoutUserInput
+  personal?: Prisma.PersonalDetailsCreateNestedOneWithoutUserInput
+  sports?: Prisma.SportsPreferencesCreateNestedOneWithoutUserInput
   address?: Prisma.AddressCreateNestedOneWithoutUserInput
 }
 
-export type UserUncheckedCreateWithoutProfessionalDetailsInput = {
+export type UserUncheckedCreateWithoutProfessionalInput = {
   id?: string
   firstName: string
   middleName?: string | null
   lastName: string
+  countryCode: string
   mobile: string
   email: string
+  passwordHash: string
   createdAt?: Date | string
   updatedAt?: Date | string
-  personalDetails?: Prisma.PersonalDetailsUncheckedCreateNestedOneWithoutUserInput
-  sportsPreferences?: Prisma.SportsPreferencesUncheckedCreateNestedOneWithoutUserInput
+  personal?: Prisma.PersonalDetailsUncheckedCreateNestedOneWithoutUserInput
+  sports?: Prisma.SportsPreferencesUncheckedCreateNestedOneWithoutUserInput
   address?: Prisma.AddressUncheckedCreateNestedOneWithoutUserInput
 }
 
-export type UserCreateOrConnectWithoutProfessionalDetailsInput = {
+export type UserCreateOrConnectWithoutProfessionalInput = {
   where: Prisma.UserWhereUniqueInput
-  create: Prisma.XOR<Prisma.UserCreateWithoutProfessionalDetailsInput, Prisma.UserUncheckedCreateWithoutProfessionalDetailsInput>
+  create: Prisma.XOR<Prisma.UserCreateWithoutProfessionalInput, Prisma.UserUncheckedCreateWithoutProfessionalInput>
 }
 
-export type UserUpsertWithoutProfessionalDetailsInput = {
-  update: Prisma.XOR<Prisma.UserUpdateWithoutProfessionalDetailsInput, Prisma.UserUncheckedUpdateWithoutProfessionalDetailsInput>
-  create: Prisma.XOR<Prisma.UserCreateWithoutProfessionalDetailsInput, Prisma.UserUncheckedCreateWithoutProfessionalDetailsInput>
+export type UserUpsertWithoutProfessionalInput = {
+  update: Prisma.XOR<Prisma.UserUpdateWithoutProfessionalInput, Prisma.UserUncheckedUpdateWithoutProfessionalInput>
+  create: Prisma.XOR<Prisma.UserCreateWithoutProfessionalInput, Prisma.UserUncheckedCreateWithoutProfessionalInput>
   where?: Prisma.UserWhereInput
 }
 
-export type UserUpdateToOneWithWhereWithoutProfessionalDetailsInput = {
+export type UserUpdateToOneWithWhereWithoutProfessionalInput = {
   where?: Prisma.UserWhereInput
-  data: Prisma.XOR<Prisma.UserUpdateWithoutProfessionalDetailsInput, Prisma.UserUncheckedUpdateWithoutProfessionalDetailsInput>
+  data: Prisma.XOR<Prisma.UserUpdateWithoutProfessionalInput, Prisma.UserUncheckedUpdateWithoutProfessionalInput>
 }
 
-export type UserUpdateWithoutProfessionalDetailsInput = {
+export type UserUpdateWithoutProfessionalInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   firstName?: Prisma.StringFieldUpdateOperationsInput | string
   middleName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   lastName?: Prisma.StringFieldUpdateOperationsInput | string
+  countryCode?: Prisma.StringFieldUpdateOperationsInput | string
   mobile?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.StringFieldUpdateOperationsInput | string
+  passwordHash?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  personalDetails?: Prisma.PersonalDetailsUpdateOneWithoutUserNestedInput
-  sportsPreferences?: Prisma.SportsPreferencesUpdateOneWithoutUserNestedInput
+  personal?: Prisma.PersonalDetailsUpdateOneWithoutUserNestedInput
+  sports?: Prisma.SportsPreferencesUpdateOneWithoutUserNestedInput
   address?: Prisma.AddressUpdateOneWithoutUserNestedInput
 }
 
-export type UserUncheckedUpdateWithoutProfessionalDetailsInput = {
+export type UserUncheckedUpdateWithoutProfessionalInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   firstName?: Prisma.StringFieldUpdateOperationsInput | string
   middleName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   lastName?: Prisma.StringFieldUpdateOperationsInput | string
+  countryCode?: Prisma.StringFieldUpdateOperationsInput | string
   mobile?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.StringFieldUpdateOperationsInput | string
+  passwordHash?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  personalDetails?: Prisma.PersonalDetailsUncheckedUpdateOneWithoutUserNestedInput
-  sportsPreferences?: Prisma.SportsPreferencesUncheckedUpdateOneWithoutUserNestedInput
+  personal?: Prisma.PersonalDetailsUncheckedUpdateOneWithoutUserNestedInput
+  sports?: Prisma.SportsPreferencesUncheckedUpdateOneWithoutUserNestedInput
   address?: Prisma.AddressUncheckedUpdateOneWithoutUserNestedInput
 }
 
@@ -537,13 +595,15 @@ export type UserCreateWithoutAddressInput = {
   firstName: string
   middleName?: string | null
   lastName: string
+  countryCode: string
   mobile: string
   email: string
+  passwordHash: string
   createdAt?: Date | string
   updatedAt?: Date | string
-  personalDetails?: Prisma.PersonalDetailsCreateNestedOneWithoutUserInput
-  professionalDetails?: Prisma.ProfessionalDetailsCreateNestedOneWithoutUserInput
-  sportsPreferences?: Prisma.SportsPreferencesCreateNestedOneWithoutUserInput
+  personal?: Prisma.PersonalDetailsCreateNestedOneWithoutUserInput
+  professional?: Prisma.ProfessionalDetailsCreateNestedOneWithoutUserInput
+  sports?: Prisma.SportsPreferencesCreateNestedOneWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutAddressInput = {
@@ -551,13 +611,15 @@ export type UserUncheckedCreateWithoutAddressInput = {
   firstName: string
   middleName?: string | null
   lastName: string
+  countryCode: string
   mobile: string
   email: string
+  passwordHash: string
   createdAt?: Date | string
   updatedAt?: Date | string
-  personalDetails?: Prisma.PersonalDetailsUncheckedCreateNestedOneWithoutUserInput
-  professionalDetails?: Prisma.ProfessionalDetailsUncheckedCreateNestedOneWithoutUserInput
-  sportsPreferences?: Prisma.SportsPreferencesUncheckedCreateNestedOneWithoutUserInput
+  personal?: Prisma.PersonalDetailsUncheckedCreateNestedOneWithoutUserInput
+  professional?: Prisma.ProfessionalDetailsUncheckedCreateNestedOneWithoutUserInput
+  sports?: Prisma.SportsPreferencesUncheckedCreateNestedOneWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutAddressInput = {
@@ -581,13 +643,15 @@ export type UserUpdateWithoutAddressInput = {
   firstName?: Prisma.StringFieldUpdateOperationsInput | string
   middleName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   lastName?: Prisma.StringFieldUpdateOperationsInput | string
+  countryCode?: Prisma.StringFieldUpdateOperationsInput | string
   mobile?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.StringFieldUpdateOperationsInput | string
+  passwordHash?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  personalDetails?: Prisma.PersonalDetailsUpdateOneWithoutUserNestedInput
-  professionalDetails?: Prisma.ProfessionalDetailsUpdateOneWithoutUserNestedInput
-  sportsPreferences?: Prisma.SportsPreferencesUpdateOneWithoutUserNestedInput
+  personal?: Prisma.PersonalDetailsUpdateOneWithoutUserNestedInput
+  professional?: Prisma.ProfessionalDetailsUpdateOneWithoutUserNestedInput
+  sports?: Prisma.SportsPreferencesUpdateOneWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutAddressInput = {
@@ -595,156 +659,174 @@ export type UserUncheckedUpdateWithoutAddressInput = {
   firstName?: Prisma.StringFieldUpdateOperationsInput | string
   middleName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   lastName?: Prisma.StringFieldUpdateOperationsInput | string
+  countryCode?: Prisma.StringFieldUpdateOperationsInput | string
   mobile?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.StringFieldUpdateOperationsInput | string
+  passwordHash?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  personalDetails?: Prisma.PersonalDetailsUncheckedUpdateOneWithoutUserNestedInput
-  professionalDetails?: Prisma.ProfessionalDetailsUncheckedUpdateOneWithoutUserNestedInput
-  sportsPreferences?: Prisma.SportsPreferencesUncheckedUpdateOneWithoutUserNestedInput
+  personal?: Prisma.PersonalDetailsUncheckedUpdateOneWithoutUserNestedInput
+  professional?: Prisma.ProfessionalDetailsUncheckedUpdateOneWithoutUserNestedInput
+  sports?: Prisma.SportsPreferencesUncheckedUpdateOneWithoutUserNestedInput
 }
 
-export type UserCreateWithoutPersonalDetailsInput = {
+export type UserCreateWithoutPersonalInput = {
   id?: string
   firstName: string
   middleName?: string | null
   lastName: string
+  countryCode: string
   mobile: string
   email: string
+  passwordHash: string
   createdAt?: Date | string
   updatedAt?: Date | string
-  professionalDetails?: Prisma.ProfessionalDetailsCreateNestedOneWithoutUserInput
-  sportsPreferences?: Prisma.SportsPreferencesCreateNestedOneWithoutUserInput
+  professional?: Prisma.ProfessionalDetailsCreateNestedOneWithoutUserInput
+  sports?: Prisma.SportsPreferencesCreateNestedOneWithoutUserInput
   address?: Prisma.AddressCreateNestedOneWithoutUserInput
 }
 
-export type UserUncheckedCreateWithoutPersonalDetailsInput = {
+export type UserUncheckedCreateWithoutPersonalInput = {
   id?: string
   firstName: string
   middleName?: string | null
   lastName: string
+  countryCode: string
   mobile: string
   email: string
+  passwordHash: string
   createdAt?: Date | string
   updatedAt?: Date | string
-  professionalDetails?: Prisma.ProfessionalDetailsUncheckedCreateNestedOneWithoutUserInput
-  sportsPreferences?: Prisma.SportsPreferencesUncheckedCreateNestedOneWithoutUserInput
+  professional?: Prisma.ProfessionalDetailsUncheckedCreateNestedOneWithoutUserInput
+  sports?: Prisma.SportsPreferencesUncheckedCreateNestedOneWithoutUserInput
   address?: Prisma.AddressUncheckedCreateNestedOneWithoutUserInput
 }
 
-export type UserCreateOrConnectWithoutPersonalDetailsInput = {
+export type UserCreateOrConnectWithoutPersonalInput = {
   where: Prisma.UserWhereUniqueInput
-  create: Prisma.XOR<Prisma.UserCreateWithoutPersonalDetailsInput, Prisma.UserUncheckedCreateWithoutPersonalDetailsInput>
+  create: Prisma.XOR<Prisma.UserCreateWithoutPersonalInput, Prisma.UserUncheckedCreateWithoutPersonalInput>
 }
 
-export type UserUpsertWithoutPersonalDetailsInput = {
-  update: Prisma.XOR<Prisma.UserUpdateWithoutPersonalDetailsInput, Prisma.UserUncheckedUpdateWithoutPersonalDetailsInput>
-  create: Prisma.XOR<Prisma.UserCreateWithoutPersonalDetailsInput, Prisma.UserUncheckedCreateWithoutPersonalDetailsInput>
+export type UserUpsertWithoutPersonalInput = {
+  update: Prisma.XOR<Prisma.UserUpdateWithoutPersonalInput, Prisma.UserUncheckedUpdateWithoutPersonalInput>
+  create: Prisma.XOR<Prisma.UserCreateWithoutPersonalInput, Prisma.UserUncheckedCreateWithoutPersonalInput>
   where?: Prisma.UserWhereInput
 }
 
-export type UserUpdateToOneWithWhereWithoutPersonalDetailsInput = {
+export type UserUpdateToOneWithWhereWithoutPersonalInput = {
   where?: Prisma.UserWhereInput
-  data: Prisma.XOR<Prisma.UserUpdateWithoutPersonalDetailsInput, Prisma.UserUncheckedUpdateWithoutPersonalDetailsInput>
+  data: Prisma.XOR<Prisma.UserUpdateWithoutPersonalInput, Prisma.UserUncheckedUpdateWithoutPersonalInput>
 }
 
-export type UserUpdateWithoutPersonalDetailsInput = {
+export type UserUpdateWithoutPersonalInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   firstName?: Prisma.StringFieldUpdateOperationsInput | string
   middleName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   lastName?: Prisma.StringFieldUpdateOperationsInput | string
+  countryCode?: Prisma.StringFieldUpdateOperationsInput | string
   mobile?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.StringFieldUpdateOperationsInput | string
+  passwordHash?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  professionalDetails?: Prisma.ProfessionalDetailsUpdateOneWithoutUserNestedInput
-  sportsPreferences?: Prisma.SportsPreferencesUpdateOneWithoutUserNestedInput
+  professional?: Prisma.ProfessionalDetailsUpdateOneWithoutUserNestedInput
+  sports?: Prisma.SportsPreferencesUpdateOneWithoutUserNestedInput
   address?: Prisma.AddressUpdateOneWithoutUserNestedInput
 }
 
-export type UserUncheckedUpdateWithoutPersonalDetailsInput = {
+export type UserUncheckedUpdateWithoutPersonalInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   firstName?: Prisma.StringFieldUpdateOperationsInput | string
   middleName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   lastName?: Prisma.StringFieldUpdateOperationsInput | string
+  countryCode?: Prisma.StringFieldUpdateOperationsInput | string
   mobile?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.StringFieldUpdateOperationsInput | string
+  passwordHash?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  professionalDetails?: Prisma.ProfessionalDetailsUncheckedUpdateOneWithoutUserNestedInput
-  sportsPreferences?: Prisma.SportsPreferencesUncheckedUpdateOneWithoutUserNestedInput
+  professional?: Prisma.ProfessionalDetailsUncheckedUpdateOneWithoutUserNestedInput
+  sports?: Prisma.SportsPreferencesUncheckedUpdateOneWithoutUserNestedInput
   address?: Prisma.AddressUncheckedUpdateOneWithoutUserNestedInput
 }
 
-export type UserCreateWithoutSportsPreferencesInput = {
+export type UserCreateWithoutSportsInput = {
   id?: string
   firstName: string
   middleName?: string | null
   lastName: string
+  countryCode: string
   mobile: string
   email: string
+  passwordHash: string
   createdAt?: Date | string
   updatedAt?: Date | string
-  personalDetails?: Prisma.PersonalDetailsCreateNestedOneWithoutUserInput
-  professionalDetails?: Prisma.ProfessionalDetailsCreateNestedOneWithoutUserInput
+  personal?: Prisma.PersonalDetailsCreateNestedOneWithoutUserInput
+  professional?: Prisma.ProfessionalDetailsCreateNestedOneWithoutUserInput
   address?: Prisma.AddressCreateNestedOneWithoutUserInput
 }
 
-export type UserUncheckedCreateWithoutSportsPreferencesInput = {
+export type UserUncheckedCreateWithoutSportsInput = {
   id?: string
   firstName: string
   middleName?: string | null
   lastName: string
+  countryCode: string
   mobile: string
   email: string
+  passwordHash: string
   createdAt?: Date | string
   updatedAt?: Date | string
-  personalDetails?: Prisma.PersonalDetailsUncheckedCreateNestedOneWithoutUserInput
-  professionalDetails?: Prisma.ProfessionalDetailsUncheckedCreateNestedOneWithoutUserInput
+  personal?: Prisma.PersonalDetailsUncheckedCreateNestedOneWithoutUserInput
+  professional?: Prisma.ProfessionalDetailsUncheckedCreateNestedOneWithoutUserInput
   address?: Prisma.AddressUncheckedCreateNestedOneWithoutUserInput
 }
 
-export type UserCreateOrConnectWithoutSportsPreferencesInput = {
+export type UserCreateOrConnectWithoutSportsInput = {
   where: Prisma.UserWhereUniqueInput
-  create: Prisma.XOR<Prisma.UserCreateWithoutSportsPreferencesInput, Prisma.UserUncheckedCreateWithoutSportsPreferencesInput>
+  create: Prisma.XOR<Prisma.UserCreateWithoutSportsInput, Prisma.UserUncheckedCreateWithoutSportsInput>
 }
 
-export type UserUpsertWithoutSportsPreferencesInput = {
-  update: Prisma.XOR<Prisma.UserUpdateWithoutSportsPreferencesInput, Prisma.UserUncheckedUpdateWithoutSportsPreferencesInput>
-  create: Prisma.XOR<Prisma.UserCreateWithoutSportsPreferencesInput, Prisma.UserUncheckedCreateWithoutSportsPreferencesInput>
+export type UserUpsertWithoutSportsInput = {
+  update: Prisma.XOR<Prisma.UserUpdateWithoutSportsInput, Prisma.UserUncheckedUpdateWithoutSportsInput>
+  create: Prisma.XOR<Prisma.UserCreateWithoutSportsInput, Prisma.UserUncheckedCreateWithoutSportsInput>
   where?: Prisma.UserWhereInput
 }
 
-export type UserUpdateToOneWithWhereWithoutSportsPreferencesInput = {
+export type UserUpdateToOneWithWhereWithoutSportsInput = {
   where?: Prisma.UserWhereInput
-  data: Prisma.XOR<Prisma.UserUpdateWithoutSportsPreferencesInput, Prisma.UserUncheckedUpdateWithoutSportsPreferencesInput>
+  data: Prisma.XOR<Prisma.UserUpdateWithoutSportsInput, Prisma.UserUncheckedUpdateWithoutSportsInput>
 }
 
-export type UserUpdateWithoutSportsPreferencesInput = {
+export type UserUpdateWithoutSportsInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   firstName?: Prisma.StringFieldUpdateOperationsInput | string
   middleName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   lastName?: Prisma.StringFieldUpdateOperationsInput | string
+  countryCode?: Prisma.StringFieldUpdateOperationsInput | string
   mobile?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.StringFieldUpdateOperationsInput | string
+  passwordHash?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  personalDetails?: Prisma.PersonalDetailsUpdateOneWithoutUserNestedInput
-  professionalDetails?: Prisma.ProfessionalDetailsUpdateOneWithoutUserNestedInput
+  personal?: Prisma.PersonalDetailsUpdateOneWithoutUserNestedInput
+  professional?: Prisma.ProfessionalDetailsUpdateOneWithoutUserNestedInput
   address?: Prisma.AddressUpdateOneWithoutUserNestedInput
 }
 
-export type UserUncheckedUpdateWithoutSportsPreferencesInput = {
+export type UserUncheckedUpdateWithoutSportsInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   firstName?: Prisma.StringFieldUpdateOperationsInput | string
   middleName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   lastName?: Prisma.StringFieldUpdateOperationsInput | string
+  countryCode?: Prisma.StringFieldUpdateOperationsInput | string
   mobile?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.StringFieldUpdateOperationsInput | string
+  passwordHash?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  personalDetails?: Prisma.PersonalDetailsUncheckedUpdateOneWithoutUserNestedInput
-  professionalDetails?: Prisma.ProfessionalDetailsUncheckedUpdateOneWithoutUserNestedInput
+  personal?: Prisma.PersonalDetailsUncheckedUpdateOneWithoutUserNestedInput
+  professional?: Prisma.ProfessionalDetailsUncheckedUpdateOneWithoutUserNestedInput
   address?: Prisma.AddressUncheckedUpdateOneWithoutUserNestedInput
 }
 
@@ -755,13 +837,15 @@ export type UserSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = r
   firstName?: boolean
   middleName?: boolean
   lastName?: boolean
+  countryCode?: boolean
   mobile?: boolean
   email?: boolean
+  passwordHash?: boolean
   createdAt?: boolean
   updatedAt?: boolean
-  personalDetails?: boolean | Prisma.User$personalDetailsArgs<ExtArgs>
-  professionalDetails?: boolean | Prisma.User$professionalDetailsArgs<ExtArgs>
-  sportsPreferences?: boolean | Prisma.User$sportsPreferencesArgs<ExtArgs>
+  personal?: boolean | Prisma.User$personalArgs<ExtArgs>
+  professional?: boolean | Prisma.User$professionalArgs<ExtArgs>
+  sports?: boolean | Prisma.User$sportsArgs<ExtArgs>
   address?: boolean | Prisma.User$addressArgs<ExtArgs>
 }, ExtArgs["result"]["user"]>
 
@@ -770,8 +854,10 @@ export type UserSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensio
   firstName?: boolean
   middleName?: boolean
   lastName?: boolean
+  countryCode?: boolean
   mobile?: boolean
   email?: boolean
+  passwordHash?: boolean
   createdAt?: boolean
   updatedAt?: boolean
 }, ExtArgs["result"]["user"]>
@@ -781,8 +867,10 @@ export type UserSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensio
   firstName?: boolean
   middleName?: boolean
   lastName?: boolean
+  countryCode?: boolean
   mobile?: boolean
   email?: boolean
+  passwordHash?: boolean
   createdAt?: boolean
   updatedAt?: boolean
 }, ExtArgs["result"]["user"]>
@@ -792,17 +880,19 @@ export type UserSelectScalar = {
   firstName?: boolean
   middleName?: boolean
   lastName?: boolean
+  countryCode?: boolean
   mobile?: boolean
   email?: boolean
+  passwordHash?: boolean
   createdAt?: boolean
   updatedAt?: boolean
 }
 
-export type UserOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "firstName" | "middleName" | "lastName" | "mobile" | "email" | "createdAt" | "updatedAt", ExtArgs["result"]["user"]>
+export type UserOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "firstName" | "middleName" | "lastName" | "countryCode" | "mobile" | "email" | "passwordHash" | "createdAt" | "updatedAt", ExtArgs["result"]["user"]>
 export type UserInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  personalDetails?: boolean | Prisma.User$personalDetailsArgs<ExtArgs>
-  professionalDetails?: boolean | Prisma.User$professionalDetailsArgs<ExtArgs>
-  sportsPreferences?: boolean | Prisma.User$sportsPreferencesArgs<ExtArgs>
+  personal?: boolean | Prisma.User$personalArgs<ExtArgs>
+  professional?: boolean | Prisma.User$professionalArgs<ExtArgs>
+  sports?: boolean | Prisma.User$sportsArgs<ExtArgs>
   address?: boolean | Prisma.User$addressArgs<ExtArgs>
 }
 export type UserIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {}
@@ -811,9 +901,9 @@ export type UserIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensi
 export type $UserPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   name: "User"
   objects: {
-    personalDetails: Prisma.$PersonalDetailsPayload<ExtArgs> | null
-    professionalDetails: Prisma.$ProfessionalDetailsPayload<ExtArgs> | null
-    sportsPreferences: Prisma.$SportsPreferencesPayload<ExtArgs> | null
+    personal: Prisma.$PersonalDetailsPayload<ExtArgs> | null
+    professional: Prisma.$ProfessionalDetailsPayload<ExtArgs> | null
+    sports: Prisma.$SportsPreferencesPayload<ExtArgs> | null
     address: Prisma.$AddressPayload<ExtArgs> | null
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
@@ -821,8 +911,10 @@ export type $UserPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs =
     firstName: string
     middleName: string | null
     lastName: string
+    countryCode: string
     mobile: string
     email: string
+    passwordHash: string
     createdAt: Date
     updatedAt: Date
   }, ExtArgs["result"]["user"]>
@@ -1219,9 +1311,9 @@ readonly fields: UserFieldRefs;
  */
 export interface Prisma__UserClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
-  personalDetails<T extends Prisma.User$personalDetailsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$personalDetailsArgs<ExtArgs>>): Prisma.Prisma__PersonalDetailsClient<runtime.Types.Result.GetResult<Prisma.$PersonalDetailsPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
-  professionalDetails<T extends Prisma.User$professionalDetailsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$professionalDetailsArgs<ExtArgs>>): Prisma.Prisma__ProfessionalDetailsClient<runtime.Types.Result.GetResult<Prisma.$ProfessionalDetailsPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
-  sportsPreferences<T extends Prisma.User$sportsPreferencesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$sportsPreferencesArgs<ExtArgs>>): Prisma.Prisma__SportsPreferencesClient<runtime.Types.Result.GetResult<Prisma.$SportsPreferencesPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+  personal<T extends Prisma.User$personalArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$personalArgs<ExtArgs>>): Prisma.Prisma__PersonalDetailsClient<runtime.Types.Result.GetResult<Prisma.$PersonalDetailsPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+  professional<T extends Prisma.User$professionalArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$professionalArgs<ExtArgs>>): Prisma.Prisma__ProfessionalDetailsClient<runtime.Types.Result.GetResult<Prisma.$ProfessionalDetailsPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+  sports<T extends Prisma.User$sportsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$sportsArgs<ExtArgs>>): Prisma.Prisma__SportsPreferencesClient<runtime.Types.Result.GetResult<Prisma.$SportsPreferencesPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   address<T extends Prisma.User$addressArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$addressArgs<ExtArgs>>): Prisma.Prisma__AddressClient<runtime.Types.Result.GetResult<Prisma.$AddressPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
@@ -1256,8 +1348,10 @@ export interface UserFieldRefs {
   readonly firstName: Prisma.FieldRef<"User", 'String'>
   readonly middleName: Prisma.FieldRef<"User", 'String'>
   readonly lastName: Prisma.FieldRef<"User", 'String'>
+  readonly countryCode: Prisma.FieldRef<"User", 'String'>
   readonly mobile: Prisma.FieldRef<"User", 'String'>
   readonly email: Prisma.FieldRef<"User", 'String'>
+  readonly passwordHash: Prisma.FieldRef<"User", 'String'>
   readonly createdAt: Prisma.FieldRef<"User", 'DateTime'>
   readonly updatedAt: Prisma.FieldRef<"User", 'DateTime'>
 }
@@ -1653,9 +1747,9 @@ export type UserDeleteManyArgs<ExtArgs extends runtime.Types.Extensions.Internal
 }
 
 /**
- * User.personalDetails
+ * User.personal
  */
-export type User$personalDetailsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+export type User$personalArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   /**
    * Select specific fields to fetch from the PersonalDetails
    */
@@ -1672,9 +1766,9 @@ export type User$personalDetailsArgs<ExtArgs extends runtime.Types.Extensions.In
 }
 
 /**
- * User.professionalDetails
+ * User.professional
  */
-export type User$professionalDetailsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+export type User$professionalArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   /**
    * Select specific fields to fetch from the ProfessionalDetails
    */
@@ -1691,9 +1785,9 @@ export type User$professionalDetailsArgs<ExtArgs extends runtime.Types.Extension
 }
 
 /**
- * User.sportsPreferences
+ * User.sports
  */
-export type User$sportsPreferencesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+export type User$sportsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   /**
    * Select specific fields to fetch from the SportsPreferences
    */

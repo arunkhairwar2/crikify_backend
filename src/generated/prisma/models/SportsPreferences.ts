@@ -39,12 +39,10 @@ export type SportsPreferencesSumAggregateOutputType = {
 export type SportsPreferencesMinAggregateOutputType = {
   id: string | null
   userId: string | null
-  jerseySize: $Enums.JerseySize | null
+  jerseySize: $Enums.JerseySizeEnum | null
   jerseyName: string | null
   jerseyNumber: number | null
-  trackPantSize: $Enums.JerseySize | null
-  battingStyle: $Enums.BattingStyleEnum | null
-  bowlingStyle: $Enums.BowlingStyleEnum | null
+  trackPantSize: $Enums.TrackPantSizeEnum | null
   shoeSize: number | null
   createdAt: Date | null
   updatedAt: Date | null
@@ -53,12 +51,10 @@ export type SportsPreferencesMinAggregateOutputType = {
 export type SportsPreferencesMaxAggregateOutputType = {
   id: string | null
   userId: string | null
-  jerseySize: $Enums.JerseySize | null
+  jerseySize: $Enums.JerseySizeEnum | null
   jerseyName: string | null
   jerseyNumber: number | null
-  trackPantSize: $Enums.JerseySize | null
-  battingStyle: $Enums.BattingStyleEnum | null
-  bowlingStyle: $Enums.BowlingStyleEnum | null
+  trackPantSize: $Enums.TrackPantSizeEnum | null
   shoeSize: number | null
   createdAt: Date | null
   updatedAt: Date | null
@@ -71,8 +67,6 @@ export type SportsPreferencesCountAggregateOutputType = {
   jerseyName: number
   jerseyNumber: number
   trackPantSize: number
-  battingStyle: number
-  bowlingStyle: number
   shoeSize: number
   createdAt: number
   updatedAt: number
@@ -97,8 +91,6 @@ export type SportsPreferencesMinAggregateInputType = {
   jerseyName?: true
   jerseyNumber?: true
   trackPantSize?: true
-  battingStyle?: true
-  bowlingStyle?: true
   shoeSize?: true
   createdAt?: true
   updatedAt?: true
@@ -111,8 +103,6 @@ export type SportsPreferencesMaxAggregateInputType = {
   jerseyName?: true
   jerseyNumber?: true
   trackPantSize?: true
-  battingStyle?: true
-  bowlingStyle?: true
   shoeSize?: true
   createdAt?: true
   updatedAt?: true
@@ -125,8 +115,6 @@ export type SportsPreferencesCountAggregateInputType = {
   jerseyName?: true
   jerseyNumber?: true
   trackPantSize?: true
-  battingStyle?: true
-  bowlingStyle?: true
   shoeSize?: true
   createdAt?: true
   updatedAt?: true
@@ -222,12 +210,10 @@ export type SportsPreferencesGroupByArgs<ExtArgs extends runtime.Types.Extension
 export type SportsPreferencesGroupByOutputType = {
   id: string
   userId: string
-  jerseySize: $Enums.JerseySize | null
+  jerseySize: $Enums.JerseySizeEnum | null
   jerseyName: string | null
   jerseyNumber: number | null
-  trackPantSize: $Enums.JerseySize | null
-  battingStyle: $Enums.BattingStyleEnum | null
-  bowlingStyle: $Enums.BowlingStyleEnum | null
+  trackPantSize: $Enums.TrackPantSizeEnum | null
   shoeSize: number | null
   createdAt: Date
   updatedAt: Date
@@ -259,12 +245,10 @@ export type SportsPreferencesWhereInput = {
   NOT?: Prisma.SportsPreferencesWhereInput | Prisma.SportsPreferencesWhereInput[]
   id?: Prisma.StringFilter<"SportsPreferences"> | string
   userId?: Prisma.StringFilter<"SportsPreferences"> | string
-  jerseySize?: Prisma.EnumJerseySizeNullableFilter<"SportsPreferences"> | $Enums.JerseySize | null
+  jerseySize?: Prisma.EnumJerseySizeEnumNullableFilter<"SportsPreferences"> | $Enums.JerseySizeEnum | null
   jerseyName?: Prisma.StringNullableFilter<"SportsPreferences"> | string | null
   jerseyNumber?: Prisma.IntNullableFilter<"SportsPreferences"> | number | null
-  trackPantSize?: Prisma.EnumJerseySizeNullableFilter<"SportsPreferences"> | $Enums.JerseySize | null
-  battingStyle?: Prisma.EnumBattingStyleEnumNullableFilter<"SportsPreferences"> | $Enums.BattingStyleEnum | null
-  bowlingStyle?: Prisma.EnumBowlingStyleEnumNullableFilter<"SportsPreferences"> | $Enums.BowlingStyleEnum | null
+  trackPantSize?: Prisma.EnumTrackPantSizeEnumNullableFilter<"SportsPreferences"> | $Enums.TrackPantSizeEnum | null
   shoeSize?: Prisma.IntNullableFilter<"SportsPreferences"> | number | null
   createdAt?: Prisma.DateTimeFilter<"SportsPreferences"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"SportsPreferences"> | Date | string
@@ -278,8 +262,6 @@ export type SportsPreferencesOrderByWithRelationInput = {
   jerseyName?: Prisma.SortOrderInput | Prisma.SortOrder
   jerseyNumber?: Prisma.SortOrderInput | Prisma.SortOrder
   trackPantSize?: Prisma.SortOrderInput | Prisma.SortOrder
-  battingStyle?: Prisma.SortOrderInput | Prisma.SortOrder
-  bowlingStyle?: Prisma.SortOrderInput | Prisma.SortOrder
   shoeSize?: Prisma.SortOrderInput | Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
@@ -292,12 +274,10 @@ export type SportsPreferencesWhereUniqueInput = Prisma.AtLeast<{
   AND?: Prisma.SportsPreferencesWhereInput | Prisma.SportsPreferencesWhereInput[]
   OR?: Prisma.SportsPreferencesWhereInput[]
   NOT?: Prisma.SportsPreferencesWhereInput | Prisma.SportsPreferencesWhereInput[]
-  jerseySize?: Prisma.EnumJerseySizeNullableFilter<"SportsPreferences"> | $Enums.JerseySize | null
+  jerseySize?: Prisma.EnumJerseySizeEnumNullableFilter<"SportsPreferences"> | $Enums.JerseySizeEnum | null
   jerseyName?: Prisma.StringNullableFilter<"SportsPreferences"> | string | null
   jerseyNumber?: Prisma.IntNullableFilter<"SportsPreferences"> | number | null
-  trackPantSize?: Prisma.EnumJerseySizeNullableFilter<"SportsPreferences"> | $Enums.JerseySize | null
-  battingStyle?: Prisma.EnumBattingStyleEnumNullableFilter<"SportsPreferences"> | $Enums.BattingStyleEnum | null
-  bowlingStyle?: Prisma.EnumBowlingStyleEnumNullableFilter<"SportsPreferences"> | $Enums.BowlingStyleEnum | null
+  trackPantSize?: Prisma.EnumTrackPantSizeEnumNullableFilter<"SportsPreferences"> | $Enums.TrackPantSizeEnum | null
   shoeSize?: Prisma.IntNullableFilter<"SportsPreferences"> | number | null
   createdAt?: Prisma.DateTimeFilter<"SportsPreferences"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"SportsPreferences"> | Date | string
@@ -311,8 +291,6 @@ export type SportsPreferencesOrderByWithAggregationInput = {
   jerseyName?: Prisma.SortOrderInput | Prisma.SortOrder
   jerseyNumber?: Prisma.SortOrderInput | Prisma.SortOrder
   trackPantSize?: Prisma.SortOrderInput | Prisma.SortOrder
-  battingStyle?: Prisma.SortOrderInput | Prisma.SortOrder
-  bowlingStyle?: Prisma.SortOrderInput | Prisma.SortOrder
   shoeSize?: Prisma.SortOrderInput | Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
@@ -329,12 +307,10 @@ export type SportsPreferencesScalarWhereWithAggregatesInput = {
   NOT?: Prisma.SportsPreferencesScalarWhereWithAggregatesInput | Prisma.SportsPreferencesScalarWhereWithAggregatesInput[]
   id?: Prisma.StringWithAggregatesFilter<"SportsPreferences"> | string
   userId?: Prisma.StringWithAggregatesFilter<"SportsPreferences"> | string
-  jerseySize?: Prisma.EnumJerseySizeNullableWithAggregatesFilter<"SportsPreferences"> | $Enums.JerseySize | null
+  jerseySize?: Prisma.EnumJerseySizeEnumNullableWithAggregatesFilter<"SportsPreferences"> | $Enums.JerseySizeEnum | null
   jerseyName?: Prisma.StringNullableWithAggregatesFilter<"SportsPreferences"> | string | null
   jerseyNumber?: Prisma.IntNullableWithAggregatesFilter<"SportsPreferences"> | number | null
-  trackPantSize?: Prisma.EnumJerseySizeNullableWithAggregatesFilter<"SportsPreferences"> | $Enums.JerseySize | null
-  battingStyle?: Prisma.EnumBattingStyleEnumNullableWithAggregatesFilter<"SportsPreferences"> | $Enums.BattingStyleEnum | null
-  bowlingStyle?: Prisma.EnumBowlingStyleEnumNullableWithAggregatesFilter<"SportsPreferences"> | $Enums.BowlingStyleEnum | null
+  trackPantSize?: Prisma.EnumTrackPantSizeEnumNullableWithAggregatesFilter<"SportsPreferences"> | $Enums.TrackPantSizeEnum | null
   shoeSize?: Prisma.IntNullableWithAggregatesFilter<"SportsPreferences"> | number | null
   createdAt?: Prisma.DateTimeWithAggregatesFilter<"SportsPreferences"> | Date | string
   updatedAt?: Prisma.DateTimeWithAggregatesFilter<"SportsPreferences"> | Date | string
@@ -342,27 +318,23 @@ export type SportsPreferencesScalarWhereWithAggregatesInput = {
 
 export type SportsPreferencesCreateInput = {
   id?: string
-  jerseySize?: $Enums.JerseySize | null
+  jerseySize?: $Enums.JerseySizeEnum | null
   jerseyName?: string | null
   jerseyNumber?: number | null
-  trackPantSize?: $Enums.JerseySize | null
-  battingStyle?: $Enums.BattingStyleEnum | null
-  bowlingStyle?: $Enums.BowlingStyleEnum | null
+  trackPantSize?: $Enums.TrackPantSizeEnum | null
   shoeSize?: number | null
   createdAt?: Date | string
   updatedAt?: Date | string
-  user: Prisma.UserCreateNestedOneWithoutSportsPreferencesInput
+  user: Prisma.UserCreateNestedOneWithoutSportsInput
 }
 
 export type SportsPreferencesUncheckedCreateInput = {
   id?: string
   userId: string
-  jerseySize?: $Enums.JerseySize | null
+  jerseySize?: $Enums.JerseySizeEnum | null
   jerseyName?: string | null
   jerseyNumber?: number | null
-  trackPantSize?: $Enums.JerseySize | null
-  battingStyle?: $Enums.BattingStyleEnum | null
-  bowlingStyle?: $Enums.BowlingStyleEnum | null
+  trackPantSize?: $Enums.TrackPantSizeEnum | null
   shoeSize?: number | null
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -370,27 +342,23 @@ export type SportsPreferencesUncheckedCreateInput = {
 
 export type SportsPreferencesUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
-  jerseySize?: Prisma.NullableEnumJerseySizeFieldUpdateOperationsInput | $Enums.JerseySize | null
+  jerseySize?: Prisma.NullableEnumJerseySizeEnumFieldUpdateOperationsInput | $Enums.JerseySizeEnum | null
   jerseyName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   jerseyNumber?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  trackPantSize?: Prisma.NullableEnumJerseySizeFieldUpdateOperationsInput | $Enums.JerseySize | null
-  battingStyle?: Prisma.NullableEnumBattingStyleEnumFieldUpdateOperationsInput | $Enums.BattingStyleEnum | null
-  bowlingStyle?: Prisma.NullableEnumBowlingStyleEnumFieldUpdateOperationsInput | $Enums.BowlingStyleEnum | null
+  trackPantSize?: Prisma.NullableEnumTrackPantSizeEnumFieldUpdateOperationsInput | $Enums.TrackPantSizeEnum | null
   shoeSize?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  user?: Prisma.UserUpdateOneRequiredWithoutSportsPreferencesNestedInput
+  user?: Prisma.UserUpdateOneRequiredWithoutSportsNestedInput
 }
 
 export type SportsPreferencesUncheckedUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   userId?: Prisma.StringFieldUpdateOperationsInput | string
-  jerseySize?: Prisma.NullableEnumJerseySizeFieldUpdateOperationsInput | $Enums.JerseySize | null
+  jerseySize?: Prisma.NullableEnumJerseySizeEnumFieldUpdateOperationsInput | $Enums.JerseySizeEnum | null
   jerseyName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   jerseyNumber?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  trackPantSize?: Prisma.NullableEnumJerseySizeFieldUpdateOperationsInput | $Enums.JerseySize | null
-  battingStyle?: Prisma.NullableEnumBattingStyleEnumFieldUpdateOperationsInput | $Enums.BattingStyleEnum | null
-  bowlingStyle?: Prisma.NullableEnumBowlingStyleEnumFieldUpdateOperationsInput | $Enums.BowlingStyleEnum | null
+  trackPantSize?: Prisma.NullableEnumTrackPantSizeEnumFieldUpdateOperationsInput | $Enums.TrackPantSizeEnum | null
   shoeSize?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -399,12 +367,10 @@ export type SportsPreferencesUncheckedUpdateInput = {
 export type SportsPreferencesCreateManyInput = {
   id?: string
   userId: string
-  jerseySize?: $Enums.JerseySize | null
+  jerseySize?: $Enums.JerseySizeEnum | null
   jerseyName?: string | null
   jerseyNumber?: number | null
-  trackPantSize?: $Enums.JerseySize | null
-  battingStyle?: $Enums.BattingStyleEnum | null
-  bowlingStyle?: $Enums.BowlingStyleEnum | null
+  trackPantSize?: $Enums.TrackPantSizeEnum | null
   shoeSize?: number | null
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -412,12 +378,10 @@ export type SportsPreferencesCreateManyInput = {
 
 export type SportsPreferencesUpdateManyMutationInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
-  jerseySize?: Prisma.NullableEnumJerseySizeFieldUpdateOperationsInput | $Enums.JerseySize | null
+  jerseySize?: Prisma.NullableEnumJerseySizeEnumFieldUpdateOperationsInput | $Enums.JerseySizeEnum | null
   jerseyName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   jerseyNumber?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  trackPantSize?: Prisma.NullableEnumJerseySizeFieldUpdateOperationsInput | $Enums.JerseySize | null
-  battingStyle?: Prisma.NullableEnumBattingStyleEnumFieldUpdateOperationsInput | $Enums.BattingStyleEnum | null
-  bowlingStyle?: Prisma.NullableEnumBowlingStyleEnumFieldUpdateOperationsInput | $Enums.BowlingStyleEnum | null
+  trackPantSize?: Prisma.NullableEnumTrackPantSizeEnumFieldUpdateOperationsInput | $Enums.TrackPantSizeEnum | null
   shoeSize?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -426,12 +390,10 @@ export type SportsPreferencesUpdateManyMutationInput = {
 export type SportsPreferencesUncheckedUpdateManyInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   userId?: Prisma.StringFieldUpdateOperationsInput | string
-  jerseySize?: Prisma.NullableEnumJerseySizeFieldUpdateOperationsInput | $Enums.JerseySize | null
+  jerseySize?: Prisma.NullableEnumJerseySizeEnumFieldUpdateOperationsInput | $Enums.JerseySizeEnum | null
   jerseyName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   jerseyNumber?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  trackPantSize?: Prisma.NullableEnumJerseySizeFieldUpdateOperationsInput | $Enums.JerseySize | null
-  battingStyle?: Prisma.NullableEnumBattingStyleEnumFieldUpdateOperationsInput | $Enums.BattingStyleEnum | null
-  bowlingStyle?: Prisma.NullableEnumBowlingStyleEnumFieldUpdateOperationsInput | $Enums.BowlingStyleEnum | null
+  trackPantSize?: Prisma.NullableEnumTrackPantSizeEnumFieldUpdateOperationsInput | $Enums.TrackPantSizeEnum | null
   shoeSize?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -444,8 +406,6 @@ export type SportsPreferencesCountOrderByAggregateInput = {
   jerseyName?: Prisma.SortOrder
   jerseyNumber?: Prisma.SortOrder
   trackPantSize?: Prisma.SortOrder
-  battingStyle?: Prisma.SortOrder
-  bowlingStyle?: Prisma.SortOrder
   shoeSize?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
@@ -463,8 +423,6 @@ export type SportsPreferencesMaxOrderByAggregateInput = {
   jerseyName?: Prisma.SortOrder
   jerseyNumber?: Prisma.SortOrder
   trackPantSize?: Prisma.SortOrder
-  battingStyle?: Prisma.SortOrder
-  bowlingStyle?: Prisma.SortOrder
   shoeSize?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
@@ -477,8 +435,6 @@ export type SportsPreferencesMinOrderByAggregateInput = {
   jerseyName?: Prisma.SortOrder
   jerseyNumber?: Prisma.SortOrder
   trackPantSize?: Prisma.SortOrder
-  battingStyle?: Prisma.SortOrder
-  bowlingStyle?: Prisma.SortOrder
   shoeSize?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
@@ -494,8 +450,8 @@ export type SportsPreferencesNullableScalarRelationFilter = {
   isNot?: Prisma.SportsPreferencesWhereInput | null
 }
 
-export type NullableEnumJerseySizeFieldUpdateOperationsInput = {
-  set?: $Enums.JerseySize | null
+export type NullableEnumJerseySizeEnumFieldUpdateOperationsInput = {
+  set?: $Enums.JerseySizeEnum | null
 }
 
 export type NullableIntFieldUpdateOperationsInput = {
@@ -506,12 +462,8 @@ export type NullableIntFieldUpdateOperationsInput = {
   divide?: number
 }
 
-export type NullableEnumBattingStyleEnumFieldUpdateOperationsInput = {
-  set?: $Enums.BattingStyleEnum | null
-}
-
-export type NullableEnumBowlingStyleEnumFieldUpdateOperationsInput = {
-  set?: $Enums.BowlingStyleEnum | null
+export type NullableEnumTrackPantSizeEnumFieldUpdateOperationsInput = {
+  set?: $Enums.TrackPantSizeEnum | null
 }
 
 export type SportsPreferencesCreateNestedOneWithoutUserInput = {
@@ -548,12 +500,10 @@ export type SportsPreferencesUncheckedUpdateOneWithoutUserNestedInput = {
 
 export type SportsPreferencesCreateWithoutUserInput = {
   id?: string
-  jerseySize?: $Enums.JerseySize | null
+  jerseySize?: $Enums.JerseySizeEnum | null
   jerseyName?: string | null
   jerseyNumber?: number | null
-  trackPantSize?: $Enums.JerseySize | null
-  battingStyle?: $Enums.BattingStyleEnum | null
-  bowlingStyle?: $Enums.BowlingStyleEnum | null
+  trackPantSize?: $Enums.TrackPantSizeEnum | null
   shoeSize?: number | null
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -561,12 +511,10 @@ export type SportsPreferencesCreateWithoutUserInput = {
 
 export type SportsPreferencesUncheckedCreateWithoutUserInput = {
   id?: string
-  jerseySize?: $Enums.JerseySize | null
+  jerseySize?: $Enums.JerseySizeEnum | null
   jerseyName?: string | null
   jerseyNumber?: number | null
-  trackPantSize?: $Enums.JerseySize | null
-  battingStyle?: $Enums.BattingStyleEnum | null
-  bowlingStyle?: $Enums.BowlingStyleEnum | null
+  trackPantSize?: $Enums.TrackPantSizeEnum | null
   shoeSize?: number | null
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -590,12 +538,10 @@ export type SportsPreferencesUpdateToOneWithWhereWithoutUserInput = {
 
 export type SportsPreferencesUpdateWithoutUserInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
-  jerseySize?: Prisma.NullableEnumJerseySizeFieldUpdateOperationsInput | $Enums.JerseySize | null
+  jerseySize?: Prisma.NullableEnumJerseySizeEnumFieldUpdateOperationsInput | $Enums.JerseySizeEnum | null
   jerseyName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   jerseyNumber?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  trackPantSize?: Prisma.NullableEnumJerseySizeFieldUpdateOperationsInput | $Enums.JerseySize | null
-  battingStyle?: Prisma.NullableEnumBattingStyleEnumFieldUpdateOperationsInput | $Enums.BattingStyleEnum | null
-  bowlingStyle?: Prisma.NullableEnumBowlingStyleEnumFieldUpdateOperationsInput | $Enums.BowlingStyleEnum | null
+  trackPantSize?: Prisma.NullableEnumTrackPantSizeEnumFieldUpdateOperationsInput | $Enums.TrackPantSizeEnum | null
   shoeSize?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -603,12 +549,10 @@ export type SportsPreferencesUpdateWithoutUserInput = {
 
 export type SportsPreferencesUncheckedUpdateWithoutUserInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
-  jerseySize?: Prisma.NullableEnumJerseySizeFieldUpdateOperationsInput | $Enums.JerseySize | null
+  jerseySize?: Prisma.NullableEnumJerseySizeEnumFieldUpdateOperationsInput | $Enums.JerseySizeEnum | null
   jerseyName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   jerseyNumber?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  trackPantSize?: Prisma.NullableEnumJerseySizeFieldUpdateOperationsInput | $Enums.JerseySize | null
-  battingStyle?: Prisma.NullableEnumBattingStyleEnumFieldUpdateOperationsInput | $Enums.BattingStyleEnum | null
-  bowlingStyle?: Prisma.NullableEnumBowlingStyleEnumFieldUpdateOperationsInput | $Enums.BowlingStyleEnum | null
+  trackPantSize?: Prisma.NullableEnumTrackPantSizeEnumFieldUpdateOperationsInput | $Enums.TrackPantSizeEnum | null
   shoeSize?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -623,8 +567,6 @@ export type SportsPreferencesSelect<ExtArgs extends runtime.Types.Extensions.Int
   jerseyName?: boolean
   jerseyNumber?: boolean
   trackPantSize?: boolean
-  battingStyle?: boolean
-  bowlingStyle?: boolean
   shoeSize?: boolean
   createdAt?: boolean
   updatedAt?: boolean
@@ -638,8 +580,6 @@ export type SportsPreferencesSelectCreateManyAndReturn<ExtArgs extends runtime.T
   jerseyName?: boolean
   jerseyNumber?: boolean
   trackPantSize?: boolean
-  battingStyle?: boolean
-  bowlingStyle?: boolean
   shoeSize?: boolean
   createdAt?: boolean
   updatedAt?: boolean
@@ -653,8 +593,6 @@ export type SportsPreferencesSelectUpdateManyAndReturn<ExtArgs extends runtime.T
   jerseyName?: boolean
   jerseyNumber?: boolean
   trackPantSize?: boolean
-  battingStyle?: boolean
-  bowlingStyle?: boolean
   shoeSize?: boolean
   createdAt?: boolean
   updatedAt?: boolean
@@ -668,14 +606,12 @@ export type SportsPreferencesSelectScalar = {
   jerseyName?: boolean
   jerseyNumber?: boolean
   trackPantSize?: boolean
-  battingStyle?: boolean
-  bowlingStyle?: boolean
   shoeSize?: boolean
   createdAt?: boolean
   updatedAt?: boolean
 }
 
-export type SportsPreferencesOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "userId" | "jerseySize" | "jerseyName" | "jerseyNumber" | "trackPantSize" | "battingStyle" | "bowlingStyle" | "shoeSize" | "createdAt" | "updatedAt", ExtArgs["result"]["sportsPreferences"]>
+export type SportsPreferencesOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "userId" | "jerseySize" | "jerseyName" | "jerseyNumber" | "trackPantSize" | "shoeSize" | "createdAt" | "updatedAt", ExtArgs["result"]["sportsPreferences"]>
 export type SportsPreferencesInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
 }
@@ -694,12 +630,10 @@ export type $SportsPreferencesPayload<ExtArgs extends runtime.Types.Extensions.I
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
     userId: string
-    jerseySize: $Enums.JerseySize | null
+    jerseySize: $Enums.JerseySizeEnum | null
     jerseyName: string | null
     jerseyNumber: number | null
-    trackPantSize: $Enums.JerseySize | null
-    battingStyle: $Enums.BattingStyleEnum | null
-    bowlingStyle: $Enums.BowlingStyleEnum | null
+    trackPantSize: $Enums.TrackPantSizeEnum | null
     shoeSize: number | null
     createdAt: Date
     updatedAt: Date
@@ -1129,12 +1063,10 @@ export interface Prisma__SportsPreferencesClient<T, Null = never, ExtArgs extend
 export interface SportsPreferencesFieldRefs {
   readonly id: Prisma.FieldRef<"SportsPreferences", 'String'>
   readonly userId: Prisma.FieldRef<"SportsPreferences", 'String'>
-  readonly jerseySize: Prisma.FieldRef<"SportsPreferences", 'JerseySize'>
+  readonly jerseySize: Prisma.FieldRef<"SportsPreferences", 'JerseySizeEnum'>
   readonly jerseyName: Prisma.FieldRef<"SportsPreferences", 'String'>
   readonly jerseyNumber: Prisma.FieldRef<"SportsPreferences", 'Int'>
-  readonly trackPantSize: Prisma.FieldRef<"SportsPreferences", 'JerseySize'>
-  readonly battingStyle: Prisma.FieldRef<"SportsPreferences", 'BattingStyleEnum'>
-  readonly bowlingStyle: Prisma.FieldRef<"SportsPreferences", 'BowlingStyleEnum'>
+  readonly trackPantSize: Prisma.FieldRef<"SportsPreferences", 'TrackPantSizeEnum'>
   readonly shoeSize: Prisma.FieldRef<"SportsPreferences", 'Int'>
   readonly createdAt: Prisma.FieldRef<"SportsPreferences", 'DateTime'>
   readonly updatedAt: Prisma.FieldRef<"SportsPreferences", 'DateTime'>

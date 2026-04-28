@@ -9,19 +9,6 @@
 * 🟢 You can import this file directly.
 */
 
-export const JerseySize = {
-  XS: 'XS',
-  S: 'S',
-  M: 'M',
-  L: 'L',
-  XL: 'XL',
-  XXL: 'XXL',
-  XXXL: 'XXXL'
-} as const
-
-export type JerseySize = (typeof JerseySize)[keyof typeof JerseySize]
-
-
 export const GenderEnum = {
   MALE: 'MALE',
   FEMALE: 'FEMALE',
@@ -102,3 +89,26 @@ export const BowlingStyleEnum = {
 } as const
 
 export type BowlingStyleEnum = (typeof BowlingStyleEnum)[keyof typeof BowlingStyleEnum]
+
+
+export const TrackPantSizeEnum = {
+  XS: 'XS',
+  S: 'S',
+  M: 'M',
+  L: 'L',
+  XL: 'XL',
+  XXL: 'XXL',
+  XXXL: 'XXXL'
+} as const
+
+export type TrackPantSizeEnum = (typeof TrackPantSizeEnum)[keyof typeof TrackPantSizeEnum]
+
+
+export const PlayerRoleEnum = {
+  BATSAMN: 'BATSAMN',
+  BOWLER: 'BOWLER',
+  WICKET_KEEPER: 'WICKET_KEEPER',
+  ALL_ROUNDER: 'ALL_ROUNDER'
+} as const
+
+export type PlayerRoleEnum = (typeof PlayerRoleEnum)[keyof typeof PlayerRoleEnum]

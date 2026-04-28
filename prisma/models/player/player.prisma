@@ -1,0 +1,28 @@
+// model PlayerProfile {
+//   id                     String   @id @default(uuid())
+
+//   userId                 String   @unique
+//   user                   User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+//   sportsPreferenceId     String?
+//   sportsPreference       SportsPreferences? @relation(fields: [sportsPreferenceId], references: [id])
+
+//   personalDetailsId      String?
+//   personalDetails        PersonalDetails? @relation(fields: [personalDetailsId], references: [id])
+
+//   professionalDetailsId  String?
+//   professionalDetails    ProfessionalDetails? @relation(fields: [professionalDetailsId], references: [id])
+
+//   isActive               Boolean  @default(true)
+
+//   createdAt              DateTime @default(now())
+//   updatedAt              DateTime @updatedAt
+
+//   teamMemberships        TeamPlayer[]
+//   tournamentEntries      TournamentPlayer[]
+//   matchParticipations    MatchPlayer[]
+
+//   stats                  PlayerCareerStats?
+
+//   @@map("player_profiles")
+// }

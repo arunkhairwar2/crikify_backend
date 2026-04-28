@@ -13,16 +13,6 @@
 //   DEACTIVATED
 // }
 
-enum JerseySize {
-    XS
-    S
-    M
-    L
-    XL
-    XXL
-    XXXL
-}
-
 enum GenderEnum {
     MALE
     FEMALE
@@ -82,4 +72,21 @@ enum BowlingStyleEnum {
     LEFT_ARM_LEG_SPIN
     RIGHT_HAND_FAST
     LEFT_HAND_FAST
+}
+
+enum TrackPantSizeEnum {
+    XS
+    S
+    M
+    L
+    XL
+    XXL
+    XXXL
+}
+
+enum PlayerRoleEnum {
+    BATSAMN
+    BOWLER
+    WICKET_KEEPER
+    ALL_ROUNDER
 }

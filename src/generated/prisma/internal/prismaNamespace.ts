@@ -849,6 +849,7 @@ export type AddressScalarFieldEnum = (typeof AddressScalarFieldEnum)[keyof typeo
 export const PersonalDetailsScalarFieldEnum = {
   id: 'id',
   userId: 'userId',
+  isAdultConfirmed: 'isAdultConfirmed',
   gender: 'gender',
   dob: 'dob',
   nickname: 'nickname',
@@ -869,8 +870,6 @@ export const SportsPreferencesScalarFieldEnum = {
   jerseyName: 'jerseyName',
   jerseyNumber: 'jerseyNumber',
   trackPantSize: 'trackPantSize',
-  battingStyle: 'battingStyle',
-  bowlingStyle: 'bowlingStyle',
   shoeSize: 'shoeSize',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
@@ -884,8 +883,10 @@ export const UserScalarFieldEnum = {
   firstName: 'firstName',
   middleName: 'middleName',
   lastName: 'lastName',
+  countryCode: 'countryCode',
   mobile: 'mobile',
   email: 'email',
+  passwordHash: 'passwordHash',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
 } as const
@@ -966,6 +967,13 @@ export type ListDateTimeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaM
 
 
 /**
+ * Reference to a field of type 'Boolean'
+ */
+export type BooleanFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Boolean'>
+    
+
+
+/**
  * Reference to a field of type 'GenderEnum'
  */
 export type EnumGenderEnumFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'GenderEnum'>
@@ -1008,16 +1016,16 @@ export type ListEnumFoodPreferenceEnumFieldRefInput<$PrismaModel> = FieldRefInpu
 
 
 /**
- * Reference to a field of type 'JerseySize'
+ * Reference to a field of type 'JerseySizeEnum'
  */
-export type EnumJerseySizeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'JerseySize'>
+export type EnumJerseySizeEnumFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'JerseySizeEnum'>
     
 
 
 /**
- * Reference to a field of type 'JerseySize[]'
+ * Reference to a field of type 'JerseySizeEnum[]'
  */
-export type ListEnumJerseySizeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'JerseySize[]'>
+export type ListEnumJerseySizeEnumFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'JerseySizeEnum[]'>
     
 
 
@@ -1036,30 +1044,16 @@ export type ListIntFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel,
 
 
 /**
- * Reference to a field of type 'BattingStyleEnum'
+ * Reference to a field of type 'TrackPantSizeEnum'
  */
-export type EnumBattingStyleEnumFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'BattingStyleEnum'>
+export type EnumTrackPantSizeEnumFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'TrackPantSizeEnum'>
     
 
 
 /**
- * Reference to a field of type 'BattingStyleEnum[]'
+ * Reference to a field of type 'TrackPantSizeEnum[]'
  */
-export type ListEnumBattingStyleEnumFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'BattingStyleEnum[]'>
-    
-
-
-/**
- * Reference to a field of type 'BowlingStyleEnum'
- */
-export type EnumBowlingStyleEnumFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'BowlingStyleEnum'>
-    
-
-
-/**
- * Reference to a field of type 'BowlingStyleEnum[]'
- */
-export type ListEnumBowlingStyleEnumFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'BowlingStyleEnum[]'>
+export type ListEnumTrackPantSizeEnumFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'TrackPantSizeEnum[]'>
     
 
 

@@ -106,6 +106,7 @@ export type AddressScalarFieldEnum = (typeof AddressScalarFieldEnum)[keyof typeo
 export const PersonalDetailsScalarFieldEnum = {
   id: 'id',
   userId: 'userId',
+  isAdultConfirmed: 'isAdultConfirmed',
   gender: 'gender',
   dob: 'dob',
   nickname: 'nickname',
@@ -126,8 +127,6 @@ export const SportsPreferencesScalarFieldEnum = {
   jerseyName: 'jerseyName',
   jerseyNumber: 'jerseyNumber',
   trackPantSize: 'trackPantSize',
-  battingStyle: 'battingStyle',
-  bowlingStyle: 'bowlingStyle',
   shoeSize: 'shoeSize',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
@@ -141,8 +140,10 @@ export const UserScalarFieldEnum = {
   firstName: 'firstName',
   middleName: 'middleName',
   lastName: 'lastName',
+  countryCode: 'countryCode',
   mobile: 'mobile',
   email: 'email',
+  passwordHash: 'passwordHash',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
 } as const
