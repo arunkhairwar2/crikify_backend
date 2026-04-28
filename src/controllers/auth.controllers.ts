@@ -35,7 +35,7 @@ class AuthControllers {
     await authServices.resendOtp(countryCode, mobile);
     return res.status(HttpStatus.OK).json({
       success: true,
-      message: "OTP resent successfully",
+      message: "OTP resent successfully to the registered mobile number",
     });
   };
 

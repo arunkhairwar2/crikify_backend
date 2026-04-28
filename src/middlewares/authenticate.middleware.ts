@@ -1,5 +1,6 @@
 import type { NextFunction, Request, Response } from "express";
-import jwt from "jsonwebtoken";
+import jwt, { type JwtPayload } from "jsonwebtoken";
+import userRepository from "../repositories/user.repository.ts";
 import { HttpStatus } from "../types/statusCode.ts";
 import { ApiError } from "../utils/ApiError.ts";
 
@@ -38,7 +39,7 @@ function isPublicRoute(req: Request): boolean {
  * - Attaches the decoded payload to `req.user` for downstream handlers.
  * - Throws 401 ApiError on missing / invalid / expired tokens.
  */
-export const authenticate = (
+export const authenticate = async (
   req: Request,
   _res: Response,
   next: NextFunction,
@@ -48,13 +49,12 @@ export const authenticate = (
     return next();
   }
 
-  const token = req.cookies?.accessToken;
+  const token =
+    req.cookies?.accessToken ||
+    req.header("Authorization")?.replace(/^Bearer\s+/, "");
 
   if (!token) {
-    throw new ApiError(
-      HttpStatus.UNAUTHORIZED,
-      "Authentication required — no token provided",
-    );
+    throw new ApiError(HttpStatus.UNAUTHORIZED, "Authentication required");
   }
 
   const secret = process.env.JWT_SECRET;
@@ -66,9 +66,17 @@ export const authenticate = (
   }
 
   try {
-    const decoded = jwt.verify(token, secret);
+    const decoded = jwt.verify(token, secret) as JwtPayload;
     // Attach decoded user payload so controllers can access it
-    (req as any).user = decoded;
+    const user = await userRepository.findById(decoded.id);
+
+    if (!user) {
+      throw new ApiError(
+        HttpStatus.UNAUTHORIZED,
+        "Invalid authentication token",
+      );
+    }
+    req.user = user;
     next();
   } catch (err: any) {
     if (err.name === "TokenExpiredError") {
