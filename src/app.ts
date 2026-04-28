@@ -3,8 +3,8 @@ import cors from "cors";
 import express from "express";
 import helmet from "helmet";
 import morgan from "morgan";
-import { authenticate } from "./middlewares/authenticate.ts";
-import { errorHandler } from "./middlewares/errorHandler.ts";
+import { authenticate } from "./middlewares/authenticate.middleware.ts";
+import { globalErrorHandler } from "./middlewares/globalErrorHandler.middleware.ts";
 import { notFound } from "./middlewares/notFound.ts";
 import router from "./routes/index.ts";
 import { HttpStatus } from "./types/statusCode.ts";
@@ -57,6 +57,6 @@ app.use("/api/v1", router);
 
 // --------------- Error Handling ---------------
 app.use(notFound);
-app.use(errorHandler);
+app.use(globalErrorHandler);
 
 export default app;
