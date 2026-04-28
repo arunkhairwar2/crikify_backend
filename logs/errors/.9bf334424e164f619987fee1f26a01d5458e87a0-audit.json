@@ -1,0 +1,15 @@
+{
+    "keep": {
+        "days": true,
+        "amount": 14
+    },
+    "auditLog": "C:\\practice_projects\\crikify_back\\logs\\errors\\.9bf334424e164f619987fee1f26a01d5458e87a0-audit.json",
+    "files": [
+        {
+            "date": 1777370448432,
+            "name": "C:\\practice_projects\\crikify_back\\logs\\errors\\rejections-2026-04-28.log",
+            "hash": "bd46a1a0eb5ec8a4186dec541ff56835367f3faf363f6dd55fa5f67fad4b78df"
+        }
+    ],
+    "hashType": "sha256"
+}

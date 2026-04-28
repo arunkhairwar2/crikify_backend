@@ -2,6 +2,7 @@ import type { Request, Response, NextFunction } from "express";
 import { ZodError } from "zod";
 import { ApiError } from "../utils/ApiError.ts";
 import { HttpStatus } from "../types/statusCode.ts";
+import { logger, maskSensitiveData } from "../utils/logger.ts";
 
 /**
  * Global error handling middleware.
@@ -14,10 +15,22 @@ import { HttpStatus } from "../types/statusCode.ts";
  */
 export const globalErrorHandler = (
   err: Error,
-  _req: Request,
+  req: Request,
   res: Response,
   _next: NextFunction,
 ) => {
+  // Only log as 'error' if it's a 5xx or unhandled.
+  const isClientError =
+    (err instanceof ApiError && err.statusCode < 500) ||
+    err instanceof ZodError ||
+    err instanceof SyntaxError;
+
+  if (isClientError) {
+    logger.warn(`[${req.originalUrl}] Client Error: ${err.message}`);
+  } else {
+    logger.error(`[${req.originalUrl}] Server Error: ${err.message}`);
+  }
+
   // Handle our custom ApiError
   if (err instanceof ApiError) {
     res.status(err.statusCode).json({
@@ -53,7 +66,6 @@ export const globalErrorHandler = (
   }
 
   // Unknown / unexpected errors
-  console.error("Unhandled error:", err);
   res.status(HttpStatus.INTERNAL_SERVER_ERROR).json({
     success: false,
     message: "Internal server error",

@@ -20,6 +20,17 @@ authRoutes.post(
   validate(ResendOtpSchema),
   authController.resendOtp,
 );
+
+
+
+
+
+
+
+
+
+
+
 //  // take mobile number as query param.
 // router.post("/login", login);
 // router.post("/verify-otp", verifyOtp);

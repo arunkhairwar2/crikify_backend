@@ -2,7 +2,7 @@ import cookieParser from "cookie-parser";
 import cors from "cors";
 import express from "express";
 import helmet from "helmet";
-import morgan from "morgan";
+import { requestLogger } from "./middlewares/requestLogger.ts";
 import { authenticate } from "./middlewares/authenticate.middleware.ts";
 import { globalErrorHandler } from "./middlewares/globalErrorHandler.middleware.ts";
 import { notFound } from "./middlewares/notFound.ts";
@@ -13,7 +13,7 @@ import { ApiError } from "./utils/ApiError.ts";
 const app = express();
 
 // --------------- Security Headers ---------------
-app.use(helmet());
+app.use((helmet as any)());
 
 // --------------- CORS with specific origin ---------------
 const allowedOrigins = (process.env.CORS_ORIGIN ?? "")
@@ -46,7 +46,7 @@ app.use(
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
-app.use(morgan("dev"));
+app.use(requestLogger);
 
 // --------------- Auth middleware (skips public routes) ---------------
 app.use(authenticate);
