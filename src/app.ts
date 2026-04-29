@@ -16,7 +16,7 @@ const app = express();
 app.use((helmet as any)());
 
 // --------------- CORS with specific origin ---------------
-const allowedOrigins = (process.env.CORS_ORIGIN ?? "")
+const allowedOrigins = (process.env.CORS_ALLOWED_ORIGINS ?? "")
   .split(",")
   .map((o) => o.trim())
   .filter(Boolean);
