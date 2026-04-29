@@ -1,0 +1,2 @@
+{"level":"error","message":"[/api/v1/auth/resent-otp] Server Error: Failed to send OTP","timestamp":"2026-04-29T06:01:58.119Z"}
+{"level":"error","message":"POST /api/v1/auth/resent-otp - 500 [543ms]","timestamp":"2026-04-29T06:01:58.125Z"}

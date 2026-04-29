@@ -7,6 +7,7 @@ import { HttpStatus } from "../types/statusCode.ts";
 import { ApiError } from "../utils/ApiError.ts";
 import { generateOtp, getOtpExpiryTime } from "../utils/otp.utils.ts";
 import { checkPassword, hashPassword } from "../utils/password.utils.ts";
+import pinnacleSmsServices from "./pinnacleSms.services.ts";
 
 class AuthServices {
   async registerUser(userData: RegisterSchemaType) {
@@ -37,6 +38,11 @@ class AuthServices {
       otp,
       otpExpiry,
     });
+
+    await pinnacleSmsServices.sendOtp(
+      userData.countryCode + userData.mobile,
+      otp,
+    );
 
     return user;
   }
@@ -79,6 +85,8 @@ class AuthServices {
     const otp = generateOtp();
     const otpExpiry = getOtpExpiryTime();
     await userRepositories.updateOtpAndExpiry(user.id, otp, otpExpiry);
+    const mobileNumberWithISD = user.countryCode + user.mobile;
+    await pinnacleSmsServices.sendOtp(mobileNumberWithISD, otp);
 
     return;
   }

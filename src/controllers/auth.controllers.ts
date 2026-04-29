@@ -15,7 +15,8 @@ class AuthControllers {
     const user = await authServices.registerUser(registerData);
     return res.status(HttpStatus.CREATED).json({
       success: true,
-      message: "User registered successfully",
+      message:
+        "User registered successfully. Please verify mobile with otp sent.",
       data: user,
     });
   };

@@ -3,7 +3,7 @@ export const generateOtp = () => {
 };
 
 export const getOtpExpiryTime = () => {
-  return new Date(Date.now() + 10 * 60 * 1000); // 10 minutes from now
+  return new Date(Date.now() + 5 * 60 * 1000); // 5 minutes from now
 };
 
 export const isOtpMatch = (otp: string, storedOtp: string) => {
