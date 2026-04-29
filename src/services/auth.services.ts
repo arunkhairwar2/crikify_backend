@@ -55,18 +55,22 @@ class AuthServices {
       throw new ApiError(HttpStatus.NOT_FOUND, "User not found");
     }
 
-    if (user.security?.mobileVerified) {
+    if (!user.security) {
+      throw new ApiError(HttpStatus.UNAUTHORIZED, "Security data not found");
+    }
+
+    if (user.security.mobileVerified) {
       throw new ApiError(
         HttpStatus.CONFLICT,
         "Mobile number already verified , please login",
       );
     }
 
-    if (user.security?.otp !== otp) {
+    if (user.security.otp !== otp) {
       throw new ApiError(HttpStatus.UNAUTHORIZED, "Invalid OTP");
     }
 
-    if (user.security?.otpExpiry < new Date()) {
+    if (!user.security.otpExpiry || user.security.otpExpiry < new Date()) {
       throw new ApiError(HttpStatus.UNAUTHORIZED, "OTP expired");
     }
 

@@ -14,6 +14,10 @@ const SENSITIVE_KEYS = [
   "apikey",
   "accesstoken",
   "refreshtoken",
+  "accesskey",
+  "secretkey",
+  "aws_access",
+  "aws_secret",
 ];
 
 export const maskSensitiveData = (data: any): any => {

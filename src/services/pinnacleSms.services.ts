@@ -1,3 +1,5 @@
+import { logger } from "../utils/logger.ts";
+
 class PinnacleSmsServices {
   accessKey = process.env.PINNACLE_ACCESS_KEY;
   apiUrl = process.env.PINNACLE_URL;
@@ -32,7 +34,7 @@ class PinnacleSmsServices {
       ],
     };
     try {
-      console.log(`[Pinnacle] Sending OTP to ${mobileNumber}...`);
+      logger.info(`[Pinnacle] Sending OTP to ${mobileNumber}...`);
       const response = await fetch(this.apiUrl, {
         method: "POST",
         headers: {
@@ -41,22 +43,23 @@ class PinnacleSmsServices {
         body: JSON.stringify(payload),
       });
 
-      const data = await response.json();
       if (!response.ok) {
         const errorData = await response.text();
-        console.error("SMS API error response:", errorData);
+        logger.error("SMS API error response:", { status: response.status, body: errorData });
         throw new Error(`SMS API call failed: ${response.statusText}`);
       }
 
-      console.log(
+      const data = await response.json();
+      logger.info(
         `[Pinnacle] OTP sent successfully to ${mobileNumber}. ReqID: ${data.req_id}`,
       );
       return data;
     } catch (error) {
-      console.error("Failed to send OTP via Pinnacle SMS:", error);
+      logger.error("Failed to send OTP via Pinnacle SMS:", { error });
       throw new Error("Failed to send OTP");
     }
   }
 }
 
 export default new PinnacleSmsServices();
+

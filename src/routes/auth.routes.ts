@@ -1,5 +1,5 @@
 import { Router } from "express";
-import authController from "../controllers/auth.controllers.ts";
+import authController from "../controllers/auth.controller.ts";
 import { validate } from "../middlewares/validate.ts";
 import {
   ResendOtpSchema,

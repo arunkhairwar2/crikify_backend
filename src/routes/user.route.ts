@@ -1,5 +1,5 @@
 import { Router } from "express";
-import userControllers from "../controllers/user.controllers.ts";
+import userControllers from "../controllers/user.controller.ts";
 import { authenticate } from "../middlewares/authenticate.middleware.ts";
 import { uploadSingle } from "../middlewares/upload.middleware.ts";
 

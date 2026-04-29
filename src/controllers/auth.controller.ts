@@ -44,9 +44,10 @@ class AuthControllers {
     const loginData = req.body as LoginSchemaType;
     const token = await authServices.login(loginData);
 
-    res.cookie("token", token, {
+    res.cookie("accessToken", token, {
       httpOnly: true,
       secure: true,
+      sameSite: "strict",
       maxAge: 1000 * 60 * 60 * 24 * 7,
     });
 
