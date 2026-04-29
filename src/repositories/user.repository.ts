@@ -1,5 +1,4 @@
 import prisma from "../config/database.ts";
-import type { RegisterSchemaType } from "../schemas/auth/register.schema.ts";
 import type { UserRegisterType } from "../types/auth.types.ts";
 import type { UpdateUserDTO } from "../types/user.types.ts";
 
@@ -133,10 +132,42 @@ class UserRepositories {
         countryCode: true,
         mobile: true,
         email: true,
-        personal: true,
-        sports: true,
-        professional: true,
-        address: true,
+        personal: {
+          select: {
+            gender: true,
+            dob: true,
+            nickname: true,
+            ageGroup: true,
+            foodPreference: true,
+            profilePicture: true,
+          },
+        },
+        sports: {
+          select: {
+            jerseySize: true,
+            jerseyName: true,
+            jerseyNumber: true,
+            trackPantSize: true,
+            shoeSize: true,
+          },
+        },
+        professional: {
+          select: {
+            currentDesignation: true,
+            organizationName: true,
+            orgType: true,
+          },
+        },
+        address: {
+          select: {
+            addressLine1: true,
+            addressLine2: true,
+            city: true,
+            state: true,
+            country: true,
+            pinCode: true,
+          },
+        },
       },
     });
     return user;
@@ -183,6 +214,90 @@ class UserRepositories {
             state: profileData.address?.state,
             country: profileData.address?.country,
             pinCode: profileData.address?.pinCode,
+          },
+        },
+      },
+      select: {
+        id: true,
+        firstName: true,
+        middleName: true,
+        lastName: true,
+        countryCode: true,
+        mobile: true,
+        email: true,
+        personal: {
+          select: {
+            gender: true,
+            dob: true,
+            nickname: true,
+            ageGroup: true,
+            foodPreference: true,
+            profilePicture: true,
+          },
+        },
+        sports: {
+          select: {
+            jerseySize: true,
+            jerseyName: true,
+            jerseyNumber: true,
+            trackPantSize: true,
+            shoeSize: true,
+          },
+        },
+        professional: {
+          select: {
+            currentDesignation: true,
+            organizationName: true,
+            orgType: true,
+          },
+        },
+        address: {
+          select: {
+            addressLine1: true,
+            addressLine2: true,
+            city: true,
+            state: true,
+            country: true,
+            pinCode: true,
+          },
+        },
+      },
+    });
+    return user;
+  }
+
+  /**
+   * Fetch only the current profile picture URL for a user.
+   * Used to determine whether an old S3 object needs cleanup.
+   */
+  async getProfilePicture(userId: string) {
+    const result = await prisma.user.findUnique({
+      where: { id: userId },
+      select: {
+        personal: {
+          select: {
+            profilePicture: true,
+          },
+        },
+      },
+    });
+    return result?.personal?.profilePicture ?? null;
+  }
+
+  async updateProfilePicture(userId: string, profilePicture: string) {
+    const user = await prisma.user.update({
+      where: { id: userId },
+      data: {
+        personal: {
+          update: {
+            profilePicture: profilePicture,
+          },
+        },
+      },
+      select: {
+        personal: {
+          select: {
+            profilePicture: true,
           },
         },
       },

@@ -1,2 +1,7 @@
 {"level":"error","message":"[/api/v1/auth/resent-otp] Server Error: Failed to send OTP","timestamp":"2026-04-29T06:01:58.119Z"}
 {"level":"error","message":"POST /api/v1/auth/resent-otp - 500 [543ms]","timestamp":"2026-04-29T06:01:58.125Z"}
+{"level":"error","message":"[/api/v1/user/profile-picture] Server Error: Unexpected field","timestamp":"2026-04-29T10:01:41.313Z"}
+{"level":"error","message":"PUT /api/v1/user/profile-picture - 500 [316ms]","timestamp":"2026-04-29T10:01:41.322Z"}
+{"error":{"$fault":"client","$metadata":{"attempts":1,"extendedRequestId":"c0JWUuYyssV8NbhGp/riktFbDHy46QzDDhHlKJdIeCm6r8vuZBHDJJ4uG8S5dBntREw4f63DW4x5Ily5nDxCnrfvZ5dBWoKF","httpStatusCode":403,"requestId":"486NK5AMNX11T75Z","totalRetryDelay":0},"AWSAccessKeyId":"AKIAY6F3AZYRKTQ3FDZR","Code":"InvalidAccessKeyId","HostId":"c0JWUuYyssV8NbhGp/riktFbDHy46QzDDhHlKJdIeCm6r8vuZBHDJJ4uG8S5dBntREw4f63DW4x5Ily5nDxCnrfvZ5dBWoKF","RequestId":"486NK5AMNX11T75Z","message":"The AWS Access Key Id you provided does not exist in our records.","name":"InvalidAccessKeyId"},"key":"profile-pictures/9d70e908-4d78-4fcd-9602-1beadfd02b64-iocn.jpg","level":"error","message":"S3 upload failed","timestamp":"2026-04-29T10:02:20.031Z"}
+{"level":"error","message":"[/api/v1/user/profile-picture] Server Error: The AWS Access Key Id you provided does not exist in our records.","timestamp":"2026-04-29T10:02:20.035Z"}
+{"level":"error","message":"PUT /api/v1/user/profile-picture - 500 [349ms]","timestamp":"2026-04-29T10:02:20.037Z"}

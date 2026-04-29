@@ -1,13 +1,17 @@
 import { Router } from "express";
 import userControllers from "../controllers/user.controllers.ts";
 import { authenticate } from "../middlewares/authenticate.middleware.ts";
+import { uploadSingle } from "../middlewares/upload.middleware.ts";
 
 const userRoutes = Router();
 
 userRoutes.get("/profile", authenticate, userControllers.getProfile);
 userRoutes.patch("/profile", authenticate, userControllers.updateProfile);
-// userRoutes.put("/update-profile");
-// userRoutes.put("/profile-image");
-// userRoutes.get("/profile-image");
+userRoutes.put(
+  "/profile-picture",
+  authenticate,
+  uploadSingle("profilePicture"),
+  userControllers.updateProfilePicture,
+);
 
 export default userRoutes;

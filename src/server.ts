@@ -7,10 +7,9 @@ async function bootstrap() {
   try {
     await prisma.$connect();
     logger.info("✓ Database connected");
-
     logger.info("Environment Variables Loaded:");
     const maskedEnv = maskSensitiveData(env);
-    
+
     // Print each variable separately instead of as a single object
     for (const [key, value] of Object.entries(maskedEnv)) {
       logger.info(`   ➔ ${key}: ${value}`);
