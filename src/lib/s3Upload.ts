@@ -1,11 +1,13 @@
 import {
-  PutObjectCommand,
   DeleteObjectCommand,
+  GetObjectCommand,
+  PutObjectCommand,
 } from "@aws-sdk/client-s3";
+import { getSignedUrl } from "@aws-sdk/s3-request-presigner";
 import crypto from "crypto";
 import path from "path";
-import { s3Client, S3_BUCKET } from "./s3Client.ts";
 import { logger } from "../utils/logger.ts";
+import { S3_BUCKET, s3Client } from "./s3Client.ts";
 
 // ---------------------------------------------------------------------------
 // Types
@@ -126,5 +128,31 @@ export function extractKeyFromUrl(url: string): string | null {
     return key || null;
   } catch {
     return null;
+  }
+}
+
+/**
+ * Generate a presigned URL for an S3 object.
+ *
+ * @param key - The S3 object key.
+ * @param expiresIn - The expiration time of the presigned URL in seconds (default: 3600).
+ * @returns The presigned URL.
+ */
+export async function getPresignedUrl(
+  key: string,
+  expiresIn = 3600,
+): Promise<string> {
+  const command = new GetObjectCommand({
+    Bucket: S3_BUCKET,
+    Key: key,
+  });
+
+  try {
+    const url = await getSignedUrl(s3Client, command, { expiresIn });
+    logger.info("Presigned URL generated successfully", { key });
+    return url;
+  } catch (error) {
+    logger.error("Failed to generate presigned URL", { key, error });
+    throw error;
   }
 }

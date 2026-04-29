@@ -1,8 +1,8 @@
-import type { Request, Response, NextFunction } from "express";
+import type { NextFunction, Request, Response } from "express";
 import { ZodError } from "zod";
-import { ApiError } from "../utils/ApiError.ts";
 import { HttpStatus } from "../types/statusCode.ts";
-import { logger, maskSensitiveData } from "../utils/logger.ts";
+import { ApiError } from "../utils/ApiError.ts";
+import { logger } from "../utils/logger.ts";
 
 /**
  * Global error handling middleware.
@@ -25,6 +25,7 @@ export const globalErrorHandler = (
     err instanceof ZodError ||
     err instanceof SyntaxError;
 
+  // logger.error(err.stack);
   if (isClientError) {
     logger.warn(`[${req.originalUrl}] Client Error: ${err.message}`);
   } else {

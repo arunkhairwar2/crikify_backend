@@ -44,6 +44,7 @@ function isAllowedImageType(mime: string): mime is AllowedImageType {
 export function validateImageFile(
   file: Express.Multer.File | undefined,
 ): asserts file is Express.Multer.File {
+  
   if (!file) {
     throw new ApiError(HttpStatus.BAD_REQUEST, "Image file is required");
   }
